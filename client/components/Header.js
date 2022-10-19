@@ -4,7 +4,7 @@ import {FiArrowUpRight} from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
 import{HiOutlineDotsVertical} from 'react-icons/hi'
 import astar from '../assets/astar.png'
-import group from '../assets/group.png'
+import uniswap from '../assets/uniswap.png'
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -28,7 +28,7 @@ const Header = () => {
 	return (
 	<div className = {style.wrapper}>
 		<div className = {style.headerlogo}>
-			<Image src = {group} alt= "FOLIOSWAP" height = {40} width = {40}/>
+			<Image src = {uniswap} alt= "Uniswap" height = {40} width = {40}/>
 		</div>
 		<div className={style.nav}>
         <div className={style.navItemsContainer}>
