@@ -10,7 +10,7 @@ export default function Home() {
     <div className={style.wrapper}>
       <Header/>
       <Main />
-      <h2>Transaction Hiwtory</h2>
+      <a href='https://github.com/tnkshuuhei'>github</a>
     </div>
   )
 }

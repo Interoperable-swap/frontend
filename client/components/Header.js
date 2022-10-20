@@ -28,10 +28,11 @@ const style = {
 
 const Header = () => {
 
-	const [selectedNav, setSelectNav] = useState('swap')
+	const [selectedNav, setSelectedNav] = useState('swap')
   const [activeAccount, setActiveAccount] = useState();
   const [myContract, setMyContract] = useState(null);
 
+  console.log(setSelectedNav);
 
   useEffect(() => {
     (async () => {

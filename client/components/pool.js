@@ -16,13 +16,13 @@ const style = {
   currencySelectorArrow: `text-lg`,
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
-const Main = () => {
+const Pool = () => {
 
 	return (
 	  <div className={style.wrapper}>
 		<div className={style.content}>
 		  <div className={style.formHeader}>
-			<div>Swap</div>
+			<div>Add liquidity</div>
 			<div>
 			  <RiSettings3Fill />
 			</div>
@@ -62,4 +62,4 @@ const Main = () => {
 	  </div>
 	)
   }
-export default Main 
+export default Pool 
