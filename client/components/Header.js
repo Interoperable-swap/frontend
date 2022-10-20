@@ -32,7 +32,6 @@ const Header = () => {
   const [activeAccount, setActiveAccount] = useState();
   const [myContract, setMyContract] = useState(null);
 
-  console.log(setSelectedNav);
 
   useEffect(() => {
     (async () => {
