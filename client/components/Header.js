@@ -109,7 +109,6 @@ const Header = () => {
             <AiOutlineDown />
           </div>
         </div>
-        {myContract === null || activeAccount == null ? (
           <div
             onClick={() => connect()}
             className={`${style.button} ${style.buttonPadding}`}
@@ -118,12 +117,6 @@ const Header = () => {
               Connect Wallet
             </div>
           </div>
-        ) : (
-          <div className="connected">
-          <div className="connected">
-          </div>
-          </div>
-        )}
         
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={`${style.buttonIconContainer} mx-2`}>
