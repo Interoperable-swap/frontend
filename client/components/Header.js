@@ -6,7 +6,7 @@ import{HiOutlineDotsVertical} from 'react-icons/hi'
 import astar from '../assets/astar.png'
 import uniswap from '../assets/uniswap.png'
 import {TransactionContext } from '../context/TransactionContext'
-import Identicon from "@polkadot/react-identicon";
+import Identicon from '@polkadot/react-identicon'
 
 
 const style = {
