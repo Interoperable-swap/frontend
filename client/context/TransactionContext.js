@@ -49,7 +49,7 @@ if (typeof window !== 'undefined') {
 		<TransactionContext.Provider
 			value= {{
 				currentAccount,
-				connectWallet,			
+				connectWallet,
 			}}>
 			{children}
 		</TransactionContext.Provider>
