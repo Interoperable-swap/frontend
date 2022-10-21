@@ -1,15 +1,11 @@
-import React, { useEffect ,useState} from "react"
-import { abi, CONTRACT_ADDRESS, blockchainUrl } from "./constants"
+import React, { useContext, useEffect ,useState} from "react"
 import Image from "next/image"
 import {FiArrowUpRight} from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
 import{HiOutlineDotsVertical} from 'react-icons/hi'
 import astar from '../assets/astar.png'
 import uniswap from '../assets/uniswap.png'
-
-//import { web3Accounts, web3Enable, web3FromAddress } from '@polkadot/extension-dapp';
-import { ApiPromise, WsProvider } from "@polkadot/api";
-import { ContractPromise } from "@polkadot/api-contract";
+import {TransactionContext } from '../context/TransactionContext'
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -29,34 +25,10 @@ const style = {
 const Header = () => {
 
 	const [selectedNav, setSelectedNav] = useState('swap')
-  const [activeAccount, setActiveAccount] = useState();
-  const [myContract, setMyContract] = useState(null);
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
+	console.log(connectWallet, currentAccount)
 
-
-  useEffect(() => {
-    (async () => {
-      activeAccount &&
-        setSigner(
-          await web3FromSource(activeAccount.meta.source).then(
-            (res) => res.signer
-          )
-        );
-    })();
-  }, [activeAccount]);
-  async function connect() {
-    try {
-      console.log("----- Connect called -----");
-      const wsProvider = new WsProvider(blockchainUrl);
-      const api = await ApiPromise.create({ provider: wsProvider });
-      const contract = new ContractPromise(api, abi, CONTRACT_ADDRESS);
-      setMyContract(contract);
-      //setSelectedTab("Account");
-    } catch (err) {
-      console.log("Couldn't connect to wallet :- ", err);
-    }
-  }
-
-	return (
+  return (
 	<div className = {style.wrapper}>
 		<div className = {style.headerlogo}>
 			<Image src = {uniswap} alt= "Uniswap" height = {40} width = {40}/>
@@ -109,14 +81,20 @@ const Header = () => {
             <AiOutlineDown />
           </div>
         </div>
+        {currentAccount ? (
+          <div className={`${style.button} ${style.buttonPadding}`}>
+          <div className={style.buttonTextContainer}>Wallet connected</div>
+          </div>
+          ) : (
           <div
-            onClick={() => connect()}
+            onClick={() => connectWallet()}
             className={`${style.button} ${style.buttonPadding}`}
           >
             <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
               Connect Wallet
             </div>
           </div>
+        )}
         
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={`${style.buttonIconContainer} mx-2`}>

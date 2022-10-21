@@ -1,4 +1,4 @@
-import type { NextPage } from 'next'
+//import type { NextPage } from 'next'
 import  Header  from '../components/Header'
 import  Main  from '../components/Main'
 const style = {
