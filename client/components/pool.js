@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown } from 'react-icons/ai'
-import {IoSwapVertical} from 'react-icons/io5'
 import astar from '../assets/astar.png'
 
 const style = {
@@ -17,13 +16,13 @@ const style = {
   currencySelectorArrow: `text-lg`,
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
-const Main = () => {
+const Pool = () => {
 
 	return (
 	  <div className={style.wrapper}>
 		<div className={style.content}>
 		  <div className={style.formHeader}>
-			<div>Swap</div>
+			<div>Add liquidity</div>
 			<div>
 			  <RiSettings3Fill />
 			</div>
@@ -41,31 +40,19 @@ const Main = () => {
 				<div className={style.currencySelectorIcon}>
 				  <Image src={astar} alt='astar logo' height={20} width={20} />
 				</div>
-				<div className={style.currencySelectorTicker}>SDN</div>
+				<div className={style.currencySelectorTicker}>ASTR</div>
 				<AiOutlineDown className={style.currencySelectorArrow} />
 			  </div>
 			</div>
 		  </div>
-		  
-		  <IoSwapVertical  />
-		  
 		  <div className={style.transferPropContainer}>
 			<input
 			  type='text'
 			  className={style.transferPropInput}
-			  placeholder='0.0'
-			  pattern='^[0-9]*[.,]?[0-9]*$'
-			  onChange={e => handleChange(e, 'amount')}
+			  placeholder='0x...'
+			  onChange={e => handleChange(e, 'addressTo')}
 			/>
-			<div className={style.currencySelector}>
-			  <div className={style.currencySelectorContent}>
-				<div className={style.currencySelectorIcon}>
-				  <Image src={astar} alt='astar logo' height={20} width={20} />
-				</div>
-				<div className={style.currencySelectorTicker}>USDT</div>
-				<AiOutlineDown className={style.currencySelectorArrow} />
-			  </div>
-			</div>
+			<div className={style.currencySelector}></div>
 		  </div>
 		  <div onClick={e => handleSubmit(e)} className={style.confirmButton}>
 			Confirm
@@ -75,4 +62,4 @@ const Main = () => {
 	  </div>
 	)
   }
-export default Main 
+export default Pool 
