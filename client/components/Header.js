@@ -6,6 +6,8 @@ import{HiOutlineDotsVertical} from 'react-icons/hi'
 import astar from '../assets/astar.png'
 import uniswap from '../assets/uniswap.png'
 import {TransactionContext } from '../context/TransactionContext'
+import Identicon from "@polkadot/react-identicon";
+
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -23,10 +25,9 @@ const style = {
 }
 
 const Header = () => {
-
 	const [selectedNav, setSelectedNav] = useState('swap')
   const { connectWallet, currentAccount } = useContext(TransactionContext)
-	console.log(connectWallet, currentAccount)
+  //console.log({connectWallet, currentAccount});
 
   return (
 	<div className = {style.wrapper}>
@@ -83,7 +84,14 @@ const Header = () => {
         </div>
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
-          <div className={style.buttonTextContainer}>Wallet connected</div>
+          <div className={style.buttonIconContainer}>
+          <Identicon
+            value={currentAccount.address}
+            size={20}
+            theme={'polkadot'}
+          />
+          </div>
+          <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
           </div>
           ) : (
           <div
