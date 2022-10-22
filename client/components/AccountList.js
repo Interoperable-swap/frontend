@@ -1,6 +1,6 @@
 import React, { useContext } from "react"
 import Identicon from '@polkadot/react-identicon'
-import {TransactionContext } from '../context/TransactionContext'
+//import {TransactionContext } from '../context/TransactionContext'
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
