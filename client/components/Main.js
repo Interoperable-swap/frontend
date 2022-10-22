@@ -3,6 +3,7 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown } from 'react-icons/ai'
 import {IoSwapVertical} from 'react-icons/io5'
 import astar from '../assets/astar.png'
+import Shiden from '../assets/Shiden.png'
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -39,7 +40,7 @@ const Main = () => {
 			<div className={style.currencySelector}>
 			  <div className={style.currencySelectorContent}>
 				<div className={style.currencySelectorIcon}>
-				  <Image src={astar} alt='astar logo' height={20} width={20} />
+				  <Image src={Shiden} alt='shiden' height={20} width={20} />
 				</div>
 				<div className={style.currencySelectorTicker}>SDN</div>
 				<AiOutlineDown className={style.currencySelectorArrow} />
@@ -62,7 +63,7 @@ const Main = () => {
 				<div className={style.currencySelectorIcon}>
 				  <Image src={astar} alt='astar logo' height={20} width={20} />
 				</div>
-				<div className={style.currencySelectorTicker}>USDT</div>
+				<div className={style.currencySelectorTicker}>ASTR</div>
 				<AiOutlineDown className={style.currencySelectorArrow} />
 			  </div>
 			</div>
