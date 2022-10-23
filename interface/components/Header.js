@@ -3,10 +3,10 @@ import Image from "next/image"
 import {FiArrowUpRight} from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
 import{HiOutlineDotsVertical} from 'react-icons/hi'
-import astar from '../assets/astar.png'
+import Shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
 import {TransactionContext } from '../context/TransactionContext'
-import Identicon from '@polkadot/react-identicon'
+//import Identicon from '@polkadot/react-identicon'
 
 
 const style = {
@@ -26,8 +26,8 @@ const style = {
 
 const Header = () => {
 	const [selectedNav, setSelectedNav] = useState('swap')
-  const { connectWallet, currentAccount } = useContext(TransactionContext)
-  //console.log({connectWallet, currentAccount});
+  const { connectWallet, currentAccount} = useContext(TransactionContext)
+  console.log({connectWallet, currentAccount});
 
   return (
 	<div className = {style.wrapper}>
@@ -75,7 +75,7 @@ const Header = () => {
       <div className={style.buttonsContainer}>
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={style.buttonIconContainer}>
-            <Image src={astar} alt='astar' height={20} width={20} />
+            <Image src={Shiden} alt='shiden' height={20} width={20} />
           </div>
           <p>Shiden</p>
           <div className={style.buttonIconContainer}>

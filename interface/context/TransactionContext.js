@@ -1,5 +1,5 @@
 import React ,{ useState,useEffect} from 'react'
-import { web3Accounts,web3Enable  } from '@polkadot/extension-dapp'
+//import { web3Accounts,web3Enable  } from '@polkadot/extension-dapp'
 export const TransactionContext = React.createContext()
 
 let pjs
@@ -49,7 +49,7 @@ if (typeof window !== 'undefined') {
 		<TransactionContext.Provider
 			value= {{
 				currentAccount,
-				connectWallet,			
+				connectWallet,
 			}}>
 			{children}
 		</TransactionContext.Provider>
