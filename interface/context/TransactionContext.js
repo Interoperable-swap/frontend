@@ -22,9 +22,7 @@ if (typeof window !== 'undefined') {
 			const provider = new WsProvider('ws://127.0.0.1:9944'); 
       		//create instance
 			const api = await ApiPromise.create({ provider });
-			//
-			const contract = new ContractPromise(api, abi, CONTRACT_ADDRESS);
-
+			
 			const extensions = await web3Enable('my cool dapp');
 			if (extensions.length === 0) {
 				// no extension installed, or the user did not accept the authorization
