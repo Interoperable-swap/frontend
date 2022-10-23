@@ -5,7 +5,7 @@ import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { Abi, ContractPromise } from '@polkadot/api-contract'
-import {router_contract,abi} from '../abi/router'
+import {ROUTER_ABI, ROUTER_ADDRESS} from '../abi/router'
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -27,8 +27,7 @@ const Liquidity = () => {
 	const provider = new WsProvider('ws://127.0.0.1:9944'); 
     //create instance
 	const api = await ApiPromise.create({ provider });
-	const contract = new ContractPromise(api, abi, router_contract);
-
+	const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
 	}
 
 	return (
