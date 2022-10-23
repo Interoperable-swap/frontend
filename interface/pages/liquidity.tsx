@@ -1,5 +1,5 @@
 import type { NextPage } from 'next'
-import AddLiquidity from '../components/AddLiquidity'
+import Liquidity from '../components/AddLiquidity'
 import Header from '../components/Header'
 
 const style = {
@@ -10,7 +10,7 @@ const liquidity: NextPage = ()  => {
   return (
     <div className={style.wrapper}>
       <Header />
-      <AddLiquidity />
+      <Liquidity />
       <a href='https://github.com/tnkshuuhei'>github</a>
     </div>
   )
