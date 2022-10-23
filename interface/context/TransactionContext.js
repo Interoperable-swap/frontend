@@ -18,11 +18,6 @@ if (typeof window !== 'undefined') {
 
 	const connectWallet = async () => {
 		try {
-			//connect local node
-			const provider = new WsProvider('ws://127.0.0.1:9944'); 
-      		//create instance
-			const api = await ApiPromise.create({ provider });
-			
 			const extensions = await web3Enable('my cool dapp');
 			if (extensions.length === 0) {
 				// no extension installed, or the user did not accept the authorization

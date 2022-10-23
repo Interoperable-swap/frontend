@@ -3,6 +3,7 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
+import { ApiPromise, WsProvider } from "@polkadot/api";
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -18,7 +19,12 @@ const style = {
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
 const Liquidity = () => {
+
 	const add_liquidigy = async () => {
+	//connect local node
+	const provider = new WsProvider('ws://127.0.0.1:9944'); 
+    //create instance
+	const api = await ApiPromise.create({ provider });
 		
 	}
 
