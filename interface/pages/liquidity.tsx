@@ -1,16 +1,19 @@
-import AccountList from '../components/AccountList'
+import type { NextPage } from 'next'
+import Liquidity from '../components/AddLiquidity'
 import Header from '../components/Header'
 
 const style = {
   wrapper: `h-screen max-h-screen h-min-screen w-screen bg-[#2D242F] text-white select-none flex flex-col justify-between`,
 }
 
-export default function Home () {
+const liquidity: NextPage = ()  => {
   return (
     <div className={style.wrapper}>
       <Header />
-      <AccountList />
+      <Liquidity />
       <a href='https://github.com/tnkshuuhei'>github</a>
     </div>
   )
 }
+
+export default liquidity

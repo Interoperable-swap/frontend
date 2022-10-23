@@ -2,6 +2,10 @@ import Image from 'next/image'
 import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown } from 'react-icons/ai'
 import astar from '../assets/astar.png'
+import Shiden from '../assets/Shiden.png'
+import { ApiPromise, WsProvider } from "@polkadot/api";
+import { Abi, ContractPromise } from '@polkadot/api-contract'
+import {ROUTER_ABI, ROUTER_ADDRESS} from '../abi/router'
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -16,17 +20,45 @@ const style = {
   currencySelectorArrow: `text-lg`,
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
-const Pool = () => {
+const Liquidity = () => {
+
+	const add_liquidigy = async () => {
+	//connect local node
+	const provider = new WsProvider('ws://127.0.0.1:9944'); 
+    //create instance
+	const api = await ApiPromise.create({ provider });
+	const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
+	}
 
 	return (
 	  <div className={style.wrapper}>
 		<div className={style.content}>
 		  <div className={style.formHeader}>
-			<div>Add liquidity</div>
+			<div>Add Liquidity</div>
 			<div>
 			  <RiSettings3Fill />
 			</div>
 		  </div>
+		  <div className={style.transferPropContainer}>
+			<input
+			  type='text'
+			  className={style.transferPropInput}
+			  placeholder='0.0'
+			  pattern='^[0-9]*[.,]?[0-9]*$'
+			  onChange={e => handleChange(e, 'amount')}
+			/>
+			<div className={style.currencySelector}>
+			  <div className={style.currencySelectorContent}>
+				<div className={style.currencySelectorIcon}>
+				  <Image src={Shiden} alt='shiden' height={20} width={20} />
+				</div>
+				<div className={style.currencySelectorTicker}>SDN</div>
+				<AiOutlineDown className={style.currencySelectorArrow} />
+			  </div>
+			</div>
+		  </div>
+		  
+		{/*add plus Icon */}		  
 		  <div className={style.transferPropContainer}>
 			<input
 			  type='text'
@@ -45,15 +77,6 @@ const Pool = () => {
 			  </div>
 			</div>
 		  </div>
-		  <div className={style.transferPropContainer}>
-			<input
-			  type='text'
-			  className={style.transferPropInput}
-			  placeholder='0x...'
-			  onChange={e => handleChange(e, 'addressTo')}
-			/>
-			<div className={style.currencySelector}></div>
-		  </div>
 		  <div onClick={e => handleSubmit(e)} className={style.confirmButton}>
 			Confirm
 		  </div>
@@ -62,4 +85,4 @@ const Pool = () => {
 	  </div>
 	)
   }
-export default Pool 
+export default Liquidity
