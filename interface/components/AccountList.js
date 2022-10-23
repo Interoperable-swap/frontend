@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import Identicon from '@polkadot/react-identicon'
+//import Identicon from '@polkadot/react-identicon'
 //import {TransactionContext } from '../context/TransactionContext'
 
 const style = {
@@ -17,13 +17,15 @@ const AccountList = () => {
 			<div>
 			<div>Accounts</div>
 				<div className={style.currencySelector}>
+					{/**
 					<div>
 						<Identicon
 							value={currentAccount.address}
 							size={32}
 							theme={'polkadot'}
 						/>
-					</div>
+					</div> 
+					*/}
 				<div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
 			</div>
 				<div className={style.buttonTextContainer}>{currentAccount.address}</div>
