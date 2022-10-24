@@ -85,11 +85,12 @@ const Header = () => {
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={style.buttonIconContainer}>
+          {/** 
           <Identicon
             value={currentAccount.address}
             size={20}
             theme={'polkadot'}
-          />
+          />*/}
           </div>
           <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
           </div>
