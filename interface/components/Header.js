@@ -31,7 +31,7 @@ const Header = () => {
   
   return (
 	<div className = {style.wrapper}>
-		<div className = {style.headerlogo}>
+		<div className = {style.headerLogo}>
 			<Image src = {uniswap} alt= "Uniswap" height = {40} width = {40}/>
 		</div>
 		<div className={style.nav}>
@@ -85,11 +85,12 @@ const Header = () => {
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={style.buttonIconContainer}>
+          {/** 
           <Identicon
             value={currentAccount.address}
             size={20}
             theme={'polkadot'}
-          />
+          />*/}
           </div>
           <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
           </div>
