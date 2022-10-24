@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Liquidity from '../components/AddLiquidity'
+import Footer from '../components/Footer'
 import Main from '../components/Main'
 
 import React, { useContext, useEffect ,useState} from "react"
@@ -126,8 +127,10 @@ const Home: NextPage = () => {
     {selectedNav == 'pool' &&(
       <Liquidity />
     )}
-      
-      <a href='https://github.com/tnkshuuhei'>github</a>
+    {/*
+    <Footer />
+    */}
+    Footer
     </div>
   )
 }
