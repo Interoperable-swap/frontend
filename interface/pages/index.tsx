@@ -1,10 +1,11 @@
+import React, { useContext, useEffect ,useState} from "react"
 import type { NextPage } from 'next'
 import Liquidity from '../components/AddLiquidity'
 //import Footer from '../components/Footer'
 import Main from '../components/Main'
 
-import React, { useContext, useEffect ,useState} from "react"
-import { Router, useRouter } from "next/router";
+
+//import { Router, useRouter } from "next/router";
 import Image from "next/image"
 import {FiArrowUpRight} from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
@@ -34,8 +35,6 @@ const style = {
 const Home: NextPage = () => {  
   const [selectedNav, setSelectedNav] = useState('swap')
   const { connectWallet, currentAccount} = useContext(TransactionContext)
-  console.log(selectedNav);
-  const router = useRouter();
 
   return (
     <div className={style.wrapper}>
