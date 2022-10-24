@@ -14,6 +14,7 @@ const style = {
   currencySelector: `flex w-1/4`,
   currencySelectorContent: `w-full h-min flex justify-between items-center bg-[#2D2F36] hover:bg-[#41444F] rounded-2xl text-xl font-medium cursor-pointer p-2 mt-[-0.2rem]`,
   currencySelectorIcon: `flex items-center`,
+  swapIcon: `flex items-center justify-center`,
   currencySelectorTicker: `mx-2`,
   currencySelectorArrow: `text-lg`,
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
@@ -47,9 +48,11 @@ const Main = () => {
 			  </div>
 			</div>
 		  </div>
-		  
-		  <IoSwapVertical  />
-		  
+		  <div className={style.swapIcon}>		  
+		  <IoSwapVertical  
+			size={42}
+		  />
+		  </div>
 		  <div className={style.transferPropContainer}>
 			<input
 			  type='text'
@@ -63,7 +66,7 @@ const Main = () => {
 				<div className={style.currencySelectorIcon}>
 				  <Image src={astar} alt='astar logo' height={20} width={20} />
 				</div>
-				<div className={style.currencySelectorTicker}>ASTR</div>
+				<div className={style.currencySelectorTicker}>SBY</div>
 				<AiOutlineDown className={style.currencySelectorArrow} />
 			  </div>
 			</div>

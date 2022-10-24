@@ -1,6 +1,6 @@
 import type { NextPage } from 'next'
 import Liquidity from '../components/AddLiquidity'
-import Footer from '../components/Footer'
+//import Footer from '../components/Footer'
 import Main from '../components/Main'
 
 import React, { useContext, useEffect ,useState} from "react"
@@ -70,12 +70,12 @@ const Home: NextPage = () => {
             Vote
           </div>
           <a
-            href='https://info.uniswap.org/#/'
+            href='https://portal.astar.network/#/shiden/'
             target='_blank'
             rel='noreferrer'
           >
             <div className={style.navItem}>
-              Charts <FiArrowUpRight />
+              Portal <FiArrowUpRight />
             </div>
           </a>
         </div>
