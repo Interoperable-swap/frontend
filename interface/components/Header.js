@@ -31,7 +31,7 @@ const Header = () => {
   
   return (
 	<div className = {style.wrapper}>
-		<div className = {style.headerlogo}>
+		<div className = {style.headerLogo}>
 			<Image src = {uniswap} alt= "Uniswap" height = {40} width = {40}/>
 		</div>
 		<div className={style.nav}>
