@@ -121,16 +121,16 @@ const Home: NextPage = () => {
       </div>
     </div>
 
-    {selectedNav == 'swap' &&(
-      <Main />
-    )}
-    {selectedNav == 'pool' &&(
-      <Liquidity />
-    )}
-    {/*
-    <Footer />
-    */}
-    Footer
+      {selectedNav == 'swap' &&(
+        <Main />
+      )}
+      {selectedNav == 'pool' &&(
+        <Liquidity />
+      )}
+      {/*
+      <Footer />
+      */}
+      Footer
     </div>
   )
 }
