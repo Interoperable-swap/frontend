@@ -1,10 +1,7 @@
+import React, { useContext, useEffect ,useState} from "react"
 import type { NextPage } from 'next'
 import Liquidity from '../components/AddLiquidity'
-import Footer from '../components/Footer'
 import Main from '../components/Main'
-
-import React, { useContext, useEffect ,useState} from "react"
-import { Router, useRouter } from "next/router";
 import Image from "next/image"
 import {FiArrowUpRight} from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
@@ -12,6 +9,8 @@ import {HiOutlineDotsVertical} from 'react-icons/hi'
 import Shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
 import { TransactionContext } from '../context/TransactionContext'
+//import Footer from '../components/Footer'
+//import { Router, useRouter } from "next/router";
 //import Identicon from '@polkadot/react-identicon'
 
 
@@ -34,8 +33,6 @@ const style = {
 const Home: NextPage = () => {  
   const [selectedNav, setSelectedNav] = useState('swap')
   const { connectWallet, currentAccount} = useContext(TransactionContext)
-  console.log(selectedNav);
-  const router = useRouter();
 
   return (
     <div className={style.wrapper}>
@@ -70,12 +67,12 @@ const Home: NextPage = () => {
             Vote
           </div>
           <a
-            href='https://info.uniswap.org/#/'
+            href='https://portal.astar.network/#/shiden/'
             target='_blank'
             rel='noreferrer'
           >
             <div className={style.navItem}>
-              Charts <FiArrowUpRight />
+              Portal <FiArrowUpRight />
             </div>
           </a>
         </div>

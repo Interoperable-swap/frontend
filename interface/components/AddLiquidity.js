@@ -72,7 +72,7 @@ const Liquidity = () => {
 				<div className={style.currencySelectorIcon}>
 				  <Image src={astar} alt='astar logo' height={20} width={20} />
 				</div>
-				<div className={style.currencySelectorTicker}>ASTR</div>
+				<div className={style.currencySelectorTicker}>SBY</div>
 				<AiOutlineDown className={style.currencySelectorArrow} />
 			  </div>
 			</div>
