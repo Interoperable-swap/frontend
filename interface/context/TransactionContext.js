@@ -20,6 +20,7 @@ if (typeof window !== 'undefined') {
 
 	const connectWallet = async () => {
 		try {
+			if (!pjs) return alert('Please install polkadot-js ')
 			const { web3Enable,web3Accounts, web3FromSource } = await import("@polkadot/extension-dapp");
 
 			const extensions = await web3Enable('Shiden DEX');
@@ -36,19 +37,18 @@ if (typeof window !== 'undefined') {
 		  if (!pjs) return alert('Please install polkadot-js ')
 		} catch (error) {
 			console.error(error)
-			//throw new Error('No ethereum object.')
 		  }
 	}
   const checkIfWalletIsConnected = async () => {
     try {
-      if (!pjs) return alert('Please install polkadot-js')
-	  const { web3Enable ,web3Accounts } = await import("@polkadot/extension-dapp");
+		if (!pjs) return alert('Please install polkadot-js ')
+		const { web3Enable ,web3Accounts } = await import("@polkadot/extension-dapp");
 
-	  const extensions = await web3Enable('Shiden DEX');
-	  if (extensions.length === 0) {
-		// no extension installed, or the user did not accept the authorization
-		// in this case we should inform the use and give a link to the extension
-		return;
+		const extensions = await web3Enable('Shiden DEX');
+		if (extensions.length === 0) {
+			// no extension installed, or the user did not accept the authorization
+			// in this case we should inform the use and give a link to the extension
+			return;
 	}
 	  const allaccounts = await web3Accounts();
 
@@ -58,7 +58,6 @@ if (typeof window !== 'undefined') {
       }
     } catch (error) {
       console.error(error)
-      //throw new Error('No ethereum object.')
     }
   }
 	return(
