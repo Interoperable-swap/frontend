@@ -3,7 +3,8 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
 import {IoSwapVertical} from 'react-icons/io5'
 import astar from '../assets/astar.png'
-import Shiden from '../assets/Shiden.png'
+import shiden from '../assets/Shiden.png'
+import usdt from '../assets/usdt.svg'
 import { useState } from 'react'
 
 const style = {
@@ -22,7 +23,7 @@ const style = {
 }
 const Main = () => {
 	const [showList, setShowList] = useState(false);
-	console.log(showList);
+
 	return (
 	  <div className={style.wrapper}>
 		<div className={style.content}>
@@ -44,7 +45,7 @@ const Main = () => {
 			  <button className={style.currencySelectorContent} onClick={ () => setShowList
 					((prevState) => !prevState )}>
 				<div className={style.currencySelectorIcon}>
-				  <Image src={Shiden} alt='shiden' height={20} width={20} />
+				  <Image src={shiden} alt='shiden' height={20} width={20} />
 				</div>
 				<div className={style.currencySelectorTicker}>SDN</div>
 				{showList ? (
@@ -87,13 +88,18 @@ const Main = () => {
 			  onChange={e => handleChange(e, 'amount')}
 			/>
 			<div className={style.currencySelector}>
-			  <div className={style.currencySelectorContent}>
+			<button className={style.currencySelectorContent} onClick={ () => setShowList
+					((prevState) => !prevState )}>
 				<div className={style.currencySelectorIcon}>
-				  <Image src={astar} alt='astar logo' height={20} width={20} />
+				  <Image src={usdt} alt='USDT' height={20} width={20} />
 				</div>
-				<div className={style.currencySelectorTicker}>SBY</div>
+				<div className={style.currencySelectorTicker}>USDT</div>
+				{showList ? (
+				<AiOutlineUp className={style.currencySelectorArrow} />
+				) : (
 				<AiOutlineDown className={style.currencySelectorArrow} />
-			  </div>
+				)}
+			  </button>
 			</div>
 		  </div>
 		  <div onClick={e => handleSubmit(e)} className={style.confirmButton}>
