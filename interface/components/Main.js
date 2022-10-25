@@ -88,8 +88,7 @@ const Main = () => {
 			  onChange={e => handleChange(e, 'amount')}
 			/>
 			<div className={style.currencySelector}>
-			<button className={style.currencySelectorContent} onClick={ () => setShowList
-					((prevState) => !prevState )}>
+			<button className={style.currencySelectorContent}>
 				<div className={style.currencySelectorIcon}>
 				  <Image src={usdt} alt='USDT' height={20} width={20} />
 				</div>
