@@ -41,7 +41,6 @@ if (typeof window !== 'undefined') {
 	}
   const checkIfWalletIsConnected = async () => {
     try {
-		if (!pjs) return alert('Please install polkadot-js ')
 		const { web3Enable ,web3Accounts } = await import("@polkadot/extension-dapp");
 
 		const extensions = await web3Enable('Shiden DEX');
@@ -49,7 +48,7 @@ if (typeof window !== 'undefined') {
 			// no extension installed, or the user did not accept the authorization
 			// in this case we should inform the use and give a link to the extension
 			return;
-	}
+		}
 	  const allaccounts = await web3Accounts();
 
       if (allaccounts.length) {
