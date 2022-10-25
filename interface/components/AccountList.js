@@ -9,8 +9,7 @@ const style = {
 }
 const AccountList = () => {
 	const { connectWallet, currentAccount } = useContext(TransactionContext)
-	console.log(currentAccount,connectWallet);
-
+	
 	return (
 	  <div className={style.wrapper}>
 		{currentAccount ? (
