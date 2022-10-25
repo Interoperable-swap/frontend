@@ -1,9 +1,10 @@
 import Image from 'next/image'
 import { RiSettings3Fill } from 'react-icons/ri'
-import { AiOutlineDown } from 'react-icons/ai'
+import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
 import {IoSwapVertical} from 'react-icons/io5'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
+import { useState } from 'react'
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -20,7 +21,8 @@ const style = {
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
 const Main = () => {
-
+	const [showList, setShowList] = useState(false);
+	console.log(showList);
 	return (
 	  <div className={style.wrapper}>
 		<div className={style.content}>
@@ -39,20 +41,43 @@ const Main = () => {
 			  onChange={e => handleChange(e, 'amount')}
 			/>
 			<div className={style.currencySelector}>
-			  <div className={style.currencySelectorContent}>
+			  <button className={style.currencySelectorContent} onClick={ () => setShowList
+					((prevState) => !prevState )}>
 				<div className={style.currencySelectorIcon}>
 				  <Image src={Shiden} alt='shiden' height={20} width={20} />
 				</div>
 				<div className={style.currencySelectorTicker}>SDN</div>
+				{showList ? (
+				<AiOutlineUp className={style.currencySelectorArrow} />
+				) : (
 				<AiOutlineDown className={style.currencySelectorArrow} />
-			  </div>
+				)}
+			  </button>
+			  {/**
+			  {showList && (
+					<ul className={style.currencySelectorContent}>
+					{[
+						{token:'aUSD', tokenName:'aUSD'},
+						{token:'USDT', tokenName:'USDT'},
+						].map(({token,tokenName},index) => (
+							<li
+								key={index}
+								className={`${style.currencySelectorTicker} `}
+							>
+							{tokenName}
+							</li>
+						))}
+					</ul>
+				)} 
+				*/}
 			</div>
 		  </div>
-		  <div className={style.swapIcon}>		  
-		  <IoSwapVertical  
-			size={42}
-		  />
+			<div className={style.swapIcon}>		  
+			<IoSwapVertical  
+				size={42}
+			/>
 		  </div>
+
 		  <div className={style.transferPropContainer}>
 			<input
 			  type='text'
