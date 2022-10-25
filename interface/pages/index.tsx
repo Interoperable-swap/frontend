@@ -11,7 +11,8 @@ import uniswap from '../assets/uniswap.png'
 import { TransactionContext } from '../context/TransactionContext'
 //import Footer from '../components/Footer'
 //import { Router, useRouter } from "next/router";
-//import Identicon from '@polkadot/react-identicon'
+import dynamic from 'next/dynamic'
+const Identicon = dynamic(() => import('@polkadot/react-identicon'), { ssr: false });
 
 
 const style = {
@@ -91,11 +92,11 @@ const Home: NextPage = () => {
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={style.buttonIconContainer}>
-          {/*<Identicon
+          <Identicon
             value={currentAccount.address}
             size={20}
             theme={'polkadot'}
-        />*/}
+        />
           </div>
           <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
           </div>
