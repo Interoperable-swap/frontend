@@ -1,11 +1,11 @@
-import React, { useContext, useEffect ,useState} from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Image from "next/image"
-import {FiArrowUpRight} from 'react-icons/fi'
+import { FiArrowUpRight } from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
-import{HiOutlineDotsVertical} from 'react-icons/hi'
+import { HiOutlineDotsVertical } from 'react-icons/hi'
 import Shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
-import {TransactionContext } from '../context/TransactionContext'
+import { TransactionContext } from '../context/TransactionContext'
 import dynamic from 'next/dynamic'
 const Identicon = dynamic(() => import('@polkadot/react-identicon'), { ssr: false });
 
@@ -27,37 +27,34 @@ const style = {
 }
 
 const Header = () => {
-	const [selectedNav, setSelectedNav] = useState('swap')
-  const { connectWallet, currentAccount} = useContext(TransactionContext)
-  
+  const [selectedNav, setSelectedNav] = useState('swap')
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
+
   return (
-	<div className = {style.wrapper}>
-		<div className = {style.headerLogo}>
-			<Image src = {uniswap} alt= "Uniswap" height = {40} width = {40}/>
-		</div>
-		<div className={style.nav}>
+    <div className={style.wrapper}>
+      <div className={style.headerLogo}>
+        <Image src={uniswap} alt="Uniswap" height={40} width={40} />
+      </div>
+      <div className={style.nav}>
         <div className={style.navItemsContainer}>
           <div
             onClick={() => setSelectedNav('swap')}
-            className={`${style.navItem} ${
-              selectedNav === 'swap' && style.activeNavItem
-            }`}
+            className={`${style.navItem} ${selectedNav === 'swap' && style.activeNavItem
+              }`}
           >
             Swap
           </div>
           <div
             onClick={() => setSelectedNav('pool')}
-            className={`${style.navItem} ${
-              selectedNav === 'pool' && style.activeNavItem
-            }`}
+            className={`${style.navItem} ${selectedNav === 'pool' && style.activeNavItem
+              }`}
           >
             Pool
           </div>
           <div
             onClick={() => setSelectedNav('vote')}
-            className={`${style.navItem} ${
-              selectedNav === 'vote' && style.activeNavItem
-            }`}
+            className={`${style.navItem} ${selectedNav === 'vote' && style.activeNavItem
+              }`}
           >
             Vote
           </div>
@@ -72,7 +69,7 @@ const Header = () => {
           </a>
         </div>
       </div>
-	  
+
       <div className={style.buttonsContainer}>
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={style.buttonIconContainer}>
@@ -85,17 +82,17 @@ const Header = () => {
         </div>
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
-          <div className={style.buttonIconContainer}>
-          
-          <Identicon
-            value={currentAccount.address}
-            size={20}
-            theme={'polkadot'}
-          />
+            <div className={style.buttonIconContainer}>
+
+              <Identicon
+                value={currentAccount.address}
+                size={20}
+                theme={'polkadot'}
+              />
+            </div>
+            <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
           </div>
-          <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
-          </div>
-          ) : (
+        ) : (
           <div
             onClick={() => connectWallet()}
             className={`${style.button} ${style.buttonPadding}`}
@@ -105,7 +102,7 @@ const Header = () => {
             </div>
           </div>
         )}
-        
+
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={`${style.buttonIconContainer} mx-2`}>
             <HiOutlineDotsVertical />

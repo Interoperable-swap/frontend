@@ -1,12 +1,12 @@
-import React, { useContext, useEffect ,useState} from "react"
+import React, { useContext, useEffect, useState } from "react"
 import type { NextPage } from 'next'
 import Liquidity from '../components/AddLiquidity'
 import AccountList from '../components/AccountList'
 import Main from '../components/Main'
 import Image from "next/image"
-import {FiArrowUpRight} from 'react-icons/fi'
+import { FiArrowUpRight } from 'react-icons/fi'
 import { AiOutlineDown } from 'react-icons/ai'
-import {HiOutlineDotsVertical} from 'react-icons/hi'
+import { HiOutlineDotsVertical } from 'react-icons/hi'
 import Shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
 import { TransactionContext } from '../context/TransactionContext'
@@ -31,35 +31,33 @@ const style = {
   buttonAccent: `bg-[#172A42] border border-[#163256] hover:border-[#234169] h-full rounded-2xl flex items-center justify-center text-[#4F90EA]`,
 }
 
-const Home: NextPage = () => {  
+const Home: NextPage = () => {
   const [selectedNav, setSelectedNav] = useState('swap')
-  const { connectWallet, currentAccount} = useContext(TransactionContext)
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
 
   return (
     <div className={style.wrapper}>
-<div className = {style.headwrapper}>
-		<div className = {style.headerLogo}>
-			<Image src = {uniswap} alt= "Uniswap" height = {40} width = {40}/>
-		</div>
-		<div className={style.nav}>
-        <div className={style.navItemsContainer}>
-          <div
-            onClick={() => setSelectedNav('swap')}
-            className={`${style.navItem} ${
-              selectedNav === 'swap' && style.activeNavItem
-            }`}
-          >
-            Swap
-          </div>
-          <div
-            onClick={() => setSelectedNav('pool')}
-            className={`${style.navItem} ${
-              selectedNav === 'pool' && style.activeNavItem
-            }`}
-          >
-            Pool
-          </div>
-          {/**
+      <div className={style.headwrapper}>
+        <div className={style.headerLogo}>
+          <Image src={uniswap} alt="Uniswap" height={40} width={40} />
+        </div>
+        <div className={style.nav}>
+          <div className={style.navItemsContainer}>
+            <div
+              onClick={() => setSelectedNav('swap')}
+              className={`${style.navItem} ${selectedNav === 'swap' && style.activeNavItem
+                }`}
+            >
+              Swap
+            </div>
+            <div
+              onClick={() => setSelectedNav('pool')}
+              className={`${style.navItem} ${selectedNav === 'pool' && style.activeNavItem
+                }`}
+            >
+              Pool
+            </div>
+            {/**
           <div
             onClick={() => setSelectedNav('vote')}
             className={`${style.navItem} ${
@@ -69,74 +67,73 @@ const Home: NextPage = () => {
             Vote
           </div>
            */}
-          <div
-            onClick={() => setSelectedNav('account')}
-            className={`${style.navItem} ${
-              selectedNav === 'account' && style.activeNavItem
-            }`}
-          >
-            Account
-          </div>
-          <a
-            href='https://portal.astar.network/#/shiden/'
-            target='_blank'
-            rel='noreferrer'
-          >
-            <div className={style.navItem}>
-              Portal <FiArrowUpRight />
+            <div
+              onClick={() => setSelectedNav('account')}
+              className={`${style.navItem} ${selectedNav === 'account' && style.activeNavItem
+                }`}
+            >
+              Account
             </div>
-          </a>
-        </div>
-      </div>
-	  
-      <div className={style.buttonsContainer}>
-        <div className={`${style.button} ${style.buttonPadding}`}>
-          <div className={style.buttonIconContainer}>
-            <Image src={Shiden} alt='shiden' height={20} width={20} />
-          </div>
-          <p>Shiden</p>
-          <div className={style.buttonIconContainer}>
-            <AiOutlineDown />
+            <a
+              href='https://portal.astar.network/#/shiden/'
+              target='_blank'
+              rel='noreferrer'
+            >
+              <div className={style.navItem}>
+                Portal <FiArrowUpRight />
+              </div>
+            </a>
           </div>
         </div>
-        {currentAccount ? (
-          <div className={`${style.button} ${style.buttonPadding}`}>
-          <div className={style.buttonIconContainer}>
-          <Identicon
-            value={currentAccount.address}
-            size={20}
-            theme={'polkadot'}
-        />
-          </div>
-          <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
-          </div>
-          ) : (
-          <div
-            onClick={() => connectWallet()}
-            className={`${style.button} ${style.buttonPadding}`}
-          >
-            <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
-              Connect Wallet
-            </div>
-          </div>
-        )}
-        
-        <div className={`${style.button} ${style.buttonPadding}`}>
-          <div className={`${style.buttonIconContainer} mx-2`}>
-            <HiOutlineDotsVertical />
-          </div>
-        </div>
-      </div>
-    </div>
 
-      {selectedNav == 'swap' &&(
+        <div className={style.buttonsContainer}>
+          <div className={`${style.button} ${style.buttonPadding}`}>
+            <div className={style.buttonIconContainer}>
+              <Image src={Shiden} alt='shiden' height={20} width={20} />
+            </div>
+            <p>Shiden</p>
+            <div className={style.buttonIconContainer}>
+              <AiOutlineDown />
+            </div>
+          </div>
+          {currentAccount ? (
+            <div className={`${style.button} ${style.buttonPadding}`}>
+              <div className={style.buttonIconContainer}>
+                <Identicon
+                  value={currentAccount.address}
+                  size={20}
+                  theme={'polkadot'}
+                />
+              </div>
+              <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
+            </div>
+          ) : (
+            <div
+              onClick={() => connectWallet()}
+              className={`${style.button} ${style.buttonPadding}`}
+            >
+              <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
+                Connect Wallet
+              </div>
+            </div>
+          )}
+
+          <div className={`${style.button} ${style.buttonPadding}`}>
+            <div className={`${style.buttonIconContainer} mx-2`}>
+              <HiOutlineDotsVertical />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {selectedNav == 'swap' && (
         <Main />
       )}
-      {selectedNav == 'pool' &&(
+      {selectedNav == 'pool' && (
         <Liquidity />
       )}
-      {selectedNav == 'account' &&(
-        <AccountList/>
+      {selectedNav == 'account' && (
+        <AccountList />
       )}
       <Footer />
     </div>
