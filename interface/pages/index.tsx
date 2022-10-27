@@ -59,6 +59,7 @@ const Home: NextPage = () => {
           >
             Pool
           </div>
+          {/**
           <div
             onClick={() => setSelectedNav('vote')}
             className={`${style.navItem} ${
@@ -67,6 +68,7 @@ const Home: NextPage = () => {
           >
             Vote
           </div>
+           */}
           <div
             onClick={() => setSelectedNav('account')}
             className={`${style.navItem} ${
