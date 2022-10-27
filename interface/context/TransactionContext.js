@@ -1,9 +1,6 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
 import React ,{ useState,useEffect} from 'react'
 //import { ApiPromise, WsProvider } from '@polkadot/api';
-//import dynamic from 'next/dynamic'
-//const web3Accounts = dynamic(() => import('@polkadot/extension-dapp'), { ssr: false })
-//const web3Enable = dynamic(() => import('@polkadot/extension-dapp'), { ssr: false })
 
 export const TransactionContext = React.createContext()
 
@@ -40,7 +37,7 @@ const DAPP_NAME = 'Shiden DEX'
 				api.rpc.system.version()
 			  ]);
 			console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
-			
+
 			const allaccounts = await web3Accounts();
 			const account = allAccounts[0];
 			setCurrentAccount(account)
