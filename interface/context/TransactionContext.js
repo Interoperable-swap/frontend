@@ -1,6 +1,5 @@
 import { ApiPromise, WsProvider } from '@polkadot/api'
 import React ,{ useState,useEffect} from 'react'
-//import { ApiPromise, WsProvider } from '@polkadot/api';
 
 export const TransactionContext = React.createContext()
 
@@ -35,14 +34,13 @@ const DAPP_NAME = 'Shiden DEX'
 				api.rpc.system.chain(),
 				api.rpc.system.name(),
 				api.rpc.system.version()
-			  ]);
+			]);
 			console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
 
 			const allaccounts = await web3Accounts();
-			const account = allAccounts[0];
+			const account = allaccounts[0];
 			setCurrentAccount(account)
-			const injector = await web3FromSource(account.meta.source);
-
+			
 		  if (!pjs) return alert('Please install polkadot-js ')
 		} catch (error) {
 			console.error(error)
@@ -61,7 +59,6 @@ const DAPP_NAME = 'Shiden DEX'
 
       if (allaccounts.length) {
         setCurrentAccount(allaccounts[0])
-		console.log('wallet is already connected!')
       }
 	  const provider = new WsProvider(WS_PROVIDER);
 	  // Create the API and wait until ready

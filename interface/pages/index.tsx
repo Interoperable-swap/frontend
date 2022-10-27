@@ -10,7 +10,6 @@ import Shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
 import { TransactionContext } from '../context/TransactionContext'
 //import Footer from '../components/Footer'
-//import { Router, useRouter } from "next/router";
 import dynamic from 'next/dynamic'
 const Identicon = dynamic(() => import('@polkadot/react-identicon'), { ssr: false });
 
