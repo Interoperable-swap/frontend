@@ -28,7 +28,7 @@ const DAPP_NAME = 'Shiden DEX'
 				return;
 			}
 			const provider = new WsProvider(WS_PROVIDER);
-			// Create the API and wait until ready
+
 			const api = await ApiPromise.create({ provider });
 			const allaccounts = await web3Accounts();
 			const account = allaccounts[0];
@@ -43,8 +43,6 @@ const DAPP_NAME = 'Shiden DEX'
 		const { web3Enable ,web3Accounts,web3FromSource } = await import("@polkadot/extension-dapp");
 		const extensions = await web3Enable(DAPP_NAME);
 		if (extensions.length === 0) {
-			// no extension installed, or the user did not accept the authorization
-			// in this case we should inform the use and give a link to the extension
 			return;
 		}
 		const allaccounts = await web3Accounts();
@@ -54,16 +52,9 @@ const DAPP_NAME = 'Shiden DEX'
 		const provider = new WsProvider(WS_PROVIDER);
 		// Create the API and wait until ready
 		const api = await ApiPromise.create({ provider });
+		await api.isReady;
 		const account = allaccounts[0];
 		setCurrentAccount(account)
-		const transferExtrinsic = api.tx.balances.transfer('5C5555yEXUcmEJ5kkcCMvdZjUo7NGJiQJMS7vZXEeoMhj3VQ', 12345)
-		const injector = await web3FromSource(account.meta.source);
-		transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
-			if (status.isInBlock) {
-				console.log(`Completed at block hash #${status.asInBlock.toString()}`);
-			} else {
-				console.log(`Current status: ${status.type}`);
-			}})
     } catch (error) {
       console.error(error)
     }

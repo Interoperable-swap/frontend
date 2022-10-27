@@ -1,6 +1,7 @@
 import React, { useContext, useEffect ,useState} from "react"
 import type { NextPage } from 'next'
 import Liquidity from '../components/AddLiquidity'
+import AccountList from '../components/AccountList'
 import Main from '../components/Main'
 import Image from "next/image"
 import {FiArrowUpRight} from 'react-icons/fi'
@@ -66,6 +67,14 @@ const Home: NextPage = () => {
           >
             Vote
           </div>
+          <div
+            onClick={() => setSelectedNav('account')}
+            className={`${style.navItem} ${
+              selectedNav === 'account' && style.activeNavItem
+            }`}
+          >
+            Account
+          </div>
           <a
             href='https://portal.astar.network/#/shiden/'
             target='_blank'
@@ -123,6 +132,9 @@ const Home: NextPage = () => {
       )}
       {selectedNav == 'pool' &&(
         <Liquidity />
+      )}
+      {selectedNav == 'account' &&(
+        <AccountList/>
       )}
       {/*
       <Footer />

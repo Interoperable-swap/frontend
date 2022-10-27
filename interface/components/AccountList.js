@@ -1,22 +1,36 @@
-import React, { useContext } from "react"
-//import Identicon from '@polkadot/react-identicon'
-//import {TransactionContext } from '../context/TransactionContext'
+import React, { useContext, useEffect } from "react"
+import {TransactionContext } from '../context/TransactionContext'
+import dynamic from 'next/dynamic'
+const Identicon = dynamic(() => import('@polkadot/react-identicon'), { ssr: false });
+const { ApiPromise, WsProvider } = require('@polkadot/api');
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
-  currencySelector: `flex w-1/4`,
-  buttonTextContainer: `h-8 flex items-center`,
+  content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
+  title: 'px-2 flex items-center justify-between font-semibold text-xl',
+  currencySelector: `h-8 flex items-center`,
+  buttonTextContainer: `h-8 flex items-center font-semibold text-l`,
 }
+
 const AccountList = () => {
-	const { connectWallet, currentAccount } = useContext(TransactionContext)
+	const { currentAccount } = useContext(TransactionContext)
 	
+	const gasLimit = 3000n * 1000000n;
+	useEffect(() => {
+		main()
+	},[])
+
+	const main = async() => {
+	  // Create our API with a default connection to the local node
+	  const provider = new WsProvider('wss://shibuya.public.blastapi.io');
+	  const api = await ApiPromise.create({ provider });
+	}
 	return (
 	  <div className={style.wrapper}>
 		{currentAccount ? (
-			<div>
-			<div>Accounts</div>
+			<div className={style.content}>
+			<h2 className={style.title}>Account</h2>
 				<div className={style.currencySelector}>
-					{/**
 					<div>
 						<Identicon
 							value={currentAccount.address}
@@ -24,10 +38,9 @@ const AccountList = () => {
 							theme={'polkadot'}
 						/>
 					</div> 
-					*/}
 				<div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
 			</div>
-				<div className={style.buttonTextContainer}>{currentAccount.address}</div>
+				<div className={style.buttonTextContainer}>Address : {currentAccount.address}</div>
 			</div>
 			) : (
 			<h1>Wallet is not connected</h1>
