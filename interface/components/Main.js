@@ -6,7 +6,7 @@ import astar from '../assets/astar.png'
 import shiden from '../assets/Shiden.png'
 import usdt from '../assets/usdt.svg'
 import { useState } from 'react'
-
+import Button from '../components/Button'
 const style = {
 	wrapper: `w-screen flex items-center justify-center mt-14`,
 	content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
@@ -19,7 +19,6 @@ const style = {
 	swapIcon: `flex items-center justify-center`,
 	currencySelectorTicker: `mx-2`,
 	currencySelectorArrow: `text-lg`,
-	confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
 const Main = () => {
 	const [showList, setShowList] = useState(false);
@@ -101,9 +100,7 @@ const Main = () => {
 						</button>
 					</div>
 				</div>
-				<div onClick={e => handleSubmit(e)} className={style.confirmButton}>
-					Confirm
-				</div>
+				<Button title='confirm' />
 			</div>
 
 		</div>

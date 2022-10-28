@@ -3,9 +3,11 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
-import { ApiPromise, WsProvider } from "@polkadot/api";
-import { Abi, ContractPromise } from '@polkadot/api-contract'
-import { ROUTER_ABI, ROUTER_ADDRESS } from '../abi/router'
+//import { Abi, ContractPromise } from '@polkadot/api-contract'
+//import { ROUTER_ABI, ROUTER_ADDRESS } from '../abi/router'
+import Button from './Button'
+import { TransactionContext } from '../context/TransactionContext'
+import React, { useContext } from "react"
 
 const style = {
 	wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -21,16 +23,35 @@ const style = {
 	plusIcon: `flex items-center justify-center`,
 	confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
+
 const Liquidity = () => {
+	const { currentAccount, api,handleChange,amount } = useContext(TransactionContext);
+	const add_liquidity = async () => {
+		//const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
 
-	const add_liquidigy = async () => {
-		//connect local node
-		const provider = new WsProvider('ws://127.0.0.1:9944');
-		//create instance
-		const api = await ApiPromise.create({ provider });
-		const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
+		//const provider = new WsProvider('wss://shibuya.public.blastapi.io');
+		//const api = await ApiPromise.create({ provider });
+		const [chain, nodeName, nodeVersion] = await Promise.all([
+			api.rpc.system.chain(),
+			api.rpc.system.name(),
+			api.rpc.system.version()
+		]);
+
+		console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
+		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF'
+		const { web3FromSource } = await import('@polkadot/extension-dapp')
+		const account = currentAccount
+		const injector = await web3FromSource(account.meta.source);
+		const transferExtrinsic = api.tx.balances.transfer(recipient, amount)
+		transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
+			if (status.isInBlock) {
+				console.log(`Completed at block hash #${status.asInBlock.toString()}`);
+			} else {
+				console.log(`Current status: ${status.type}`);
+			}
+		})
+
 	}
-
 	return (
 		<div className={style.wrapper}>
 			<div className={style.content}>
@@ -82,11 +103,10 @@ const Liquidity = () => {
 						</div>
 					</div>
 				</div>
-				<div onClick={e => handleSubmit(e)} className={style.confirmButton}>
-					Confirm
+				<div onClick={() => add_liquidity()}>
+					<Button title='Add liquidity' />
 				</div>
 			</div>
-
 		</div>
 	)
 }

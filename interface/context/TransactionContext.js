@@ -12,11 +12,14 @@ const WS_PROVIDER = 'wss://shibuya.public.blastapi.io'
 const DAPP_NAME = 'Shiden DEX'
 export const TransactionProvider = ({ children }) => {
 	const [currentAccount, setCurrentAccount] = useState()
-
+	const [api, setapi] = useState()
+	const [amount, setAmount] = useState();
 	useEffect(() => {
 		checkIfWalletIsConnected()
 	}, [])
-
+	const handleChange = (e) => {
+		setAmount(e.target.value)
+	  }
 	const connectWallet = async () => {
 		try {
 			if (!pjs) return alert('Please install polkadot-js ')
@@ -30,6 +33,7 @@ export const TransactionProvider = ({ children }) => {
 			const provider = new WsProvider(WS_PROVIDER);
 
 			const api = await ApiPromise.create({ provider });
+			setapi(api)
 			const allaccounts = await web3Accounts();
 			const account = allaccounts[0];
 			setCurrentAccount(account)
@@ -50,8 +54,8 @@ export const TransactionProvider = ({ children }) => {
 				setCurrentAccount(allaccounts[0])
 			}
 			const provider = new WsProvider(WS_PROVIDER);
-			// Create the API and wait until ready
 			const api = await ApiPromise.create({ provider });
+			setapi(api);
 			await api.isReady;
 			const account = allaccounts[0];
 			setCurrentAccount(account)
@@ -64,6 +68,9 @@ export const TransactionProvider = ({ children }) => {
 			value={{
 				currentAccount,
 				connectWallet,
+				api,
+				handleChange,
+				amount,
 			}}>
 			{children}
 		</TransactionContext.Provider>
