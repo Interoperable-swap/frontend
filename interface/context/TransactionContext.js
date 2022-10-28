@@ -13,11 +13,13 @@ const DAPP_NAME = 'Shiden DEX'
 export const TransactionProvider = ({ children }) => {
 	const [currentAccount, setCurrentAccount] = useState()
 	const [api, setapi] = useState()
-
+	const [amount, setAmount] = useState();
 	useEffect(() => {
 		checkIfWalletIsConnected()
 	}, [])
-
+	const handleChange = (e) => {
+		setAmount(e.target.value)
+	  }
 	const connectWallet = async () => {
 		try {
 			if (!pjs) return alert('Please install polkadot-js ')
@@ -67,6 +69,8 @@ export const TransactionProvider = ({ children }) => {
 				currentAccount,
 				connectWallet,
 				api,
+				handleChange,
+				amount,
 			}}>
 			{children}
 		</TransactionContext.Provider>

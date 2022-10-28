@@ -5,7 +5,7 @@ const style = {
 
 const Button = (props) => {
 	return (
-		<div onClick={e => handleSubmit(e)} className={style.confirmButton}>
+		<div className={style.confirmButton}>
 		{props.title}
 		</div>
 	)

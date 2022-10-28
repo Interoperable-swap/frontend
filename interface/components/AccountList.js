@@ -13,7 +13,7 @@ const style = {
 }
 
 const AccountList = () => {
-	const { currentAccount } = useContext(TransactionContext)
+	const { currentAccount , api } = useContext(TransactionContext)
 
 	const gasLimit = 3000n * 1000000n;
 	useEffect(() => {
@@ -21,9 +21,6 @@ const AccountList = () => {
 	}, [])
 
 	const main = async () => {
-		// Create our API with a default connection to the local node
-		const provider = new WsProvider('wss://shibuya.public.blastapi.io');
-		const api = await ApiPromise.create({ provider });
 	}
 	return (
 		<div className={style.wrapper}>

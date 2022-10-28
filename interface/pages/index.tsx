@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import type { NextPage } from 'next'
-import Liquidity from '../components/AddLiquidity'
+import AddLiquidity from '../components/AddLiquidity'
 import AccountList from '../components/AccountList'
 import Main from '../components/Main'
 import Image from "next/image"
@@ -74,7 +74,7 @@ const Home: NextPage = () => {
               Account
             </div>
             <a
-              href='https://portal.astar.network/#/shiden/'
+              href='https://portal.astar.network/#/shiden/assets'
               target='_blank'
               rel='noreferrer'
             >
@@ -129,7 +129,7 @@ const Home: NextPage = () => {
         <Main />
       )}
       {selectedNav == 'pool' && (
-        <Liquidity />
+        <AddLiquidity />
       )}
       {selectedNav == 'account' && (
         <AccountList />
