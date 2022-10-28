@@ -1,5 +1,5 @@
 ## 1.- Title of the project
-Shiden AMM
+
 ## 2.- Project description (minimum 150 words)
 The AMM will have the following features: Provide, Withdraw and Swap. It will also support trading fees to incentivize liquidity providers to add liquidity and slippage tolerance to protect traders from market fluctuation. To keep things simple, The AMM doesn't implement routing and, hence it will deal with only two tokens at a time. The AMM will maintain its own internal mapping that stores the balance of accounts instead of dealing with the external tokens.
 
