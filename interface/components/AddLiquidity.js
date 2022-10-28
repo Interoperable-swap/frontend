@@ -6,6 +6,7 @@ import Shiden from '../assets/Shiden.png'
 import { ApiPromise, WsProvider } from "@polkadot/api";
 import { Abi, ContractPromise } from '@polkadot/api-contract'
 import { ROUTER_ABI, ROUTER_ADDRESS } from '../abi/router'
+import Button from '../components/Button'
 
 const style = {
 	wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -82,9 +83,7 @@ const Liquidity = () => {
 						</div>
 					</div>
 				</div>
-				<div onClick={e => handleSubmit(e)} className={style.confirmButton}>
-					Confirm
-				</div>
+				<Button title='Add liquidity'/>
 			</div>
 
 		</div>
