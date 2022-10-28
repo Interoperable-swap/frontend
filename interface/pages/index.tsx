@@ -33,8 +33,7 @@ const style = {
 
 const Home: NextPage = () => {
   const [selectedNav, setSelectedNav] = useState('swap')
-  const { connectWallet, currentAccount } = useContext(TransactionContext)
-
+  const { connectWallet, currentAccount, api } = useContext(TransactionContext)
   return (
     <div className={style.wrapper}>
       <div className={style.headwrapper}>

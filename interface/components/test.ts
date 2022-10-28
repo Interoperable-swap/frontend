@@ -13,7 +13,8 @@ import Router from '../types/contracts/router_contract';
 import { ApiPromise, WsProvider, Keyring } from '@polkadot/api';
 import { KeyringPair } from '@polkadot/keyring/types';
 import { AccountId, Hash } from '../types/types-arguments/factory_contract';
-
+import { TransactionContext } from '../context/TransactionContext'
+import { useContext } from 'react';
 const zeroAddress = encodeAddress(
 	'0x0000000000000000000000000000000000000000000000000000000000000000',
 );
@@ -21,7 +22,7 @@ const zeroAddress = encodeAddress(
 const MINIMUM_LIQUIDITY = 1000;
 
 // Create a new instance of contract
-const wsProvider = new WsProvider('ws://127.0.0.1:9944');
+const { api } = useContext(TransactionContext)
 // Create a keyring instance
 const keyring = new Keyring({ type: 'sr25519' });
 
@@ -30,7 +31,7 @@ let factoryFactory: Factory_factory;
 let routerFactory: Router_factory;
 let tokenFactory: Token_factory;
 let wnativeFactory: Wnative_factory;
-let api: ApiPromise;
+//let api: ApiPromise;
 let deployer: KeyringPair;
 let wallet: KeyringPair;
 // const alice = keyring.addFromUri('//Alice//stash');
@@ -46,7 +47,7 @@ let wnative: Wnative;
 async function setupPsp22(): Promise<void> {
 	tokenFactory = new Token_factory(api, deployer);
 	const totalSupply = new BN(10000000);
-	
+
 	//create new token. tokenaddress = token contract address
 	const tokenAaddress = (await tokenFactory.new(totalSupply)).address;
 	const tokenBaddress = (await tokenFactory.new(totalSupply)).address;
@@ -59,16 +60,16 @@ async function setupPsp22(): Promise<void> {
 }
 
 async function setupRouter(): Promise<void> {
-    wnativeFactory = new Wnative_factory(api, deployer);
-    wnative = new Wnative((await wnativeFactory.new()).address, deployer, api);
-    routerFactory = new Router_factory(api, deployer);
-    router = new Router(
-      (
-        await routerFactory.new(factory.address, wnative.address, pairHash)
-      ).address,
-      deployer,
-      api,
-    );
-  }
+	wnativeFactory = new Wnative_factory(api, deployer);
+	wnative = new Wnative((await wnativeFactory.new()).address, deployer, api);
+	routerFactory = new Router_factory(api, deployer);
+	router = new Router(
+		(
+			await routerFactory.new(factory.address, wnative.address, pairHash)
+		).address,
+		deployer,
+		api,
+	);
+}
 //
 
