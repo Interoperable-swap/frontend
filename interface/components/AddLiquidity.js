@@ -23,9 +23,8 @@ const style = {
 	plusIcon: `flex items-center justify-center`,
 	confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
-
 const Liquidity = () => {
-	const { currentAccount, api,handleChange,amount } = useContext(TransactionContext);
+	const { currentAccount, api, handleChange, amount } = useContext(TransactionContext);
 	const add_liquidity = async () => {
 		//const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
 
@@ -36,9 +35,8 @@ const Liquidity = () => {
 			api.rpc.system.name(),
 			api.rpc.system.version()
 		]);
-
-		console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
-		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF'
+		console.log('amount:', amount);
+		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF' //dev1
 		const { web3FromSource } = await import('@polkadot/extension-dapp')
 		const account = currentAccount
 		const injector = await web3FromSource(account.meta.source);
