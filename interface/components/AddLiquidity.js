@@ -27,14 +27,6 @@ const Liquidity = () => {
 	const { currentAccount, api, handleChange, amount } = useContext(TransactionContext);
 	const add_liquidity = async () => {
 		//const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
-
-		//const provider = new WsProvider('wss://shibuya.public.blastapi.io');
-		//const api = await ApiPromise.create({ provider });
-		const [chain, nodeName, nodeVersion] = await Promise.all([
-			api.rpc.system.chain(),
-			api.rpc.system.name(),
-			api.rpc.system.version()
-		]);
 		console.log('amount:', amount);
 		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF' //dev1
 		const { web3FromSource } = await import('@polkadot/extension-dapp')
@@ -48,6 +40,9 @@ const Liquidity = () => {
 				console.log(`Current status: ${status.type}`);
 			}
 		})
+
+	}
+	const approve = async() => {
 
 	}
 	return (
