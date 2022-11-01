@@ -3,8 +3,8 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
-//import { Abi, ContractPromise } from '@polkadot/api-contract'
-//import { ROUTER_ABI, ROUTER_ADDRESS } from '../abi/router'
+import { ContractPromise } from '@polkadot/api-contract'
+import { ERC20 } from '../abi/erc20'
 import Button from './Button'
 import { TransactionContext } from '../context/TransactionContext'
 import React, { useContext } from "react"
@@ -26,7 +26,6 @@ const style = {
 const Liquidity = () => {
 	const { currentAccount, api, handleChange, amount } = useContext(TransactionContext);
 	const add_liquidity = async () => {
-		//const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
 		console.log('amount:', amount);
 		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF' //dev1
 		const { web3FromSource } = await import('@polkadot/extension-dapp')
@@ -42,15 +41,22 @@ const Liquidity = () => {
 		})
 
 	}
-	const approve = async() => {
-
+	const approve = async () => {
+		const gasLimit = 3000n * 1000000n;
+		const target = '5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y';
+		const erc20address = 'XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7';
+		const contract = new ContractPromise(api, ERC20, erc20address);
+		// the address to subtract the fees from
+		const from = currentAccount;
+		const callValue = await contract.query.balanceOf(from, { gasLimit: -1 }, target);
+		console.log(callValue);
 	}
 	return (
 		<div className={style.wrapper}>
 			<div className={style.content}>
 				<div className={style.formHeader}>
 					<div>Add Liquidity</div>
-					<div>
+					<div onClick={() => approve()}>
 						<RiSettings3Fill />
 					</div>
 				</div>
