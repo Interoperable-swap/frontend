@@ -32,21 +32,23 @@ const Liquidity = () => {
 		const account = currentAccount
 		const injector = await web3FromSource(account.meta.source);
 		const transferExtrinsic = api.tx.balances.transfer(recipient, amount)
-		transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
-			if (status.isInBlock) {
-				console.log(`Completed at block hash #${status.asInBlock.toString()}`);
-			} else {
-				console.log(`Current status: ${status.type}`);
-			}
-		})
-
+		if (amount === '0' || amount === '') {
+			alert('please input amount')
+		} else {
+			transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
+				if (status.isInBlock) {
+					console.log(`Completed at block hash #${status.asInBlock.toString()}`);
+				} else {
+					console.log(`Current status: ${status.type}`);
+				}
+			})
+		}
 	}
 	const approve = async () => {
 		const gasLimit = 3000n * 1000000n;
 		const target = '5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y';
 		const erc20address = 'XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7';
 		const contract = new ContractPromise(api, ERC20, erc20address);
-		// the address to subtract the fees from
 		const from = currentAccount;
 		const callValue = await contract.query.balanceOf(from, { gasLimit: -1 }, target);
 		console.log(callValue);
