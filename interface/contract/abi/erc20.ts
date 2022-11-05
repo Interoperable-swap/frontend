@@ -1,516 +1,446 @@
-export const ERC20 ={
-  "source": {
-    "hash": "0xfc8f1123836e2fd811a79ccd40855cfeb2c73c0e8aa4c99a8ec995a480e22c8a",
-    "language": "ink! 3.3.1",
-    "compiler": "rustc 1.65.0-nightly"
+export const ERC20 = {
+  source: {
+    hash: "0xfc8f1123836e2fd811a79ccd40855cfeb2c73c0e8aa4c99a8ec995a480e22c8a",
+    language: "ink! 3.3.1",
+    compiler: "rustc 1.65.0-nightly",
   },
-  "contract": {
-    "name": "erc20",
-    "version": "0.1.0",
-    "authors": [
-      "[your_name] <[your_email]>"
-    ]
+  contract: {
+    name: "erc20",
+    version: "0.1.0",
+    authors: ["[your_name] <[your_email]>"],
   },
-  "V3": {
-    "spec": {
-      "constructors": [
+  V3: {
+    spec: {
+      constructors: [
         {
-          "args": [
+          args: [
             {
-              "label": "initial_supply",
-              "type": {
-                "displayName": [
-                  "Balance"
-                ],
-                "type": 0
-              }
-            }
+              label: "initial_supply",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
           ],
-          "docs": [],
-          "label": "new",
-          "payable": false,
-          "selector": "0x9bae9d5e"
-        }
+          docs: [],
+          label: "new",
+          payable: false,
+          selector: "0x9bae9d5e",
+        },
       ],
-      "docs": [],
-      "events": [
+      docs: [],
+      events: [
         {
-          "args": [
+          args: [
             {
-              "docs": [],
-              "indexed": true,
-              "label": "from",
-              "type": {
-                "displayName": [
-                  "Option"
-                ],
-                "type": 9
-              }
+              docs: [],
+              indexed: true,
+              label: "from",
+              type: {
+                displayName: ["Option"],
+                type: 9,
+              },
             },
             {
-              "docs": [],
-              "indexed": true,
-              "label": "to",
-              "type": {
-                "displayName": [
-                  "Option"
-                ],
-                "type": 9
-              }
+              docs: [],
+              indexed: true,
+              label: "to",
+              type: {
+                displayName: ["Option"],
+                type: 9,
+              },
             },
             {
-              "docs": [],
-              "indexed": true,
-              "label": "value",
-              "type": {
-                "displayName": [
-                  "Balance"
-                ],
-                "type": 0
-              }
-            }
+              docs: [],
+              indexed: true,
+              label: "value",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
           ],
-          "docs": [],
-          "label": "Transfer"
+          docs: [],
+          label: "Transfer",
         },
         {
-          "args": [
+          args: [
             {
-              "docs": [],
-              "indexed": true,
-              "label": "owner",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              docs: [],
+              indexed: true,
+              label: "owner",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "docs": [],
-              "indexed": true,
-              "label": "spender",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              docs: [],
+              indexed: true,
+              label: "spender",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "docs": [],
-              "indexed": true,
-              "label": "value",
-              "type": {
-                "displayName": [
-                  "Balance"
-                ],
-                "type": 0
-              }
-            }
+              docs: [],
+              indexed: true,
+              label: "value",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
           ],
-          "docs": [],
-          "label": "Approval"
-        }
+          docs: [],
+          label: "Approval",
+        },
       ],
-      "messages": [
+      messages: [
         {
-          "args": [],
-          "docs": [],
-          "label": "total_supply",
-          "mutates": false,
-          "payable": false,
-          "returnType": {
-            "displayName": [
-              "Balance"
-            ],
-            "type": 0
+          args: [],
+          docs: [],
+          label: "total_supply",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["Balance"],
+            type: 0,
           },
-          "selector": "0xdb6375a8"
+          selector: "0xdb6375a8",
         },
         {
-          "args": [
+          args: [
             {
-              "label": "owner",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
-            }
+              label: "owner",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
+            },
           ],
-          "docs": [],
-          "label": "balance_of",
-          "mutates": false,
-          "payable": false,
-          "returnType": {
-            "displayName": [
-              "Balance"
-            ],
-            "type": 0
+          docs: [],
+          label: "balance_of",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["Balance"],
+            type: 0,
           },
-          "selector": "0x0f755a56"
+          selector: "0x0f755a56",
         },
         {
-          "args": [
+          args: [
             {
-              "label": "spender",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              label: "spender",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "label": "value",
-              "type": {
-                "displayName": [
-                  "Balance"
-                ],
-                "type": 0
-              }
-            }
+              label: "value",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
           ],
-          "docs": [],
-          "label": "approve",
-          "mutates": true,
-          "payable": false,
-          "returnType": {
-            "displayName": [
-              "bool"
-            ],
-            "type": 8
+          docs: [],
+          label: "approve",
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ["bool"],
+            type: 8,
           },
-          "selector": "0x681266a0"
+          selector: "0x681266a0",
         },
         {
-          "args": [
+          args: [
             {
-              "label": "owner",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              label: "owner",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "label": "spender",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
-            }
+              label: "spender",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
+            },
           ],
-          "docs": [],
-          "label": "allowance",
-          "mutates": false,
-          "payable": false,
-          "returnType": {
-            "displayName": [
-              "Balance"
-            ],
-            "type": 0
+          docs: [],
+          label: "allowance",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["Balance"],
+            type: 0,
           },
-          "selector": "0x6a00165e"
+          selector: "0x6a00165e",
         },
         {
-          "args": [
+          args: [
             {
-              "label": "from",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              label: "from",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "label": "to",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              label: "to",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "label": "value",
-              "type": {
-                "displayName": [
-                  "Balance"
-                ],
-                "type": 0
-              }
-            }
+              label: "value",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
           ],
-          "docs": [],
-          "label": "transfer_from",
-          "mutates": true,
-          "payable": false,
-          "returnType": {
-            "displayName": [
-              "bool"
-            ],
-            "type": 8
+          docs: [],
+          label: "transfer_from",
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ["bool"],
+            type: 8,
           },
-          "selector": "0x0b396f18"
+          selector: "0x0b396f18",
         },
         {
-          "args": [
+          args: [
             {
-              "label": "to",
-              "type": {
-                "displayName": [
-                  "AccountId"
-                ],
-                "type": 2
-              }
+              label: "to",
+              type: {
+                displayName: ["AccountId"],
+                type: 2,
+              },
             },
             {
-              "label": "value",
-              "type": {
-                "displayName": [
-                  "Balance"
-                ],
-                "type": 0
-              }
-            }
+              label: "value",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
           ],
-          "docs": [],
-          "label": "transfer",
-          "mutates": true,
-          "payable": false,
-          "returnType": {
-            "displayName": [
-              "bool"
-            ],
-            "type": 8
+          docs: [],
+          label: "transfer",
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ["bool"],
+            type: 8,
           },
-          "selector": "0x84a15da1"
-        }
-      ]
+          selector: "0x84a15da1",
+        },
+      ],
     },
-    "storage": {
-      "struct": {
-        "fields": [
+    storage: {
+      struct: {
+        fields: [
           {
-            "layout": {
-              "cell": {
-                "key": "0x0000000000000000000000000000000000000000000000000000000000000000",
-                "ty": 0
-              }
+            layout: {
+              cell: {
+                key: "0x0000000000000000000000000000000000000000000000000000000000000000",
+                ty: 0,
+              },
             },
-            "name": "total_supply"
+            name: "total_supply",
           },
           {
-            "layout": {
-              "cell": {
-                "key": "0x0100000000000000000000000000000000000000000000000000000000000000",
-                "ty": 1
-              }
+            layout: {
+              cell: {
+                key: "0x0100000000000000000000000000000000000000000000000000000000000000",
+                ty: 1,
+              },
             },
-            "name": "balances"
+            name: "balances",
           },
           {
-            "layout": {
-              "cell": {
-                "key": "0x0200000000000000000000000000000000000000000000000000000000000000",
-                "ty": 6
-              }
+            layout: {
+              cell: {
+                key: "0x0200000000000000000000000000000000000000000000000000000000000000",
+                ty: 6,
+              },
             },
-            "name": "allowances"
-          }
-        ]
-      }
+            name: "allowances",
+          },
+        ],
+      },
     },
-    "types": [
+    types: [
       {
-        "id": 0,
-        "type": {
-          "def": {
-            "primitive": "u128"
-          }
-        }
+        id: 0,
+        type: {
+          def: {
+            primitive: "u128",
+          },
+        },
       },
       {
-        "id": 1,
-        "type": {
-          "def": {
-            "composite": {
-              "fields": [
+        id: 1,
+        type: {
+          def: {
+            composite: {
+              fields: [
                 {
-                  "name": "offset_key",
-                  "type": 5,
-                  "typeName": "Key"
-                }
-              ]
-            }
+                  name: "offset_key",
+                  type: 5,
+                  typeName: "Key",
+                },
+              ],
+            },
           },
-          "params": [
+          params: [
             {
-              "name": "K",
-              "type": 2
+              name: "K",
+              type: 2,
             },
             {
-              "name": "V",
-              "type": 0
-            }
+              name: "V",
+              type: 0,
+            },
           ],
-          "path": [
-            "ink_storage",
-            "lazy",
-            "mapping",
-            "Mapping"
-          ]
-        }
+          path: ["ink_storage", "lazy", "mapping", "Mapping"],
+        },
       },
       {
-        "id": 2,
-        "type": {
-          "def": {
-            "composite": {
-              "fields": [
+        id: 2,
+        type: {
+          def: {
+            composite: {
+              fields: [
                 {
-                  "type": 3,
-                  "typeName": "[u8; 32]"
-                }
-              ]
-            }
+                  type: 3,
+                  typeName: "[u8; 32]",
+                },
+              ],
+            },
           },
-          "path": [
-            "ink_env",
-            "types",
-            "AccountId"
-          ]
-        }
+          path: ["ink_env", "types", "AccountId"],
+        },
       },
       {
-        "id": 3,
-        "type": {
-          "def": {
-            "array": {
-              "len": 32,
-              "type": 4
-            }
-          }
-        }
+        id: 3,
+        type: {
+          def: {
+            array: {
+              len: 32,
+              type: 4,
+            },
+          },
+        },
       },
       {
-        "id": 4,
-        "type": {
-          "def": {
-            "primitive": "u8"
-          }
-        }
+        id: 4,
+        type: {
+          def: {
+            primitive: "u8",
+          },
+        },
       },
       {
-        "id": 5,
-        "type": {
-          "def": {
-            "composite": {
-              "fields": [
+        id: 5,
+        type: {
+          def: {
+            composite: {
+              fields: [
                 {
-                  "type": 3,
-                  "typeName": "[u8; 32]"
-                }
-              ]
-            }
+                  type: 3,
+                  typeName: "[u8; 32]",
+                },
+              ],
+            },
           },
-          "path": [
-            "ink_primitives",
-            "Key"
-          ]
-        }
+          path: ["ink_primitives", "Key"],
+        },
       },
       {
-        "id": 6,
-        "type": {
-          "def": {
-            "composite": {
-              "fields": [
+        id: 6,
+        type: {
+          def: {
+            composite: {
+              fields: [
                 {
-                  "name": "offset_key",
-                  "type": 5,
-                  "typeName": "Key"
-                }
-              ]
-            }
+                  name: "offset_key",
+                  type: 5,
+                  typeName: "Key",
+                },
+              ],
+            },
           },
-          "params": [
+          params: [
             {
-              "name": "K",
-              "type": 7
+              name: "K",
+              type: 7,
             },
             {
-              "name": "V",
-              "type": 0
-            }
+              name: "V",
+              type: 0,
+            },
           ],
-          "path": [
-            "ink_storage",
-            "lazy",
-            "mapping",
-            "Mapping"
-          ]
-        }
+          path: ["ink_storage", "lazy", "mapping", "Mapping"],
+        },
       },
       {
-        "id": 7,
-        "type": {
-          "def": {
-            "tuple": [
-              2,
-              2
-            ]
-          }
-        }
+        id: 7,
+        type: {
+          def: {
+            tuple: [2, 2],
+          },
+        },
       },
       {
-        "id": 8,
-        "type": {
-          "def": {
-            "primitive": "bool"
-          }
-        }
+        id: 8,
+        type: {
+          def: {
+            primitive: "bool",
+          },
+        },
       },
       {
-        "id": 9,
-        "type": {
-          "def": {
-            "variant": {
-              "variants": [
+        id: 9,
+        type: {
+          def: {
+            variant: {
+              variants: [
                 {
-                  "index": 0,
-                  "name": "None"
+                  index: 0,
+                  name: "None",
                 },
                 {
-                  "fields": [
+                  fields: [
                     {
-                      "type": 2
-                    }
+                      type: 2,
+                    },
                   ],
-                  "index": 1,
-                  "name": "Some"
-                }
-              ]
-            }
+                  index: 1,
+                  name: "Some",
+                },
+              ],
+            },
           },
-          "params": [
+          params: [
             {
-              "name": "T",
-              "type": 2
-            }
+              name: "T",
+              type: 2,
+            },
           ],
-          "path": [
-            "Option"
-          ]
-        }
-      }
-    ]
-  }
+          path: ["Option"],
+        },
+      },
+    ],
+  },
 };
