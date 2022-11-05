@@ -19,11 +19,11 @@ export const TransactionProvider = ({ children }) => {
 	}, [])
 	const handleChange = (e) => {
 		setAmount(e.target.value)
-	  }
+	}
 	const connectWallet = async () => {
 		try {
 			if (!pjs) return alert('Please install polkadot-js ')
-			const { web3Enable, web3Accounts, web3FromSource } = await import("@polkadot/extension-dapp");
+			const { web3Enable, web3Accounts } = await import("@polkadot/extension-dapp");
 			const extensions = await web3Enable(DAPP_NAME);
 			if (extensions.length === 0) {
 				// no extension installed, or the user did not accept the authorization

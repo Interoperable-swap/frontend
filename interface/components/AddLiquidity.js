@@ -4,7 +4,7 @@ import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
 import { ContractPromise } from '@polkadot/api-contract'
-import { ERC20 } from '../abi/erc20'
+import { ERC20 } from '../contract/abi/erc20'
 import Button from './Button'
 import { TransactionContext } from '../context/TransactionContext'
 import React, { useContext } from "react"
