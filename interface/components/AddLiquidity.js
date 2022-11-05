@@ -3,8 +3,8 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
-//import { Abi, ContractPromise } from '@polkadot/api-contract'
-//import { ROUTER_ABI, ROUTER_ADDRESS } from '../abi/router'
+import { ContractPromise } from '@polkadot/api-contract'
+import { ERC20 } from '../abi/erc20'
 import Button from './Button'
 import { TransactionContext } from '../context/TransactionContext'
 import React, { useContext } from "react"
@@ -23,41 +23,42 @@ const style = {
 	plusIcon: `flex items-center justify-center`,
 	confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 }
-
 const Liquidity = () => {
-	const { currentAccount, api,handleChange,amount } = useContext(TransactionContext);
+	const { currentAccount, api, handleChange, amount } = useContext(TransactionContext);
 	const add_liquidity = async () => {
-		//const contract = new ContractPromise(api, ROUTER_ABI, ROUTER_ADDRESS);
-
-		//const provider = new WsProvider('wss://shibuya.public.blastapi.io');
-		//const api = await ApiPromise.create({ provider });
-		const [chain, nodeName, nodeVersion] = await Promise.all([
-			api.rpc.system.chain(),
-			api.rpc.system.name(),
-			api.rpc.system.version()
-		]);
-
-		console.log(`You are connected to chain ${chain} using ${nodeName} v${nodeVersion}`);
-		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF'
+		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF' //dev1
 		const { web3FromSource } = await import('@polkadot/extension-dapp')
 		const account = currentAccount
 		const injector = await web3FromSource(account.meta.source);
 		const transferExtrinsic = api.tx.balances.transfer(recipient, amount)
-		transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
-			if (status.isInBlock) {
-				console.log(`Completed at block hash #${status.asInBlock.toString()}`);
-			} else {
-				console.log(`Current status: ${status.type}`);
-			}
-		})
-
+		if (amount === '0' || amount === '') {
+			alert('please input amount')
+		} else {
+			transferExtrinsic.signAndSend(account.address, { signer: injector.signer }, ({ status }) => {
+				if (status.isInBlock) {
+					console.log(`Completed at block hash #${status.asInBlock.toString()}`);
+				} else {
+					console.log(`Current status: ${status.type}`);
+				}
+			})
+		}
+	}
+	const approve = async () => {
+		const { web3FromSource } = await import('@polkadot/extension-dapp')
+		const injector = await web3FromSource(currentAccount.meta.source);
+		const gasLimit = 3000n * 1000000n;
+		const target = '5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y';
+		const erc20address = 'XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7';
+		const contract = new ContractPromise(api, ERC20, erc20address);
+		const callValue = await contract.tx.transferFrom(currentAccount, target, 100000);
+		console.log(callValue);
 	}
 	return (
 		<div className={style.wrapper}>
 			<div className={style.content}>
 				<div className={style.formHeader}>
 					<div>Add Liquidity</div>
-					<div>
+					<div onClick={() => approve()}>
 						<RiSettings3Fill />
 					</div>
 				</div>

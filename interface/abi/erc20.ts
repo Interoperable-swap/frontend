@@ -1,4 +1,4 @@
-{
+export const ERC20 ={
   "source": {
     "hash": "0xfc8f1123836e2fd811a79ccd40855cfeb2c73c0e8aa4c99a8ec995a480e22c8a",
     "language": "ink! 3.3.1",
@@ -513,4 +513,4 @@
       }
     ]
   }
-}
+};
