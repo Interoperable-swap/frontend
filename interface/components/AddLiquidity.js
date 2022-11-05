@@ -26,7 +26,6 @@ const style = {
 const Liquidity = () => {
 	const { currentAccount, api, handleChange, amount } = useContext(TransactionContext);
 	const add_liquidity = async () => {
-		console.log('amount:', amount);
 		const recipient = '5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF' //dev1
 		const { web3FromSource } = await import('@polkadot/extension-dapp')
 		const account = currentAccount
@@ -45,12 +44,13 @@ const Liquidity = () => {
 		}
 	}
 	const approve = async () => {
+		const { web3FromSource } = await import('@polkadot/extension-dapp')
+		const injector = await web3FromSource(currentAccount.meta.source);
 		const gasLimit = 3000n * 1000000n;
 		const target = '5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y';
 		const erc20address = 'XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7';
 		const contract = new ContractPromise(api, ERC20, erc20address);
-		const from = currentAccount;
-		const callValue = await contract.query.balanceOf(from, { gasLimit: -1 }, target);
+		const callValue = await contract.tx.transferFrom(currentAccount, target, 100000);
 		console.log(callValue);
 	}
 	return (
