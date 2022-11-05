@@ -1,5 +1,4 @@
-export const ROUTER_ADDRESS = "";
-export const ROUTER_ABI = {
+const ROUTER_CONTRACT = {
   source: {
     hash: "0x94ba8281bbfb0770629bd02347730b93e93e010e7a6f6d7bbd4c80be01636c23",
     language: "ink! 3.3.1",
@@ -1278,3 +1277,4 @@ export const ROUTER_ABI = {
     ],
   },
 };
+export default ROUTER_CONTRACT;
