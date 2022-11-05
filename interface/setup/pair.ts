@@ -25,6 +25,7 @@ console.log("---------------------------------------------");
   //setup token address
   const tokenA = "";
   const tokenB = "";
+  //need to read from contract
 
   const gasLimit = 18750000000;
   const storageDepositLimit = null;
@@ -32,7 +33,7 @@ console.log("---------------------------------------------");
   //get wasm
   const pair_wasm = PAIR_WASM.source.wasm;
   const factory_wasm = FACTORY_WASM.source.wasm;
-  const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1
+  const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
   //initialize pair contract
   const pair = new CodePromise(api, PAIR_CONTRACT, pair_wasm);
   //deploy new pair contract
