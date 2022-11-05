@@ -13,7 +13,7 @@ const style = {
 }
 
 const AccountList = () => {
-	const { currentAccount , api } = useContext(TransactionContext)
+	const { currentAccount, api } = useContext(TransactionContext)
 
 	const gasLimit = 3000n * 1000000n;
 	useEffect(() => {

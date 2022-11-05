@@ -6,7 +6,7 @@ const style = {
 const Button = (props) => {
 	return (
 		<div className={style.confirmButton}>
-		{props.title}
+			{props.title}
 		</div>
 	)
 }
