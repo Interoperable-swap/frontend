@@ -33,11 +33,14 @@ const style = {
   currencySelectorTicker: `mx-2`,
   currencySelectorArrow: `text-lg`,
 };
+
+const MINIMUM_LIQUIDITY = 1000;
+
 const Main = () => {
   const [showList, setShowList] = useState(false);
   const { currentAccount, api, handleChange, amount, signer } =
     useContext(TransactionContext);
-  const swap = async () => {
+  const setup = async () => {
     const gasLimit = 18750000000;
     const storageDepositLimit = null;
     const MINIMUM_LIQUIDITY = 1000;
@@ -49,12 +52,31 @@ const Main = () => {
     const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
     //initialize pair contract
     const pair = new CodePromise(api, PAIR_CONTRACT, pair_wasm);
-    console.log(pair);
-    //deploy new pair contract
-    const pair_contract = pair.tx.new({ gasLimit, storageDepositLimit });
+    const create_pair = pair.tx.new({ gasLimit, storageDepositLimit });
+    create_pair.signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ contract, status }) => {
+        if (status.isInBlock) {
+          let address = contract.address.toString();
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+          console.log(`Contract is deployed: #${address}`);
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
+    );
+    // pair address WtpRP8WkUwv5VVjDk2hjsSrCCr8wiRXGGxtf8qL4BKwixgE
     const pair_code_hash = PAIR_CONTRACT.source.hash;
-    //initialize factory contract
     const factory = new CodePromise(api, FACTORY_CONTRACT, factory_wasm);
+    const create_factory = factory.tx.new(
+      { gasLimit, storageDepositLimit },
+      fee_to_setter,
+      pair_code_hash
+    );
+    //initialize factory contract
     //deploy new factory contract
   };
   return (
