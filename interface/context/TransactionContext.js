@@ -14,6 +14,7 @@ export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState();
   const [api, setapi] = useState();
   const [amount, setAmount] = useState();
+  const [signer, setSigner] = useState();
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
@@ -23,7 +24,7 @@ export const TransactionProvider = ({ children }) => {
   const connectWallet = async () => {
     try {
       if (!pjs) return alert("Please install polkadot-js ");
-      const { web3Enable, web3Accounts } = await import(
+      const { web3Enable, web3Accounts, web3FromSource } = await import(
         "@polkadot/extension-dapp"
       );
       const extensions = await web3Enable(DAPP_NAME);
@@ -39,6 +40,10 @@ export const TransactionProvider = ({ children }) => {
       const allaccounts = await web3Accounts();
       const account = allaccounts[0];
       setCurrentAccount(account);
+      const injector = await web3FromSource(account.meta.source);
+      if (injector) {
+        setSigner(injector);
+      }
       if (!pjs) return alert("Please install polkadot-js ");
     } catch (error) {
       console.error(error);
@@ -63,6 +68,11 @@ export const TransactionProvider = ({ children }) => {
       await api.isReady;
       const account = allaccounts[0];
       setCurrentAccount(account);
+      const injector = await web3FromSource(account.meta.source);
+      if (injector) {
+        setSigner(injector);
+        console.log("signer:", signer);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -75,6 +85,7 @@ export const TransactionProvider = ({ children }) => {
         api,
         handleChange,
         amount,
+        signer,
       }}
     >
       {children}
