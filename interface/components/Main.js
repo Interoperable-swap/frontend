@@ -49,6 +49,7 @@ const Main = () => {
     const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
     //initialize pair contract
     const pair = new CodePromise(api, PAIR_CONTRACT, pair_wasm);
+    console.log(pair);
     //deploy new pair contract
     const pair_contract = pair.tx.new({ gasLimit, storageDepositLimit });
     const pair_code_hash = PAIR_CONTRACT.source.hash;
