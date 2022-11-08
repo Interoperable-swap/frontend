@@ -8,7 +8,7 @@ import usdt from "../assets/usdt.svg";
 import { useContext, useState } from "react";
 import Button from "./Button";
 import { TransactionContext } from "../context/TransactionContext";
-import { ContractPromise } from "@polkadot/api-contract";
+import { CodePromise, ContractPromise } from "@polkadot/api-contract";
 import { BN } from "bn.js";
 //abi
 import PAIR_CONTRACT from "../contract/abi/pair";

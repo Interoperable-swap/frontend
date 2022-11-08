@@ -41,9 +41,8 @@ export const TransactionProvider = ({ children }) => {
       const account = allaccounts[0];
       setCurrentAccount(account);
       const injector = await web3FromSource(account.meta.source);
-      if (injector) {
-        setSigner(injector);
-      }
+
+      setSigner(injector);
       if (!pjs) return alert("Please install polkadot-js ");
     } catch (error) {
       console.error(error);
@@ -69,10 +68,9 @@ export const TransactionProvider = ({ children }) => {
       const account = allaccounts[0];
       setCurrentAccount(account);
       const injector = await web3FromSource(account.meta.source);
-      if (injector) {
-        setSigner(injector);
-        console.log("signer:", signer);
-      }
+
+      setSigner(injector);
+      console.log("signer:", signer);
     } catch (error) {
       console.error(error);
     }
