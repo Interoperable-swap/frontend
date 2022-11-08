@@ -1,13 +1,11 @@
 import Image from "next/image";
+import React, { useContext } from "react";
 import { RiSettings3Fill } from "react-icons/ri";
 import { AiOutlineDown, AiOutlinePlus } from "react-icons/ai";
 import astar from "../assets/astar.png";
 import Shiden from "../assets/Shiden.png";
-import { ContractPromise } from "@polkadot/api-contract";
-import { ERC20 } from "../contract/abi/erc20";
 import Button from "./Button";
 import { TransactionContext } from "../context/TransactionContext";
-import React, { useContext } from "react";
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -24,20 +22,18 @@ const style = {
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 };
 const Liquidity = () => {
-  const { currentAccount, api, handleChange, amount } =
+  const { currentAccount, api, handleChange, amount, signer } =
     useContext(TransactionContext);
   const add_liquidity = async () => {
     const recipient = "5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF"; //dev1
-    const { web3FromSource } = await import("@polkadot/extension-dapp");
     const account = currentAccount;
-    const injector = await web3FromSource(account.meta.source);
     const transferExtrinsic = api.tx.balances.transfer(recipient, amount);
     if (amount === "0" || amount === "") {
       alert("please input amount");
     } else {
       transferExtrinsic.signAndSend(
         account.address,
-        { signer: injector.signer },
+        { signer: signer.signer },
         ({ status }) => {
           if (status.isInBlock) {
             console.log(
@@ -50,26 +46,12 @@ const Liquidity = () => {
       );
     }
   };
-  const approve = async () => {
-    const { web3FromSource } = await import("@polkadot/extension-dapp");
-    const injector = await web3FromSource(currentAccount.meta.source);
-    const gasLimit = 3000n * 1000000n;
-    const target = "5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y";
-    const erc20address = "XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7";
-    const contract = new ContractPromise(api, ERC20, erc20address);
-    const callValue = await contract.tx.transferFrom(
-      currentAccount,
-      target,
-      100000
-    );
-    console.log(callValue);
-  };
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
         <div className={style.formHeader}>
           <div>Add Liquidity</div>
-          <div onClick={() => approve()}>
+          <div>
             <RiSettings3Fill />
           </div>
         </div>

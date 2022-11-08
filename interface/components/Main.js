@@ -5,8 +5,21 @@ import { IoSwapVertical } from "react-icons/io5";
 import astar from "../assets/astar.png";
 import shiden from "../assets/Shiden.png";
 import usdt from "../assets/usdt.svg";
-import { useState } from "react";
-import Button from "../components/Button";
+import { useContext, useState } from "react";
+import Button from "./Button";
+import { TransactionContext } from "../context/TransactionContext";
+import { ContractPromise } from "@polkadot/api-contract";
+import { BN } from "bn.js";
+//abi
+import PAIR_CONTRACT from "../contract/abi/pair";
+import FACTORY_CONTRACT from "../contract/abi/factory";
+import { PSP22_ABI } from "../contract/abi/psp22";
+//wasm
+import FACTORY_WASM from "../contract/wasm/factory_wasm";
+import PAIR_WASM from "../contract/wasm/pair_wasm";
+import PSP22_WASM from "../contract/wasm/psp22_wasm";
+const ONE = new BN(10).pow(new BN(18));
+
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
   content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
@@ -22,7 +35,27 @@ const style = {
 };
 const Main = () => {
   const [showList, setShowList] = useState(false);
-
+  const { currentAccount, api, handleChange, amount, signer } =
+    useContext(TransactionContext);
+  const swap = async () => {
+    const gasLimit = 18750000000;
+    const storageDepositLimit = null;
+    const MINIMUM_LIQUIDITY = 1000;
+    const target = "5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y";
+    const erc20address = "XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7";
+    //get wasm
+    const pair_wasm = PAIR_WASM.source.wasm;
+    const factory_wasm = FACTORY_WASM.source.wasm;
+    const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
+    //initialize pair contract
+    const pair = new CodePromise(api, PAIR_CONTRACT, pair_wasm);
+    //deploy new pair contract
+    const pair_contract = pair.tx.new({ gasLimit, storageDepositLimit });
+    const pair_code_hash = PAIR_CONTRACT.source.hash;
+    //initialize factory contract
+    const factory = new CodePromise(api, FACTORY_CONTRACT, factory_wasm);
+    //deploy new factory contract
+  };
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
@@ -83,7 +116,9 @@ const Main = () => {
             </button>
           </div>
         </div>
-        <Button title="confirm" />
+        <div onClick={() => swap()}>
+          <Button title="swap" />
+        </div>
       </div>
     </div>
   );
