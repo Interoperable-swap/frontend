@@ -3,28 +3,33 @@ import { BN } from "bn.js";
 import { useContext } from "react";
 import PAIR_CONTRACT from "../contract/abi/pair";
 import FACTORY_CONTRACT from "../contract/abi/factory";
+import { PSP22_ABI } from "../contract/abi/psp22";
 import { TransactionContext } from "../context/TransactionContext";
 import FACTORY_WASM from "../contract/wasm/factory_wasm";
 import PAIR_WASM from "../contract/wasm/pair_wasm";
-
+import PSP22_WASM from "../contract/wasm/psp22_wasm";
 const ONE = new BN(10).pow(new BN(18));
 
 const setup_pair = async () => {
   /**
-console.log("---------------------------------------------");
-console.log("wallet.address: " + wallet.address.toString());
-console.log("tokenA.contract.address: " + tokenA.contract.address.toString());
-console.log("tokenB.contract.address: " + tokenB.contract.address.toString());
-console.log("pair_code_hash: " + pair_code_hash.toString());
-console.log("pair address: " + pair_contract.contract.address.toString());
-console.log("Factory address: " + factory_contract.contract.address.toString());
-console.log("Router address: " + router_contract.contract.address.toString());
-console.log("---------------------------------------------");
-	 */
+	 console.log("---------------------------------------------");
+	 console.log("wallet.address: " + wallet.address.toString());
+	console.log("tokenA.contract.address: " + tokenA.contract.address.toString());
+	console.log("tokenB.contract.address: " + tokenB.contract.address.toString());
+	console.log("pair_code_hash: " + pair_code_hash.toString());
+	console.log("pair address: " + pair_contract.contract.address.toString());
+	console.log("Factory address: " + factory_contract.contract.address.toString());
+	console.log("Router address: " + router_contract.contract.address.toString());
+	console.log("---------------------------------------------");
+*/
+
   const { api, currentAccount } = useContext(TransactionContext);
-  //setup token address
-  const tokenA = "";
-  const tokenB = "";
+  const tokenA_contract = new CodePromise(
+    api,
+    PSP22_ABI,
+    PSP22_WASM.source.wasm
+  );
+
   //need to read from contract
 
   const gasLimit = 18750000000;

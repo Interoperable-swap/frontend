@@ -55,23 +55,6 @@ const Main = () => {
                 <AiOutlineDown className={style.currencySelectorArrow} />
               )}
             </button>
-            {/**
-			  {showList && (
-					<ul className={style.currencySelectorContent}>
-					{[
-						{token:'aUSD', tokenName:'aUSD'},
-						{token:'USDT', tokenName:'USDT'},
-						].map(({token,tokenName},index) => (
-							<li
-								key={index}
-								className={`${style.currencySelectorTicker} `}
-							>
-							{tokenName}
-							</li>
-						))}
-					</ul>
-				)} 
-				*/}
           </div>
         </div>
         <div className={style.swapIcon}>
