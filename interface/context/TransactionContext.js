@@ -8,7 +8,7 @@ let pjs;
 if (typeof window !== "undefined") {
   pjs = window.injectedWeb3;
 }
-const WS_PROVIDER = "wss://shibuya.public.blastapi.io";
+const WS_PROVIDER = "wss://rpc.shibuya.astar.network";
 const DAPP_NAME = "Shiden DEX";
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState();
@@ -18,6 +18,7 @@ export const TransactionProvider = ({ children }) => {
   useEffect(() => {
     checkIfWalletIsConnected();
   }, []);
+
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
@@ -64,13 +65,10 @@ export const TransactionProvider = ({ children }) => {
       const provider = new WsProvider(WS_PROVIDER);
       const api = await ApiPromise.create({ provider });
       setapi(api);
-      await api.isReady;
       const account = allaccounts[0];
       setCurrentAccount(account);
       const injector = await web3FromSource(account.meta.source);
-
       setSigner(injector);
-      console.log("signer:", signer);
     } catch (error) {
       console.error(error);
     }

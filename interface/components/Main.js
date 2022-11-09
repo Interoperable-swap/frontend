@@ -5,11 +5,13 @@ import { IoSwapVertical } from "react-icons/io5";
 import astar from "../assets/astar.png";
 import shiden from "../assets/Shiden.png";
 import usdt from "../assets/usdt.svg";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import { TransactionContext } from "../context/TransactionContext";
-import { CodePromise, ContractPromise } from "@polkadot/api-contract";
+import { ContractPromise } from "@polkadot/api-contract";
 import { BN } from "bn.js";
+import { encodeAddress } from "@polkadot/keyring";
+
 //abi
 import PAIR_CONTRACT from "../contract/abi/pair";
 import FACTORY_CONTRACT from "../contract/abi/factory";
@@ -18,7 +20,6 @@ import { PSP22_ABI } from "../contract/abi/psp22";
 import FACTORY_WASM from "../contract/wasm/factory_wasm";
 import PAIR_WASM from "../contract/wasm/pair_wasm";
 import PSP22_WASM from "../contract/wasm/psp22_wasm";
-const ONE = new BN(10).pow(new BN(18));
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -32,25 +33,96 @@ const style = {
   swapIcon: `flex items-center justify-center`,
   currencySelectorTicker: `mx-2`,
   currencySelectorArrow: `text-lg`,
+  copyarea: `flex cursor-pointer`,
 };
-
+const ONE = new BN(10).pow(new BN(18));
+const zeroAddress = encodeAddress(
+  "0x0000000000000000000000000000000000000000000000000000000000000000"
+);
 const MINIMUM_LIQUIDITY = 1000;
+const gasLimit = 18750000000;
+const storageDepositLimit = null;
+const options = { gasLimit, storageDepositLimit };
+
+const factory_address = "aiPpAoWnzUuEXuQD8M75F42tgcaQ9MY6kbNqXxP8raYa73p";
+const router_address = "b7Vz6KZCVFrD6CpMxXohe5cKu2Zst71m13ruxv5jdJsxKoA"; // fee_to_setter = dev1
+const pair_address = "b4WSUKQu6Evooh4Rtz6s9LhLWs7XHpqCx2wsfmsP2uFWkUe";
+const pair_code_hash = PAIR_CONTRACT.source.hash;
+//UNI1
+const name0 = "Wrapped Ether1";
+const symbol0 = "UNI1";
+const address0 = "aDGRyf3Q8jGYRisf3Aydt87ccongLCgdobaSiXJkW7Z2zrh";
+//UNI2
+const name1 = "Uniswap Token2";
+const symbol1 = "UNI2";
+const address1 = "aL3VQDDaMU38RYk9njg3RPz8Qzx2hDCA526GE6cvWZek4b5";
+
+//get wasm
+const pair_wasm = PAIR_WASM.source.wasm;
+const factory_wasm = FACTORY_WASM.source.wasm;
+const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
 
 const Main = () => {
   const [showList, setShowList] = useState(false);
   const { currentAccount, api, handleChange, amount, signer } =
     useContext(TransactionContext);
+  const [Uni1Contract, setUni1Contract] = useState(undefined);
+  const [Uni2Contract, setUni2Contract] = useState(undefined);
+  const [UniI1Balance, setUni1Balance] = useState("");
+  const [UniI2Balance, setUni2Balance] = useState("");
+
+  //1. setup
   const setup = async () => {
-    const gasLimit = 18750000000;
-    const storageDepositLimit = null;
-    const MINIMUM_LIQUIDITY = 1000;
-    const target = "5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y";
-    const erc20address = "XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7";
-    //get wasm
-    const pair_wasm = PAIR_WASM.source.wasm;
-    const factory_wasm = FACTORY_WASM.source.wasm;
-    const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
-    //initialize pair contract
+    //initialize contracts
+    const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0);
+    const getUNI2Contract = new ContractPromise(api, PSP22_ABI, address1);
+    const factory = new ContractPromise(api, FACTORY_CONTRACT, factory_address);
+    const uni1balance = await getUNI1Contract.query["psp22::balanceOf"](
+      currentAccount.address,
+      { gasLimit: gasLimit },
+      currentAccount.address
+    );
+    if (uni1balance.result.isOk) {
+      setUni1Balance(uni1balance.output.toString());
+    } else {
+      console.error("Error", result.asErr);
+    }
+
+    const uni2balance = await getUNI2Contract.query["psp22::balanceOf"](
+      currentAccount.address,
+      { gasLimit: gasLimit },
+      currentAccount.address
+    );
+    if (uni2balance.result.isOk) {
+      // output the return value
+      setUni2Balance(uni2balance.output.toString());
+    } else {
+      console.error("Error", result.asErr);
+    }
+    const approveUni1 = await getUNI1Contract.tx["psp22::approve"](
+      currentAccount.address,
+      router_address,
+      amount
+    );
+    approveUni1.signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
+    );
+  };
+
+  //2.approve
+
+  //3.execute swap
+  /**
     const pair = new CodePromise(api, PAIR_CONTRACT, pair_wasm);
     const create_pair = pair.tx.new({ gasLimit, storageDepositLimit });
     create_pair.signAndSend(
@@ -68,17 +140,7 @@ const Main = () => {
         }
       }
     );
-    // pair address WtpRP8WkUwv5VVjDk2hjsSrCCr8wiRXGGxtf8qL4BKwixgE
-    const pair_code_hash = PAIR_CONTRACT.source.hash;
-    const factory = new CodePromise(api, FACTORY_CONTRACT, factory_wasm);
-    const create_factory = factory.tx.new(
-      { gasLimit, storageDepositLimit },
-      fee_to_setter,
-      pair_code_hash
-    );
-    //initialize factory contract
-    //deploy new factory contract
-  };
+		 */
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
@@ -113,10 +175,16 @@ const Main = () => {
             </button>
           </div>
         </div>
+        {UniI1Balance ? (
+          <div>
+            <div className={style.copyarea}>Balance :{UniI1Balance}</div>
+          </div>
+        ) : (
+          <div className={style.copyarea}>Balance :0</div>
+        )}
         <div className={style.swapIcon}>
           <IoSwapVertical size={42} />
         </div>
-
         <div className={style.transferPropContainer}>
           <input
             type="text"
@@ -139,7 +207,14 @@ const Main = () => {
             </button>
           </div>
         </div>
-        <div onClick={() => swap()}>
+        {UniI2Balance ? (
+          <div>
+            <div className={style.copyarea}>Balance :{UniI2Balance}</div>
+          </div>
+        ) : (
+          <div className={style.copyarea}>Balance :0</div>
+        )}
+        <div onClick={() => setup()}>
           <Button title="swap" />
         </div>
       </div>

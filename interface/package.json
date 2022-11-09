@@ -11,6 +11,7 @@
     "@polkadot/api": "^9.5.2",
     "@polkadot/api-contract": "^9.5.2",
     "@polkadot/extension-dapp": "^0.44.6",
+    "@polkadot/keyring": "^10.1.11",
     "@polkadot/react-identicon": "^2.9.12",
     "@redspot/patract": "^0.13.6",
     "bn.js-typings": "^1.0.1",
