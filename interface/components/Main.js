@@ -117,9 +117,29 @@ const Main = () => {
         }
       }
     );
+    const pair = await factory.query["factory::createPair"](
+      currentAccount,
+      address0,
+      address1,
+      { gasLimit: gasLimit }
+    );
+    pair.signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
+    );
   };
 
-  //2.approve
+  //2.create pair
+  const setupPair = async () => {};
 
   //3.execute swap
   /**
