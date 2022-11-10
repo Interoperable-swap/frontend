@@ -88,7 +88,7 @@ const Main = () => {
       }
     }
     setup()
-  }, [api, currentAccount.address])
+  }, [api, currentAccount])
 
   const transfer = async () => {
     const data = ''
