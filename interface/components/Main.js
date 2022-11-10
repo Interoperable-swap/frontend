@@ -49,17 +49,8 @@ const zeroAddress = encodeAddress(
 const gasLimit = 18750000000;
 const storageDepositLimit = null;
 const pair_code_hash = PAIR_CONTRACT.source.hash;
-//token0
-const name0 = "Uni1 Token";
-const symbol0 = "UNI1";
 
-//token1
-const name1 = "Wrapped SBY";
-const symbol1 = "WSBY";
 
-//get wasm
-const pair_wasm = PAIR_WASM.source.wasm;
-const factory_wasm = FACTORY_WASM.source.wasm;
 const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
 // uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
 

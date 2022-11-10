@@ -38,13 +38,13 @@ const Liquidity = () => {
     setInputAmount1(e.target.value);
   };
   const handleInput2 = (e) => {
-    setOnputAmount2(e.target.value);
+    setInputAmount2(e.target.value);
   };
   const [Uni1Contract, setUni1Contract] = useState(undefined);
   const [token2Contract, setToken2Contract] = useState(undefined);
 
   const [inputAmount1, setInputAmount1] = useState("");
-  const [outputAmount2, setOnputAmount2] = useState("");
+  const [inputAmount2, setInputAmount2] = useState("");
 
   const gasLimit = 100000000000;
   const storageDepositLimit = null;
@@ -52,15 +52,15 @@ const Liquidity = () => {
   const add_liquidity = async () => {
     const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0);
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1);
+    //TODO: approve
     /**
-    await getUNI1Contract.tx["psp22::transfer"](
+		 await getUNI1Contract.tx["psp22::approve"](
       {
         gasLimit,
         storageDepositLimit,
       },
-      pair_address,
-      inputAmount1,
-      data
+      router_address,
+      inputAmount1
     ).signAndSend(
       currentAccount.address,
       { signer: signer.signer },
@@ -74,14 +74,13 @@ const Liquidity = () => {
         }
       }
     );
-    await getToken2Contract.tx["psp22::transfer"](
+		await getToken2Contract.tx["psp22::approve"](
       {
         gasLimit,
         storageDepositLimit,
       },
-      pair_address,
-      outputAmount2,
-      data
+      router_address,
+      inputAmount2
     ).signAndSend(
       currentAccount.address,
       { signer: signer.signer },
@@ -95,9 +94,9 @@ const Liquidity = () => {
         }
       }
     );
-*/
-    const router = new ContractPromise(api, ROUTER_CONTRACT, router_address);
+		 */
     //add liquidity via router
+    const router = new ContractPromise(api, ROUTER_CONTRACT, router_address);
     const deadline = "111111111111111111";
     await router.tx["router::addLiquidity"](
       { gasLimit, storageDepositLimit },
