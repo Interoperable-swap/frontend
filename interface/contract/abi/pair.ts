@@ -1,14 +1,14 @@
-export const PAIR_ADDRESS = "";
+export const PAIR_ADDRESS = ''
 const PAIR_CONTRACT = {
   source: {
-    hash: "0x8767c887f29bca911480a4b5bba7ccf8dcb1fb1c35a53d5909a0b1d9611c11a0",
-    language: "ink! 3.3.1",
-    compiler: "rustc 1.65.0-nightly",
+    hash: '0x8767c887f29bca911480a4b5bba7ccf8dcb1fb1c35a53d5909a0b1d9611c11a0',
+    language: 'ink! 3.3.1',
+    compiler: 'rustc 1.65.0-nightly',
   },
   contract: {
-    name: "pair_contract",
-    version: "0.1.0",
-    authors: ["Shuhei Tanaka <shuhei46491@gmail.com>"],
+    name: 'pair_contract',
+    version: '0.1.0',
+    authors: ['Shuhei Tanaka <shuhei46491@gmail.com>'],
   },
   V3: {
     spec: {
@@ -16,9 +16,9 @@ const PAIR_CONTRACT = {
         {
           args: [],
           docs: [],
-          label: "new",
+          label: 'new',
           payable: false,
-          selector: "0x9bae9d5e",
+          selector: '0x9bae9d5e',
         },
       ],
       docs: [],
@@ -28,727 +28,727 @@ const PAIR_CONTRACT = {
             {
               docs: [],
               indexed: true,
-              label: "sender",
+              label: 'sender',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_0",
+              label: 'amount_0',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_1",
+              label: 'amount_1',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
           ],
           docs: [],
-          label: "Mint",
+          label: 'Mint',
         },
         {
           args: [
             {
               docs: [],
               indexed: true,
-              label: "sender",
+              label: 'sender',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_0",
+              label: 'amount_0',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_1",
+              label: 'amount_1',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: true,
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Burn",
+          label: 'Burn',
         },
         {
           args: [
             {
               docs: [],
               indexed: true,
-              label: "sender",
+              label: 'sender',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_0_in",
+              label: 'amount_0_in',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_1_in",
+              label: 'amount_1_in',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_0_out",
+              label: 'amount_0_out',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "amount_1_out",
+              label: 'amount_1_out',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: true,
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Swap",
+          label: 'Swap',
         },
         {
           args: [
             {
               docs: [],
               indexed: false,
-              label: "reserve_0",
+              label: 'reserve_0',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "reserve_1",
+              label: 'reserve_1',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
           ],
           docs: [],
-          label: "Sync",
+          label: 'Sync',
         },
         {
           args: [
             {
               docs: [],
               indexed: true,
-              label: "from",
+              label: 'from',
               type: {
-                displayName: ["Option"],
+                displayName: ['Option'],
                 type: 31,
               },
             },
             {
               docs: [],
               indexed: true,
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["Option"],
+                displayName: ['Option'],
                 type: 31,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
           ],
           docs: [],
-          label: "Transfer",
+          label: 'Transfer',
         },
       ],
       messages: [
         {
           args: [
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "ApproveInput1"],
+                displayName: ['psp22_external', 'ApproveInput1'],
                 type: 2,
               },
             },
             {
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["psp22_external", "ApproveInput2"],
+                displayName: ['psp22_external', 'ApproveInput2'],
                 type: 0,
               },
             },
           ],
           docs: [
             " Allows `spender` to withdraw from the caller's account multiple times, up to",
-            " the `value` amount.",
-            "",
-            " If this function is called again it overwrites the current allowance with `value`.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
+            ' the `value` amount.',
+            '',
+            ' If this function is called again it overwrites the current allowance with `value`.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::approve",
+          label: 'PSP22::approve',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "ApproveOutput"],
+            displayName: ['psp22_external', 'ApproveOutput'],
             type: 17,
           },
-          selector: "0xb20f1bbd",
+          selector: '0xb20f1bbd',
         },
         {
           args: [
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "IncreaseAllowanceInput1"],
+                displayName: ['psp22_external', 'IncreaseAllowanceInput1'],
                 type: 2,
               },
             },
             {
-              label: "delta_value",
+              label: 'delta_value',
               type: {
-                displayName: ["psp22_external", "IncreaseAllowanceInput2"],
+                displayName: ['psp22_external', 'IncreaseAllowanceInput2'],
                 type: 0,
               },
             },
           ],
           docs: [
-            " Atomically increases the allowance granted to `spender` by the caller.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
+            ' Atomically increases the allowance granted to `spender` by the caller.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::increase_allowance",
+          label: 'PSP22::increase_allowance',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "IncreaseAllowanceOutput"],
+            displayName: ['psp22_external', 'IncreaseAllowanceOutput'],
             type: 17,
           },
-          selector: "0x96d6b57a",
+          selector: '0x96d6b57a',
         },
         {
           args: [
             {
-              label: "from",
+              label: 'from',
               type: {
-                displayName: ["psp22_external", "TransferFromInput1"],
+                displayName: ['psp22_external', 'TransferFromInput1'],
                 type: 2,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["psp22_external", "TransferFromInput2"],
+                displayName: ['psp22_external', 'TransferFromInput2'],
                 type: 2,
               },
             },
             {
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["psp22_external", "TransferFromInput3"],
+                displayName: ['psp22_external', 'TransferFromInput3'],
                 type: 0,
               },
             },
             {
-              label: "data",
+              label: 'data',
               type: {
-                displayName: ["psp22_external", "TransferFromInput4"],
+                displayName: ['psp22_external', 'TransferFromInput4'],
                 type: 20,
               },
             },
           ],
           docs: [],
-          label: "PSP22::transfer_from",
+          label: 'PSP22::transfer_from',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TransferFromOutput"],
+            displayName: ['psp22_external', 'TransferFromOutput'],
             type: 17,
           },
-          selector: "0x54b3c76e",
+          selector: '0x54b3c76e',
         },
         {
           args: [
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["psp22_external", "TransferInput1"],
+                displayName: ['psp22_external', 'TransferInput1'],
                 type: 2,
               },
             },
             {
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["psp22_external", "TransferInput2"],
+                displayName: ['psp22_external', 'TransferInput2'],
                 type: 0,
               },
             },
             {
-              label: "data",
+              label: 'data',
               type: {
-                displayName: ["psp22_external", "TransferInput3"],
+                displayName: ['psp22_external', 'TransferInput3'],
                 type: 20,
               },
             },
           ],
           docs: [
             " Transfers `value` amount of tokens from the caller's account to account `to`",
-            " with additional `data` in unspecified format.",
-            "",
-            " On success a `Transfer` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Returns `InsufficientBalance` error if there are not enough tokens on",
+            ' with additional `data` in unspecified format.',
+            '',
+            ' On success a `Transfer` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Returns `InsufficientBalance` error if there are not enough tokens on',
             " the caller's account Balance.",
-            "",
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::transfer",
+          label: 'PSP22::transfer',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TransferOutput"],
+            displayName: ['psp22_external', 'TransferOutput'],
             type: 17,
           },
-          selector: "0xdb20f9f5",
+          selector: '0xdb20f9f5',
         },
         {
           args: [
             {
-              label: "owner",
+              label: 'owner',
               type: {
-                displayName: ["psp22_external", "AllowanceInput1"],
+                displayName: ['psp22_external', 'AllowanceInput1'],
                 type: 2,
               },
             },
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "AllowanceInput2"],
+                displayName: ['psp22_external', 'AllowanceInput2'],
                 type: 2,
               },
             },
           ],
           docs: [
-            " Returns the amount which `spender` is still allowed to withdraw from `owner`.",
-            "",
-            " Returns `0` if no allowance has been set `0`.",
+            ' Returns the amount which `spender` is still allowed to withdraw from `owner`.',
+            '',
+            ' Returns `0` if no allowance has been set `0`.',
           ],
-          label: "PSP22::allowance",
+          label: 'PSP22::allowance',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "AllowanceOutput"],
+            displayName: ['psp22_external', 'AllowanceOutput'],
             type: 0,
           },
-          selector: "0x4d47d921",
+          selector: '0x4d47d921',
         },
         {
           args: [
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "DecreaseAllowanceInput1"],
+                displayName: ['psp22_external', 'DecreaseAllowanceInput1'],
                 type: 2,
               },
             },
             {
-              label: "delta_value",
+              label: 'delta_value',
               type: {
-                displayName: ["psp22_external", "DecreaseAllowanceInput2"],
+                displayName: ['psp22_external', 'DecreaseAllowanceInput2'],
                 type: 0,
               },
             },
           ],
           docs: [
-            " Atomically decreases the allowance granted to `spender` by the caller.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
-            " by owner for `spender`.",
-            "",
+            ' Atomically decreases the allowance granted to `spender` by the caller.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Returns `InsufficientAllowance` error if there are not enough tokens allowed',
+            ' by owner for `spender`.',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::decrease_allowance",
+          label: 'PSP22::decrease_allowance',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "DecreaseAllowanceOutput"],
+            displayName: ['psp22_external', 'DecreaseAllowanceOutput'],
             type: 17,
           },
-          selector: "0xfecb57d5",
+          selector: '0xfecb57d5',
         },
         {
           args: [
             {
-              label: "owner",
+              label: 'owner',
               type: {
-                displayName: ["psp22_external", "BalanceOfInput1"],
+                displayName: ['psp22_external', 'BalanceOfInput1'],
                 type: 2,
               },
             },
           ],
           docs: [
-            " Returns the account Balance for the specified `owner`.",
-            "",
-            " Returns `0` if the account is non-existent.",
+            ' Returns the account Balance for the specified `owner`.',
+            '',
+            ' Returns `0` if the account is non-existent.',
           ],
-          label: "PSP22::balance_of",
+          label: 'PSP22::balance_of',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "BalanceOfOutput"],
+            displayName: ['psp22_external', 'BalanceOfOutput'],
             type: 0,
           },
-          selector: "0x6568382f",
+          selector: '0x6568382f',
         },
         {
           args: [],
-          docs: [" Returns the total token supply."],
-          label: "PSP22::total_supply",
+          docs: [' Returns the total token supply.'],
+          label: 'PSP22::total_supply',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TotalSupplyOutput"],
+            displayName: ['psp22_external', 'TotalSupplyOutput'],
             type: 0,
           },
-          selector: "0x162df8c2",
+          selector: '0x162df8c2',
         },
         {
           args: [
             {
-              label: "new_owner",
+              label: 'new_owner',
               type: {
-                displayName: ["ownable_external", "TransferOwnershipInput1"],
+                displayName: ['ownable_external', 'TransferOwnershipInput1'],
                 type: 2,
               },
             },
           ],
           docs: [
-            " Transfers ownership of the contract to a `new_owner`.",
-            " Can only be called by the current owner.",
-            "",
-            " On success a `OwnershipTransferred` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Panics with `CallerIsNotOwner` error if caller is not owner.",
-            "",
+            ' Transfers ownership of the contract to a `new_owner`.',
+            ' Can only be called by the current owner.',
+            '',
+            ' On success a `OwnershipTransferred` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Panics with `CallerIsNotOwner` error if caller is not owner.',
+            '',
             " Panics with `NewOwnerIsZero` error if new owner's address is zero.",
           ],
-          label: "Ownable::transfer_ownership",
+          label: 'Ownable::transfer_ownership',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["ownable_external", "TransferOwnershipOutput"],
+            displayName: ['ownable_external', 'TransferOwnershipOutput'],
             type: 21,
           },
-          selector: "0x11f43efd",
+          selector: '0x11f43efd',
         },
         {
           args: [],
           docs: [
-            " Leaves the contract without owner. It will not be possible to call",
+            ' Leaves the contract without owner. It will not be possible to call',
             " owner's functions anymore. Can only be called by the current owner.",
-            "",
-            " NOTE: Renouncing ownership will leave the contract without an owner,",
-            " thereby removing any functionality that is only available to the owner.",
-            "",
-            " On success a `OwnershipTransferred` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Panics with `CallerIsNotOwner` error if caller is not owner",
+            '',
+            ' NOTE: Renouncing ownership will leave the contract without an owner,',
+            ' thereby removing any functionality that is only available to the owner.',
+            '',
+            ' On success a `OwnershipTransferred` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Panics with `CallerIsNotOwner` error if caller is not owner',
           ],
-          label: "Ownable::renounce_ownership",
+          label: 'Ownable::renounce_ownership',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["ownable_external", "RenounceOwnershipOutput"],
+            displayName: ['ownable_external', 'RenounceOwnershipOutput'],
             type: 21,
           },
-          selector: "0x5e228753",
+          selector: '0x5e228753',
         },
         {
           args: [],
-          docs: [" Returns the address of the current owner."],
-          label: "Ownable::owner",
+          docs: [' Returns the address of the current owner.'],
+          label: 'Ownable::owner',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["ownable_external", "OwnerOutput"],
+            displayName: ['ownable_external', 'OwnerOutput'],
             type: 2,
           },
-          selector: "0x4fa43c8c",
+          selector: '0x4fa43c8c',
         },
         {
           args: [
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["pair_external", "SkimInput1"],
+                displayName: ['pair_external', 'SkimInput1'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Pair::skim",
+          label: 'Pair::skim',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "SkimOutput"],
+            displayName: ['pair_external', 'SkimOutput'],
             type: 23,
           },
-          selector: "0x51c32781",
+          selector: '0x51c32781',
         },
         {
           args: [],
           docs: [],
-          label: "Pair::get_reserves",
+          label: 'Pair::get_reserves',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "GetReservesOutput"],
+            displayName: ['pair_external', 'GetReservesOutput'],
             type: 27,
           },
-          selector: "0x5a21e3fc",
+          selector: '0x5a21e3fc',
         },
         {
           args: [
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["pair_external", "MintInput1"],
+                displayName: ['pair_external', 'MintInput1'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Pair::mint",
+          label: 'Pair::mint',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "MintOutput"],
+            displayName: ['pair_external', 'MintOutput'],
             type: 28,
           },
-          selector: "0x4eaaf722",
+          selector: '0x4eaaf722',
         },
         {
           args: [],
           docs: [],
-          label: "Pair::price_1_cumulative_last",
+          label: 'Pair::price_1_cumulative_last',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "Price1CumulativeLastOutput"],
+            displayName: ['pair_external', 'Price1CumulativeLastOutput'],
             type: 13,
           },
-          selector: "0x1dd38d52",
+          selector: '0x1dd38d52',
         },
         {
           args: [
             {
-              label: "amount_0_out",
+              label: 'amount_0_out',
               type: {
-                displayName: ["pair_external", "SwapInput1"],
+                displayName: ['pair_external', 'SwapInput1'],
                 type: 0,
               },
             },
             {
-              label: "amount_1_out",
+              label: 'amount_1_out',
               type: {
-                displayName: ["pair_external", "SwapInput2"],
+                displayName: ['pair_external', 'SwapInput2'],
                 type: 0,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["pair_external", "SwapInput3"],
+                displayName: ['pair_external', 'SwapInput3'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Pair::swap",
+          label: 'Pair::swap',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "SwapOutput"],
+            displayName: ['pair_external', 'SwapOutput'],
             type: 23,
           },
-          selector: "0xc4b60ed8",
+          selector: '0xc4b60ed8',
         },
         {
           args: [],
           docs: [],
-          label: "Pair::get_token_0",
+          label: 'Pair::get_token_0',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "GetToken0Output"],
+            displayName: ['pair_external', 'GetToken0Output'],
             type: 2,
           },
-          selector: "0x7aeb98a8",
+          selector: '0x7aeb98a8',
         },
         {
           args: [
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["pair_external", "BurnInput1"],
+                displayName: ['pair_external', 'BurnInput1'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Pair::burn",
+          label: 'Pair::burn',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "BurnOutput"],
+            displayName: ['pair_external', 'BurnOutput'],
             type: 29,
           },
-          selector: "0x0221c524",
+          selector: '0x0221c524',
         },
         {
           args: [],
           docs: [],
-          label: "Pair::price_0_cumulative_last",
+          label: 'Pair::price_0_cumulative_last',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "Price0CumulativeLastOutput"],
+            displayName: ['pair_external', 'Price0CumulativeLastOutput'],
             type: 13,
           },
-          selector: "0xf4d99951",
+          selector: '0xf4d99951',
         },
         {
           args: [],
           docs: [],
-          label: "Pair::get_token_1",
+          label: 'Pair::get_token_1',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "GetToken1Output"],
+            displayName: ['pair_external', 'GetToken1Output'],
             type: 2,
           },
-          selector: "0xa5b0616f",
+          selector: '0xa5b0616f',
         },
         {
           args: [],
           docs: [],
-          label: "Pair::sync",
+          label: 'Pair::sync',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "SyncOutput"],
+            displayName: ['pair_external', 'SyncOutput'],
             type: 23,
           },
-          selector: "0x79261d93",
+          selector: '0x79261d93',
         },
         {
           args: [
             {
-              label: "token_0",
+              label: 'token_0',
               type: {
-                displayName: ["pair_external", "InitializeInput1"],
+                displayName: ['pair_external', 'InitializeInput1'],
                 type: 2,
               },
             },
             {
-              label: "token_1",
+              label: 'token_1',
               type: {
-                displayName: ["pair_external", "InitializeInput2"],
+                displayName: ['pair_external', 'InitializeInput2'],
                 type: 2,
               },
             },
           ],
           docs: [],
-          label: "Pair::initialize",
+          label: 'Pair::initialize',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["pair_external", "InitializeOutput"],
+            displayName: ['pair_external', 'InitializeOutput'],
             type: 23,
           },
-          selector: "0xd372021c",
+          selector: '0xd372021c',
         },
       ],
     },
@@ -762,42 +762,41 @@ const PAIR_CONTRACT = {
                   {
                     layout: {
                       cell: {
-                        key: "0xf232311200000000000000000000000000000000000000000000000000000000",
+                        key: '0xf232311200000000000000000000000000000000000000000000000000000000',
                         ty: 0,
                       },
                     },
-                    name: "supply",
+                    name: 'supply',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xf332311200000000000000000000000000000000000000000000000000000000",
+                        key: '0xf332311200000000000000000000000000000000000000000000000000000000',
                         ty: 1,
                       },
                     },
-                    name: "balances",
+                    name: 'balances',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xf432311200000000000000000000000000000000000000000000000000000000",
+                        key: '0xf432311200000000000000000000000000000000000000000000000000000000',
                         ty: 7,
                       },
                     },
-                    name: "allowances",
+                    name: 'allowances',
                   },
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0xf532311200000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0xf532311200000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0xf632311200000000000000000000000000000000000000000000000000000000",
+                                    key: '0xf632311200000000000000000000000000000000000000000000000000000000',
                                     ty: 11,
                                   },
                                 },
@@ -805,18 +804,18 @@ const PAIR_CONTRACT = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "_reserved",
+                    name: '_reserved',
                   },
                 ],
               },
             },
-            name: "psp22",
+            name: 'psp22',
           },
           {
             layout: {
@@ -825,24 +824,23 @@ const PAIR_CONTRACT = {
                   {
                     layout: {
                       cell: {
-                        key: "0xb36ee29c00000000000000000000000000000000000000000000000000000000",
+                        key: '0xb36ee29c00000000000000000000000000000000000000000000000000000000',
                         ty: 2,
                       },
                     },
-                    name: "owner",
+                    name: 'owner',
                   },
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0xb46ee29c00000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0xb46ee29c00000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0xb56ee29c00000000000000000000000000000000000000000000000000000000",
+                                    key: '0xb56ee29c00000000000000000000000000000000000000000000000000000000',
                                     ty: 11,
                                   },
                                 },
@@ -850,18 +848,18 @@ const PAIR_CONTRACT = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "_reserved",
+                    name: '_reserved',
                   },
                 ],
               },
             },
-            name: "ownable",
+            name: 'ownable',
           },
           {
             layout: {
@@ -870,24 +868,23 @@ const PAIR_CONTRACT = {
                   {
                     layout: {
                       cell: {
-                        key: "0xf9c17de900000000000000000000000000000000000000000000000000000000",
+                        key: '0xf9c17de900000000000000000000000000000000000000000000000000000000',
                         ty: 4,
                       },
                     },
-                    name: "status",
+                    name: 'status',
                   },
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0xfac17de900000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0xfac17de900000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0xfbc17de900000000000000000000000000000000000000000000000000000000",
+                                    key: '0xfbc17de900000000000000000000000000000000000000000000000000000000',
                                     ty: 11,
                                   },
                                 },
@@ -895,18 +892,18 @@ const PAIR_CONTRACT = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "_reserved",
+                    name: '_reserved',
                   },
                 ],
               },
             },
-            name: "guard",
+            name: 'guard',
           },
           {
             layout: {
@@ -915,97 +912,97 @@ const PAIR_CONTRACT = {
                   {
                     layout: {
                       cell: {
-                        key: "0xa8db30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xa8db30a400000000000000000000000000000000000000000000000000000000',
                         ty: 2,
                       },
                     },
-                    name: "factory",
+                    name: 'factory',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xa9db30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xa9db30a400000000000000000000000000000000000000000000000000000000',
                         ty: 2,
                       },
                     },
-                    name: "token_0",
+                    name: 'token_0',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xaadb30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xaadb30a400000000000000000000000000000000000000000000000000000000',
                         ty: 2,
                       },
                     },
-                    name: "token_1",
+                    name: 'token_1',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xabdb30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xabdb30a400000000000000000000000000000000000000000000000000000000',
                         ty: 0,
                       },
                     },
-                    name: "reserve_0",
+                    name: 'reserve_0',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xacdb30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xacdb30a400000000000000000000000000000000000000000000000000000000',
                         ty: 0,
                       },
                     },
-                    name: "reserve_1",
+                    name: 'reserve_1',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xaddb30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xaddb30a400000000000000000000000000000000000000000000000000000000',
                         ty: 12,
                       },
                     },
-                    name: "block_timestamp_last",
+                    name: 'block_timestamp_last',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xaedb30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xaedb30a400000000000000000000000000000000000000000000000000000000',
                         ty: 13,
                       },
                     },
-                    name: "price_0_cumulative_last",
+                    name: 'price_0_cumulative_last',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xafdb30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xafdb30a400000000000000000000000000000000000000000000000000000000',
                         ty: 13,
                       },
                     },
-                    name: "price_1_cumulative_last",
+                    name: 'price_1_cumulative_last',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xb0db30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xb0db30a400000000000000000000000000000000000000000000000000000000',
                         ty: 13,
                       },
                     },
-                    name: "k_last",
+                    name: 'k_last',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xb1db30a400000000000000000000000000000000000000000000000000000000",
+                        key: '0xb1db30a400000000000000000000000000000000000000000000000000000000',
                         ty: 16,
                       },
                     },
-                    name: "lock",
+                    name: 'lock',
                   },
                 ],
               },
             },
-            name: "pair",
+            name: 'pair',
           },
         ],
       },
@@ -1015,7 +1012,7 @@ const PAIR_CONTRACT = {
         id: 0,
         type: {
           def: {
-            primitive: "u128",
+            primitive: 'u128',
           },
         },
       },
@@ -1033,15 +1030,15 @@ const PAIR_CONTRACT = {
           },
           params: [
             {
-              name: "K",
+              name: 'K',
               type: 2,
             },
             {
-              name: "V",
+              name: 'V',
               type: 0,
             },
           ],
-          path: ["openbrush_lang", "storage", "mapping", "Mapping"],
+          path: ['openbrush_lang', 'storage', 'mapping', 'Mapping'],
         },
       },
       {
@@ -1052,12 +1049,12 @@ const PAIR_CONTRACT = {
               fields: [
                 {
                   type: 3,
-                  typeName: "[u8; 32]",
+                  typeName: '[u8; 32]',
                 },
               ],
             },
           },
-          path: ["ink_env", "types", "AccountId"],
+          path: ['ink_env', 'types', 'AccountId'],
         },
       },
       {
@@ -1075,7 +1072,7 @@ const PAIR_CONTRACT = {
         id: 4,
         type: {
           def: {
-            primitive: "u8",
+            primitive: 'u8',
           },
         },
       },
@@ -1111,15 +1108,15 @@ const PAIR_CONTRACT = {
           },
           params: [
             {
-              name: "K",
+              name: 'K',
               type: 8,
             },
             {
-              name: "V",
+              name: 'V',
               type: 0,
             },
           ],
-          path: ["openbrush_lang", "storage", "mapping", "Mapping"],
+          path: ['openbrush_lang', 'storage', 'mapping', 'Mapping'],
         },
       },
       {
@@ -1160,7 +1157,7 @@ const PAIR_CONTRACT = {
         id: 12,
         type: {
           def: {
-            primitive: "u64",
+            primitive: 'u64',
           },
         },
       },
@@ -1172,12 +1169,12 @@ const PAIR_CONTRACT = {
               fields: [
                 {
                   type: 14,
-                  typeName: "U256",
+                  typeName: 'U256',
                 },
               ],
             },
           },
-          path: ["uniswap_v2", "traits", "types", "WrappedU256"],
+          path: ['uniswap_v2', 'traits', 'types', 'WrappedU256'],
         },
       },
       {
@@ -1188,12 +1185,12 @@ const PAIR_CONTRACT = {
               fields: [
                 {
                   type: 15,
-                  typeName: "[u64; 4]",
+                  typeName: '[u64; 4]',
                 },
               ],
             },
           },
-          path: ["primitive_types", "U256"],
+          path: ['primitive_types', 'U256'],
         },
       },
       {
@@ -1211,7 +1208,7 @@ const PAIR_CONTRACT = {
         id: 16,
         type: {
           def: {
-            primitive: "bool",
+            primitive: 'bool',
           },
         },
       },
@@ -1228,7 +1225,7 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1237,22 +1234,22 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 11,
             },
             {
-              name: "E",
+              name: 'E',
               type: 18,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1265,55 +1262,49 @@ const PAIR_CONTRACT = {
                   fields: [
                     {
                       type: 19,
-                      typeName: "String",
+                      typeName: 'String',
                     },
                   ],
                   index: 0,
-                  name: "Custom",
+                  name: 'Custom',
                 },
                 {
                   index: 1,
-                  name: "InsufficientBalance",
+                  name: 'InsufficientBalance',
                 },
                 {
                   index: 2,
-                  name: "InsufficientAllowance",
+                  name: 'InsufficientAllowance',
                 },
                 {
                   index: 3,
-                  name: "ZeroRecipientAddress",
+                  name: 'ZeroRecipientAddress',
                 },
                 {
                   index: 4,
-                  name: "ZeroSenderAddress",
+                  name: 'ZeroSenderAddress',
                 },
                 {
                   fields: [
                     {
                       type: 19,
-                      typeName: "String",
+                      typeName: 'String',
                     },
                   ],
                   index: 5,
-                  name: "SafeTransferCheckFailed",
+                  name: 'SafeTransferCheckFailed',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "psp22",
-            "PSP22Error",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'psp22', 'PSP22Error'],
         },
       },
       {
         id: 19,
         type: {
           def: {
-            primitive: "str",
+            primitive: 'str',
           },
         },
       },
@@ -1340,7 +1331,7 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1349,22 +1340,22 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 11,
             },
             {
-              name: "E",
+              name: 'E',
               type: 22,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1375,22 +1366,16 @@ const PAIR_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "CallerIsNotOwner",
+                  name: 'CallerIsNotOwner',
                 },
                 {
                   index: 1,
-                  name: "NewOwnerIsZero",
+                  name: 'NewOwnerIsZero',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "ownable",
-            "OwnableError",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'ownable', 'OwnableError'],
         },
       },
       {
@@ -1406,7 +1391,7 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1415,22 +1400,22 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 11,
             },
             {
-              name: "E",
+              name: 'E',
               type: 24,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1443,230 +1428,230 @@ const PAIR_CONTRACT = {
                   fields: [
                     {
                       type: 18,
-                      typeName: "PSP22Error",
+                      typeName: 'PSP22Error',
                     },
                   ],
                   index: 0,
-                  name: "PSP22Error",
+                  name: 'PSP22Error',
                 },
                 {
                   fields: [
                     {
                       type: 22,
-                      typeName: "OwnableError",
+                      typeName: 'OwnableError',
                     },
                   ],
                   index: 1,
-                  name: "OwnableError",
+                  name: 'OwnableError',
                 },
                 {
                   fields: [
                     {
                       type: 25,
-                      typeName: "PausableError",
+                      typeName: 'PausableError',
                     },
                   ],
                   index: 2,
-                  name: "PausableError",
+                  name: 'PausableError',
                 },
                 {
                   fields: [
                     {
                       type: 26,
-                      typeName: "ReentrancyGuardError",
+                      typeName: 'ReentrancyGuardError',
                     },
                   ],
                   index: 3,
-                  name: "ReentrancyGuardError",
+                  name: 'ReentrancyGuardError',
                 },
                 {
                   index: 4,
-                  name: "K",
+                  name: 'K',
                 },
                 {
                   index: 5,
-                  name: "InsufficientLiquidityMinted",
+                  name: 'InsufficientLiquidityMinted',
                 },
                 {
                   index: 6,
-                  name: "InsufficientLiquidityBurned",
+                  name: 'InsufficientLiquidityBurned',
                 },
                 {
                   index: 7,
-                  name: "InsufficientOutputAmount",
+                  name: 'InsufficientOutputAmount',
                 },
                 {
                   index: 8,
-                  name: "InsufficientLiquidity",
+                  name: 'InsufficientLiquidity',
                 },
                 {
                   index: 9,
-                  name: "InsufficientInputAmount",
+                  name: 'InsufficientInputAmount',
                 },
                 {
                   index: 10,
-                  name: "SafeTransferFailed",
+                  name: 'SafeTransferFailed',
                 },
                 {
                   index: 11,
-                  name: "InvalidTo",
+                  name: 'InvalidTo',
                 },
                 {
                   index: 12,
-                  name: "Overflow",
+                  name: 'Overflow',
                 },
                 {
                   index: 13,
-                  name: "Locked",
+                  name: 'Locked',
                 },
                 {
                   index: 14,
-                  name: "SubUnderFlow1",
+                  name: 'SubUnderFlow1',
                 },
                 {
                   index: 15,
-                  name: "SubUnderFlow2",
+                  name: 'SubUnderFlow2',
                 },
                 {
                   index: 16,
-                  name: "SubUnderFlow3",
+                  name: 'SubUnderFlow3',
                 },
                 {
                   index: 17,
-                  name: "SubUnderFlow4",
+                  name: 'SubUnderFlow4',
                 },
                 {
                   index: 18,
-                  name: "SubUnderFlow5",
+                  name: 'SubUnderFlow5',
                 },
                 {
                   index: 19,
-                  name: "SubUnderFlow6",
+                  name: 'SubUnderFlow6',
                 },
                 {
                   index: 20,
-                  name: "SubUnderFlow7",
+                  name: 'SubUnderFlow7',
                 },
                 {
                   index: 21,
-                  name: "SubUnderFlow8",
+                  name: 'SubUnderFlow8',
                 },
                 {
                   index: 22,
-                  name: "SubUnderFlow9",
+                  name: 'SubUnderFlow9',
                 },
                 {
                   index: 23,
-                  name: "SubUnderFlow10",
+                  name: 'SubUnderFlow10',
                 },
                 {
                   index: 24,
-                  name: "SubUnderFlow11",
+                  name: 'SubUnderFlow11',
                 },
                 {
                   index: 25,
-                  name: "SubUnderFlow12",
+                  name: 'SubUnderFlow12',
                 },
                 {
                   index: 26,
-                  name: "SubUnderFlow13",
+                  name: 'SubUnderFlow13',
                 },
                 {
                   index: 27,
-                  name: "SubUnderFlow14",
+                  name: 'SubUnderFlow14',
                 },
                 {
                   index: 28,
-                  name: "MulOverFlow1",
+                  name: 'MulOverFlow1',
                 },
                 {
                   index: 29,
-                  name: "MulOverFlow2",
+                  name: 'MulOverFlow2',
                 },
                 {
                   index: 30,
-                  name: "MulOverFlow3",
+                  name: 'MulOverFlow3',
                 },
                 {
                   index: 31,
-                  name: "MulOverFlow4",
+                  name: 'MulOverFlow4',
                 },
                 {
                   index: 32,
-                  name: "MulOverFlow5",
+                  name: 'MulOverFlow5',
                 },
                 {
                   index: 33,
-                  name: "MulOverFlow6",
+                  name: 'MulOverFlow6',
                 },
                 {
                   index: 34,
-                  name: "MulOverFlow7",
+                  name: 'MulOverFlow7',
                 },
                 {
                   index: 35,
-                  name: "MulOverFlow8",
+                  name: 'MulOverFlow8',
                 },
                 {
                   index: 36,
-                  name: "MulOverFlow9",
+                  name: 'MulOverFlow9',
                 },
                 {
                   index: 37,
-                  name: "MulOverFlow10",
+                  name: 'MulOverFlow10',
                 },
                 {
                   index: 38,
-                  name: "MulOverFlow11",
+                  name: 'MulOverFlow11',
                 },
                 {
                   index: 39,
-                  name: "MulOverFlow12",
+                  name: 'MulOverFlow12',
                 },
                 {
                   index: 40,
-                  name: "MulOverFlow13",
+                  name: 'MulOverFlow13',
                 },
                 {
                   index: 41,
-                  name: "MulOverFlow14",
+                  name: 'MulOverFlow14',
                 },
                 {
                   index: 42,
-                  name: "DivByZero1",
+                  name: 'DivByZero1',
                 },
                 {
                   index: 43,
-                  name: "DivByZero2",
+                  name: 'DivByZero2',
                 },
                 {
                   index: 44,
-                  name: "DivByZero3",
+                  name: 'DivByZero3',
                 },
                 {
                   index: 45,
-                  name: "DivByZero4",
+                  name: 'DivByZero4',
                 },
                 {
                   index: 46,
-                  name: "DivByZero5",
+                  name: 'DivByZero5',
                 },
                 {
                   index: 47,
-                  name: "AddOverflow1",
+                  name: 'AddOverflow1',
                 },
                 {
                   index: 48,
-                  name: "CastOverflow1",
+                  name: 'CastOverflow1',
                 },
                 {
                   index: 49,
-                  name: "CastOverflow2",
+                  name: 'CastOverflow2',
                 },
               ],
             },
           },
-          path: ["uniswap_v2", "traits", "pair", "PairError"],
+          path: ['uniswap_v2', 'traits', 'pair', 'PairError'],
         },
       },
       {
@@ -1677,22 +1662,16 @@ const PAIR_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "Paused",
+                  name: 'Paused',
                 },
                 {
                   index: 1,
-                  name: "NotPaused",
+                  name: 'NotPaused',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "pausable",
-            "PausableError",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'pausable', 'PausableError'],
         },
       },
       {
@@ -1703,18 +1682,12 @@ const PAIR_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "ReentrantCall",
+                  name: 'ReentrantCall',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "reentrancy_guard",
-            "ReentrancyGuardError",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'reentrancy_guard', 'ReentrancyGuardError'],
         },
       },
       {
@@ -1738,7 +1711,7 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1747,22 +1720,22 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 0,
             },
             {
-              name: "E",
+              name: 'E',
               type: 24,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1778,7 +1751,7 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1787,22 +1760,22 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 30,
             },
             {
-              name: "E",
+              name: 'E',
               type: 24,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1821,7 +1794,7 @@ const PAIR_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "None",
+                  name: 'None',
                 },
                 {
                   fields: [
@@ -1830,22 +1803,22 @@ const PAIR_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Some",
+                  name: 'Some',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 2,
             },
           ],
-          path: ["Option"],
+          path: ['Option'],
         },
       },
     ],
   },
-};
+}
 
-export default PAIR_CONTRACT;
+export default PAIR_CONTRACT

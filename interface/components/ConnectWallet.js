@@ -1,11 +1,11 @@
-import React from "react";
-import { WalletSelect } from "@talismn/connect-components";
+import React from 'react'
+import { WalletSelect } from '@talismn/connect-components'
 //TODO
 const ConnectWallet = () => {
   return (
     <WalletSelect
       // [Required] The dapp name
-      dappName="My First Dapp"
+      dappName='My First Dapp'
       // Use if the dapp is controlling the modal toggle.
       open={false}
       // The component that opens the WalletSelect Modal
@@ -20,9 +20,9 @@ const ConnectWallet = () => {
         </button>
       }
       // Override the default header
-      header={""}
+      header={''}
       // Override the default footer
-      footer={""}
+      footer={''}
       // If `showAccountsList={true}`, then account selection modal will show up after selecting the a wallet. Default is `false`.
       showAccountsList={false}
       // Callback when the WalletSelect Modal is opened
@@ -39,7 +39,7 @@ const ConnectWallet = () => {
       // `onWalletConnectOpen`, `onWalletSelected`, `onAccountSelected` and `onWalletConnectClose`,
       onError={(error) => {}}
     />
-  );
-};
+  )
+}
 
-export default ConnectWallet;
+export default ConnectWallet

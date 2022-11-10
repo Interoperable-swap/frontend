@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import Image from "next/image";
-import { FiArrowUpRight } from "react-icons/fi";
-import { AiOutlineDown } from "react-icons/ai";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import Shiden from "../assets/Shiden.png";
-import uniswap from "../assets/uniswap.png";
-import { TransactionContext } from "../context/TransactionContext";
-import dynamic from "next/dynamic";
-const Identicon = dynamic(() => import("@polkadot/react-identicon"), {
+import React, { useContext, useEffect, useState } from 'react'
+import Image from 'next/image'
+import { FiArrowUpRight } from 'react-icons/fi'
+import { AiOutlineDown } from 'react-icons/ai'
+import { HiOutlineDotsVertical } from 'react-icons/hi'
+import Shiden from '../assets/Shiden.png'
+import uniswap from '../assets/uniswap.png'
+import { TransactionContext } from '../context/TransactionContext'
+import dynamic from 'next/dynamic'
+const Identicon = dynamic(() => import('@polkadot/react-identicon'), {
   ssr: false,
-});
+})
 
 const style = {
   wrapper: `p-4 w-screen flex justify-between items-center`,
@@ -24,48 +24,38 @@ const style = {
   buttonTextContainer: `h-8 flex items-center`,
   buttonIconContainer: `flex items-center justify-center w-8 h-8`,
   buttonAccent: `bg-[#172A42] border border-[#163256] hover:border-[#234169] h-full rounded-2xl flex items-center justify-center text-[#4F90EA]`,
-};
+}
 
 const Header = () => {
-  const [selectedNav, setSelectedNav] = useState("swap");
-  const { connectWallet, currentAccount } = useContext(TransactionContext);
+  const [selectedNav, setSelectedNav] = useState('swap')
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
 
   return (
     <div className={style.wrapper}>
       <div className={style.headerLogo}>
-        <Image src={uniswap} alt="Uniswap" height={40} width={40} />
+        <Image src={uniswap} alt='Uniswap' height={40} width={40} />
       </div>
       <div className={style.nav}>
         <div className={style.navItemsContainer}>
           <div
-            onClick={() => setSelectedNav("swap")}
-            className={`${style.navItem} ${
-              selectedNav === "swap" && style.activeNavItem
-            }`}
+            onClick={() => setSelectedNav('swap')}
+            className={`${style.navItem} ${selectedNav === 'swap' && style.activeNavItem}`}
           >
             Swap
           </div>
           <div
-            onClick={() => setSelectedNav("pool")}
-            className={`${style.navItem} ${
-              selectedNav === "pool" && style.activeNavItem
-            }`}
+            onClick={() => setSelectedNav('pool')}
+            className={`${style.navItem} ${selectedNav === 'pool' && style.activeNavItem}`}
           >
             Pool
           </div>
           <div
-            onClick={() => setSelectedNav("vote")}
-            className={`${style.navItem} ${
-              selectedNav === "vote" && style.activeNavItem
-            }`}
+            onClick={() => setSelectedNav('vote')}
+            className={`${style.navItem} ${selectedNav === 'vote' && style.activeNavItem}`}
           >
             Vote
           </div>
-          <a
-            href="https://info.uniswap.org/#/"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href='https://info.uniswap.org/#/' target='_blank' rel='noreferrer'>
             <div className={style.navItem}>
               Charts <FiArrowUpRight />
             </div>
@@ -76,7 +66,7 @@ const Header = () => {
       <div className={style.buttonsContainer}>
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={style.buttonIconContainer}>
-            <Image src={Shiden} alt="shiden" height={20} width={20} />
+            <Image src={Shiden} alt='shiden' height={20} width={20} />
           </div>
           <p>Shiden</p>
           <div className={style.buttonIconContainer}>
@@ -86,24 +76,13 @@ const Header = () => {
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
             <div className={style.buttonIconContainer}>
-              <Identicon
-                value={currentAccount.address}
-                size={20}
-                theme={"polkadot"}
-              />
+              <Identicon value={currentAccount.address} size={20} theme={'polkadot'} />
             </div>
-            <div className={style.buttonTextContainer}>
-              {currentAccount.meta.name}
-            </div>
+            <div className={style.buttonTextContainer}>{currentAccount.meta.name}</div>
           </div>
         ) : (
-          <div
-            onClick={() => connectWallet()}
-            className={`${style.button} ${style.buttonPadding}`}
-          >
-            <div className={`${style.buttonAccent} ${style.buttonPadding}`}>
-              Connect Wallet
-            </div>
+          <div onClick={() => connectWallet()} className={`${style.button} ${style.buttonPadding}`}>
+            <div className={`${style.buttonAccent} ${style.buttonPadding}`}>Connect Wallet</div>
           </div>
         )}
 
@@ -114,7 +93,7 @@ const Header = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
