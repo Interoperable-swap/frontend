@@ -76,6 +76,8 @@ const Main = () => {
     //initialize contracts
     const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0);
     const getUNI2Contract = new ContractPromise(api, PSP22_ABI, address1);
+    setUni1Contract(getUNI1Contract);
+    setUni2Contract(getUNI2Contract);
     const factory = new ContractPromise(api, FACTORY_CONTRACT, factory_address);
     const uni1balance = await getUNI1Contract.query["psp22::balanceOf"](
       currentAccount.address,
@@ -99,7 +101,12 @@ const Main = () => {
     } else {
       console.error("Error", result.asErr);
     }
-    const approveUni1 = await getUNI1Contract.tx["psp22::approve"](
+  };
+
+  //3.execute swap
+  const runswap = async () => {
+    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
+    const approveUni1 = await Uni1Contract.tx["psp22::approve"](
       currentAccount.address,
       router_address,
       amount
@@ -117,50 +124,29 @@ const Main = () => {
         }
       }
     );
-    const pair = await factory.query["factory::createPair"](
-      currentAccount,
-      address0,
-      address1,
-      { gasLimit: gasLimit }
+    const swapAmount = amount;
+    const expectedOutputAmount = new BN(1111111111111111);
+    await pair.tx["pair::swap"](
+      0,
+      expectedOutputAmount,
+      currentAccount.address
     );
-    pair.signAndSend(
-      currentAccount.address,
-      { signer: signer.signer },
-      ({ status }) => {
-        if (status.isInBlock) {
-          console.log(
-            `Completed at block hash #${status.asInBlock.toString()}`
-          );
-        } else {
-          console.log(`Current status: ${status.type}`);
-        }
-      }
-    );
+    //sighandsend
   };
-
-  //2.create pair
-  const setupPair = async () => {};
-
-  //3.execute swap
-  /**
-    const pair = new CodePromise(api, PAIR_CONTRACT, pair_wasm);
-    const create_pair = pair.tx.new({ gasLimit, storageDepositLimit });
-    create_pair.signAndSend(
-      currentAccount.address,
-      { signer: signer.signer },
-      ({ contract, status }) => {
-        if (status.isInBlock) {
-          let address = contract.address.toString();
-          console.log(
-            `Completed at block hash #${status.asInBlock.toString()}`
-          );
-          console.log(`Contract is deployed: #${address}`);
-        } else {
-          console.log(`Current status: ${status.type}`);
-        }
-      }
-    );
-		 */
+  //addliquidity
+  const addLiquidity = async (
+    Uni1Contract,
+    Uni2Contract,
+    pair,
+    currentAccount,
+    token0Amount,
+    token1Amount
+  ) => {
+    await Uni1Contract.tx["psp22::transfer"](pair, token0Amount);
+    await Uni2Contract.tx["psp22::transfer"](pair, token1Amount);
+    //mint LPtoken to liquidity provider
+    await pair.tx["pair::mint"](currentAccount.address);
+  };
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
