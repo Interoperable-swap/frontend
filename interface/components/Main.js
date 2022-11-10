@@ -23,10 +23,6 @@ import PAIR_CONTRACT from "../contract/abi/pair";
 import FACTORY_CONTRACT from "../contract/abi/factory";
 import { PSP22_ABI } from "../contract/abi/psp22";
 import { WNATIVE_ABI } from "../contract/abi/wnative";
-//wasm
-import FACTORY_WASM from "../contract/wasm/factory_wasm";
-import PAIR_WASM from "../contract/wasm/pair_wasm";
-import PSP22_WASM from "../contract/wasm/psp22_wasm";
 import ROUTER_CONTRACT from "../contract/abi/router";
 
 const style = {
@@ -50,8 +46,6 @@ const zeroAddress = encodeAddress(
 //const gasLimit = 18750000000;
 const gasLimit = 100000000000;
 const storageDepositLimit = null;
-const pair_code_hash = PAIR_CONTRACT.source.hash;
-
 const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
 // uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
 
