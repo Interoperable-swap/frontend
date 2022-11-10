@@ -14,7 +14,7 @@ if (typeof window !== "undefined") {
 	Astar Team: wss://rpc.shibuya.astar.network
  * 
  */
-const WS_PROVIDER = " wss://shibuya-rpc.dwellir.com";
+const WS_PROVIDER = "wss://shibuya-rpc.dwellir.com";
 const DAPP_NAME = "Shiden DEX";
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState();
@@ -71,6 +71,7 @@ export const TransactionProvider = ({ children }) => {
       const provider = new WsProvider(WS_PROVIDER);
       const api = await ApiPromise.create({ provider });
       setapi(api);
+      api.isReady;
       const account = allaccounts[0];
       setCurrentAccount(account);
       const injector = await web3FromSource(account.meta.source);

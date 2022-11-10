@@ -17,11 +17,3 @@ export const address0 = "aDGRyf3Q8jGYRisf3Aydt87ccongLCgdobaSiXJkW7Z2zrh";
 export const name1 = "Wrapped SBY";
 export const symbol1 = "WSBY";
 export const address1 = "ZHF9zwK6S582RxGhYSyTGQ5rMYeNet8czcuuUZxFyv2AZwC";
-const provider = new WsProvider("wss://rpc.shibuya.astar.network");
-
-const api = ApiPromise.create({ provider: provider });
-
-export const getUNI1Contract = () =>
-  new ContractPromise(api, PSP22_ABI, address0);
-export const getToken2Contract = () =>
-  new ContractPromise(api, WNATIVE_ABI, address1);

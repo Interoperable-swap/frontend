@@ -97,13 +97,14 @@ const Liquidity = () => {
 		 */
     //add liquidity via router
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address);
+    console.log(router);
     const deadline = "111111111111111111";
     await router.tx["router::addLiquidity"](
       { gasLimit, storageDepositLimit },
       getUNI1Contract.address,
       getToken2Contract.address,
-      1000,
-      1000,
+      inputAmount1,
+      inputAmount2,
       0,
       0,
       currentAccount.address,

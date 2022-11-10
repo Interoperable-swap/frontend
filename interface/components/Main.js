@@ -50,7 +50,6 @@ const gasLimit = 18750000000;
 const storageDepositLimit = null;
 const pair_code_hash = PAIR_CONTRACT.source.hash;
 
-
 const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
 // uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
 
