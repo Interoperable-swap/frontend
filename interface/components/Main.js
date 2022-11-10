@@ -101,8 +101,32 @@ const Main = () => {
     } else {
       console.error("Error", result.asErr);
     }
+		
+    await getUNI1Contract.tx["psp22::approve"](
+      {
+        gasLimit,
+        storageDepositLimit,
+      },
+      router_address,
+      amount
+    ).signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
+    );
+    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
+    const swapAmount = amount;
+    const expectedOutputAmount = new BN(1111111111111111);
   };
-
+  /*
   //3.execute swap
   const runswap = async () => {
     const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
@@ -132,7 +156,7 @@ const Main = () => {
       currentAccount.address
     );
     //sighandsend
-  };
+  }; */
   //addliquidity
   const addLiquidity = async (
     Uni1Contract,

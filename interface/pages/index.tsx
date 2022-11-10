@@ -94,7 +94,7 @@ const Home: NextPage = () => {
             <div className={style.buttonIconContainer}>
               <Image src={Shiden} alt="shiden" height={20} width={20} />
             </div>
-            <p>Shiden</p>
+            <p>Shibuya</p>
             <div className={style.buttonIconContainer}>
               <AiOutlineDown />
             </div>
