@@ -18,7 +18,7 @@ const Identicon = dynamic(() => import("@polkadot/react-identicon"), {
 });
 
 const style = {
-  wrapper: `h-screen max-h-screen h-min-screen w-screen bg-[#2D242F] text-white select-none flex flex-col justify-between`,
+  wrapper: `h-screen max-h-screen h-min-screen w-screen bg-gradient-to-t from-gray-900 to-gray-600 bg-gradient-to-r text-white select-none flex flex-col justify-between	`,
   headwrapper: `p-4 w-screen flex justify-between items-center`,
   headerLogo: `flex w-1/4 items-center justify-start`,
   nav: `flex-1 flex justify-center items-center`,
