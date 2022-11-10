@@ -7,9 +7,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
     "@polkadot/api": "^9.5.2",
     "@polkadot/api-contract": "^9.5.2",
     "@polkadot/extension-dapp": "^0.44.6",
+    "@polkadot/keyring": "^10.1.11",
     "@polkadot/react-identicon": "^2.9.12",
     "@redspot/patract": "^0.13.6",
     "bn.js-typings": "^1.0.1",
@@ -18,6 +20,7 @@
     "react-dom": "18.1.0",
     "react-hooks": "^1.0.1",
     "react-icons": "^4.6.0",
+    "react-spinners": "^0.13.6",
     "redspot": "^0.13.6"
   },
   "devDependencies": {

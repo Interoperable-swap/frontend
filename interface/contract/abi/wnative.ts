@@ -1,28 +1,19 @@
-export const PAIR_ADDRESS = "";
-export const PSP22_ABI = {
+export const WNATIVE_ABI = {
   source: {
-    hash: "0xbc9194904cb5059e6d187206142b46d4096202dee523bcd785b9f81ff4fab7af",
+    hash: "0x6b616ae7cc55120c76dcf49e94a0b9ca321c342d77ac4e618092d40d425738d1",
     language: "ink! 3.3.1",
     compiler: "rustc 1.65.0-nightly",
   },
   contract: {
-    name: "psp22_token",
-    version: "2.1.0",
-    authors: ["Shuhei Tanaka <shuhei46491@gmail.com>"],
+    name: "w_native_token",
+    version: "0.1.0",
+    authors: ["Stake Technologies <devops@stake.co.jp>"],
   },
   V3: {
     spec: {
       constructors: [
         {
-          args: [
-            {
-              label: "total_supply",
-              type: {
-                displayName: ["Balance"],
-                type: 0,
-              },
-            },
-          ],
+          args: [],
           docs: [],
           label: "new",
           payable: false,
@@ -100,6 +91,50 @@ export const PSP22_ABI = {
       ],
       messages: [
         {
+          args: [],
+          docs: [],
+          label: "deposit",
+          mutates: true,
+          payable: true,
+          returnType: {
+            displayName: ["Result"],
+            type: 13,
+          },
+          selector: "0x2d10c9bd",
+        },
+        {
+          args: [
+            {
+              label: "amount",
+              type: {
+                displayName: ["Balance"],
+                type: 0,
+              },
+            },
+          ],
+          docs: [],
+          label: "withdraw",
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ["Result"],
+            type: 13,
+          },
+          selector: "0x410fcc9d",
+        },
+        {
+          args: [],
+          docs: [" Returns the total token supply."],
+          label: "PSP22::total_supply",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["psp22_external", "TotalSupplyOutput"],
+            type: 0,
+          },
+          selector: "0x162df8c2",
+        },
+        {
           args: [
             {
               label: "spender",
@@ -166,46 +201,6 @@ export const PSP22_ABI = {
             type: 0,
           },
           selector: "0x4d47d921",
-        },
-        {
-          args: [
-            {
-              label: "spender",
-              type: {
-                displayName: ["psp22_external", "DecreaseAllowanceInput1"],
-                type: 2,
-              },
-            },
-            {
-              label: "delta_value",
-              type: {
-                displayName: ["psp22_external", "DecreaseAllowanceInput2"],
-                type: 0,
-              },
-            },
-          ],
-          docs: [
-            " Atomically decreases the allowance granted to `spender` by the caller.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
-            " by owner for `spender`.",
-            "",
-            " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
-            " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
-          ],
-          label: "PSP22::decrease_allowance",
-          mutates: true,
-          payable: false,
-          returnType: {
-            displayName: ["psp22_external", "DecreaseAllowanceOutput"],
-            type: 13,
-          },
-          selector: "0xfecb57d5",
         },
         {
           args: [
@@ -357,16 +352,44 @@ export const PSP22_ABI = {
           selector: "0x54b3c76e",
         },
         {
-          args: [],
-          docs: [" Returns the total token supply."],
-          label: "PSP22::total_supply",
-          mutates: false,
+          args: [
+            {
+              label: "spender",
+              type: {
+                displayName: ["psp22_external", "DecreaseAllowanceInput1"],
+                type: 2,
+              },
+            },
+            {
+              label: "delta_value",
+              type: {
+                displayName: ["psp22_external", "DecreaseAllowanceInput2"],
+                type: 0,
+              },
+            },
+          ],
+          docs: [
+            " Atomically decreases the allowance granted to `spender` by the caller.",
+            "",
+            " An `Approval` event is emitted.",
+            "",
+            " # Errors",
+            "",
+            " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
+            " by owner for `spender`.",
+            "",
+            " Returns `ZeroSenderAddress` error if sender's address is zero.",
+            "",
+            " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
+          ],
+          label: "PSP22::decrease_allowance",
+          mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TotalSupplyOutput"],
-            type: 0,
+            displayName: ["psp22_external", "DecreaseAllowanceOutput"],
+            type: 13,
           },
-          selector: "0x162df8c2",
+          selector: "0xfecb57d5",
         },
         {
           args: [
@@ -394,18 +417,6 @@ export const PSP22_ABI = {
         },
         {
           args: [],
-          docs: [" Returns the token name."],
-          label: "PSP22Metadata::token_name",
-          mutates: false,
-          payable: false,
-          returnType: {
-            displayName: ["psp22metadata_external", "TokenNameOutput"],
-            type: 16,
-          },
-          selector: "0x3d261bd4",
-        },
-        {
-          args: [],
           docs: [" Returns the token symbol."],
           label: "PSP22Metadata::token_symbol",
           mutates: false,
@@ -415,6 +426,18 @@ export const PSP22_ABI = {
             type: 16,
           },
           selector: "0x34205be5",
+        },
+        {
+          args: [],
+          docs: [" Returns the token name."],
+          label: "PSP22Metadata::token_name",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["psp22metadata_external", "TokenNameOutput"],
+            type: 16,
+          },
+          selector: "0x3d261bd4",
         },
         {
           args: [],

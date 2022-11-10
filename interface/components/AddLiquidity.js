@@ -1,14 +1,23 @@
 import Image from "next/image";
+import React, { useContext, useState } from "react";
 import { RiSettings3Fill } from "react-icons/ri";
 import { AiOutlineDown, AiOutlinePlus } from "react-icons/ai";
 import astar from "../assets/astar.png";
 import Shiden from "../assets/Shiden.png";
-import { ContractPromise } from "@polkadot/api-contract";
-import { ERC20 } from "../contract/abi/erc20";
 import Button from "./Button";
 import { TransactionContext } from "../context/TransactionContext";
-import React, { useContext } from "react";
 
+import ROUTER_CONTRACT from "../contract/abi/router";
+import { ContractPromise } from "@polkadot/api-contract";
+import { PSP22_ABI } from "../contract/abi/psp22";
+import { WNATIVE_ABI } from "../contract/abi/wnative";
+import {
+  factory_address,
+  router_address,
+  pair_address,
+  address0,
+  address1,
+} from "../util/RouterUtil";
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
   content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
@@ -24,52 +33,102 @@ const style = {
   confirmButton: `bg-[#2172E5] my-2 rounded-2xl py-6 px-8 text-xl font-semibold flex items-center justify-center cursor-pointer border border-[#2172E5] hover:border-[#234169]`,
 };
 const Liquidity = () => {
-  const { currentAccount, api, handleChange, amount } =
-    useContext(TransactionContext);
-  const add_liquidity = async () => {
-    const recipient = "5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF"; //dev1
-    const { web3FromSource } = await import("@polkadot/extension-dapp");
-    const account = currentAccount;
-    const injector = await web3FromSource(account.meta.source);
-    const transferExtrinsic = api.tx.balances.transfer(recipient, amount);
-    if (amount === "0" || amount === "") {
-      alert("please input amount");
-    } else {
-      transferExtrinsic.signAndSend(
-        account.address,
-        { signer: injector.signer },
-        ({ status }) => {
-          if (status.isInBlock) {
-            console.log(
-              `Completed at block hash #${status.asInBlock.toString()}`
-            );
-          } else {
-            console.log(`Current status: ${status.type}`);
-          }
-        }
-      );
-    }
+  const { currentAccount, api, signer } = useContext(TransactionContext);
+  const handleInput1 = (e) => {
+    setInputAmount1(e.target.value);
   };
-  const approve = async () => {
-    const { web3FromSource } = await import("@polkadot/extension-dapp");
-    const injector = await web3FromSource(currentAccount.meta.source);
-    const gasLimit = 3000n * 1000000n;
-    const target = "5CM4ecNF7j8f4t26UGEmbcDKoVHtD8BZZMYVDMq68ATKcX3y";
-    const erc20address = "XtfjrZygSXHbEonF2ddsduN9L1JySsSTJNJtW3XLp6UnjK7";
-    const contract = new ContractPromise(api, ERC20, erc20address);
-    const callValue = await contract.tx.transferFrom(
-      currentAccount,
-      target,
-      100000
+  const handleInput2 = (e) => {
+    setInputAmount2(e.target.value);
+  };
+  const [Uni1Contract, setUni1Contract] = useState(undefined);
+  const [token2Contract, setToken2Contract] = useState(undefined);
+
+  const [inputAmount1, setInputAmount1] = useState("");
+  const [inputAmount2, setInputAmount2] = useState("");
+
+  const gasLimit = 100000000000;
+  const storageDepositLimit = null;
+  const data = "";
+  const add_liquidity = async () => {
+    const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0);
+    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1);
+    //TODO: approve
+    /**
+		 await getUNI1Contract.tx["psp22::approve"](
+      {
+        gasLimit,
+        storageDepositLimit,
+      },
+      router_address,
+      inputAmount1
+    ).signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
     );
-    console.log(callValue);
+		await getToken2Contract.tx["psp22::approve"](
+      {
+        gasLimit,
+        storageDepositLimit,
+      },
+      router_address,
+      inputAmount2
+    ).signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
+    );
+		 */
+    //add liquidity via router
+    const router = new ContractPromise(api, ROUTER_CONTRACT, router_address);
+    console.log(router);
+    const deadline = "111111111111111111";
+    await router.tx["router::addLiquidity"](
+      { gasLimit, storageDepositLimit },
+      getUNI1Contract.address,
+      getToken2Contract.address,
+      inputAmount1,
+      inputAmount2,
+      0,
+      0,
+      currentAccount.address,
+      deadline
+    ).signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
+    );
   };
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
         <div className={style.formHeader}>
           <div>Add Liquidity</div>
-          <div onClick={() => approve()}>
+          <div>
             <RiSettings3Fill />
           </div>
         </div>
@@ -79,7 +138,7 @@ const Liquidity = () => {
             className={style.transferPropInput}
             placeholder="0.0"
             pattern="^[0-9]*[.,]?[0-9]*$"
-            onChange={(e) => handleChange(e, "amount")}
+            onChange={(e) => handleInput1(e, "inputAmount1")}
           />
           <div className={style.currencySelector}>
             <div className={style.currencySelectorContent}>
@@ -101,7 +160,7 @@ const Liquidity = () => {
             className={style.transferPropInput}
             placeholder="0.0"
             pattern="^[0-9]*[.,]?[0-9]*$"
-            onChange={(e) => handleChange(e, "amount")}
+            onChange={(e) => handleInput2(e, "InputAmount2")}
           />
           <div className={style.currencySelector}>
             <div className={style.currencySelectorContent}>

@@ -1,14 +1,14 @@
 export const FACTORY_ADDRESS = "";
 export const FACTORY_CONTRACT = {
   source: {
-    hash: "0x29735bb2e3c8dbffa3d3674584ca00ccba719bb6c9c0456e439d6aa67a5286c1",
+    hash: "0x58c8eff3ad709630770960282526e58a81491cc7cdeadbb0e6072cd3bb2055ca",
     language: "ink! 3.3.1",
     compiler: "rustc 1.65.0-nightly",
   },
   contract: {
     name: "factory_contract",
     version: "0.1.0",
-    authors: ["Stake Technologies <devops@stake.co.jp>"],
+    authors: ["Shuhei Tanaka <shuhei46491@gmail.com>"],
   },
   V3: {
     spec: {
@@ -73,7 +73,7 @@ export const FACTORY_CONTRACT = {
               label: "pair_len",
               type: {
                 displayName: ["u64"],
-                type: 9,
+                type: 19,
               },
             },
           ],
@@ -82,18 +82,6 @@ export const FACTORY_CONTRACT = {
         },
       ],
       messages: [
-        {
-          args: [],
-          docs: [],
-          label: "Factory::all_pair_length",
-          mutates: false,
-          payable: false,
-          returnType: {
-            displayName: ["factory_external", "AllPairLengthOutput"],
-            type: 9,
-          },
-          selector: "0xecc40c19",
-        },
         {
           args: [
             {
@@ -110,68 +98,33 @@ export const FACTORY_CONTRACT = {
           payable: false,
           returnType: {
             displayName: ["factory_external", "SetFeeToOutput"],
-            type: 10,
+            type: 9,
           },
           selector: "0x3ef205a7",
         },
         {
           args: [],
           docs: [],
-          label: "Factory::fee_to",
+          label: "Factory::fee_to_setter",
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["factory_external", "FeeToOutput"],
+            displayName: ["factory_external", "FeeToSetterOutput"],
             type: 0,
           },
-          selector: "0xd68332f3",
+          selector: "0x9d08e711",
         },
         {
-          args: [
-            {
-              label: "fee_to_setter",
-              type: {
-                displayName: ["factory_external", "SetFeeToSetterInput1"],
-                type: 0,
-              },
-            },
-          ],
+          args: [],
           docs: [],
-          label: "Factory::set_fee_to_setter",
-          mutates: true,
-          payable: false,
-          returnType: {
-            displayName: ["factory_external", "SetFeeToSetterOutput"],
-            type: 10,
-          },
-          selector: "0x80999559",
-        },
-        {
-          args: [
-            {
-              label: "token_a",
-              type: {
-                displayName: ["factory_external", "GetPairInput1"],
-                type: 0,
-              },
-            },
-            {
-              label: "token_b",
-              type: {
-                displayName: ["factory_external", "GetPairInput2"],
-                type: 0,
-              },
-            },
-          ],
-          docs: [],
-          label: "Factory::get_pair",
+          label: "Factory::pair_contract_code_hash",
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["factory_external", "GetPairOutput"],
-            type: 19,
+            displayName: ["factory_external", "PairContractCodeHashOutput"],
+            type: 8,
           },
-          selector: "0x45a3c0f6",
+          selector: "0x20be58a3",
         },
         {
           args: [
@@ -196,21 +149,100 @@ export const FACTORY_CONTRACT = {
           payable: false,
           returnType: {
             displayName: ["factory_external", "CreatePairOutput"],
-            type: 20,
+            type: 18,
           },
           selector: "0xc77f4b02",
         },
         {
-          args: [],
+          args: [
+            {
+              label: "pid",
+              type: {
+                displayName: ["factory_external", "AllPairsInput1"],
+                type: 19,
+              },
+            },
+          ],
           docs: [],
-          label: "Factory::fee_to_setter",
+          label: "Factory::all_pairs",
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["factory_external", "FeeToSetterOutput"],
+            displayName: ["factory_external", "AllPairsOutput"],
+            type: 20,
+          },
+          selector: "0x8101c257",
+        },
+        {
+          args: [],
+          docs: [],
+          label: "Factory::all_pairs_length",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["factory_external", "AllPairsLengthOutput"],
+            type: 19,
+          },
+          selector: "0xf92dcc3f",
+        },
+        {
+          args: [
+            {
+              label: "fee_to_setter",
+              type: {
+                displayName: ["factory_external", "SetFeeToSetterInput1"],
+                type: 0,
+              },
+            },
+          ],
+          docs: [],
+          label: "Factory::set_fee_to_setter",
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ["factory_external", "SetFeeToSetterOutput"],
+            type: 9,
+          },
+          selector: "0x80999559",
+        },
+        {
+          args: [],
+          docs: [],
+          label: "Factory::fee_to",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["factory_external", "FeeToOutput"],
             type: 0,
           },
-          selector: "0x9d08e711",
+          selector: "0xd68332f3",
+        },
+        {
+          args: [
+            {
+              label: "token_a",
+              type: {
+                displayName: ["factory_external", "GetPairInput1"],
+                type: 0,
+              },
+            },
+            {
+              label: "token_b",
+              type: {
+                displayName: ["factory_external", "GetPairInput2"],
+                type: 0,
+              },
+            },
+          ],
+          docs: [],
+          label: "Factory::get_pair",
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ["factory_external", "GetPairOutput"],
+            type: 20,
+          },
+          selector: "0x45a3c0f6",
         },
       ],
     },
@@ -391,20 +423,12 @@ export const FACTORY_CONTRACT = {
         id: 9,
         type: {
           def: {
-            primitive: "u64",
-          },
-        },
-      },
-      {
-        id: 10,
-        type: {
-          def: {
             variant: {
               variants: [
                 {
                   fields: [
                     {
-                      type: 11,
+                      type: 10,
                     },
                   ],
                   index: 0,
@@ -413,7 +437,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 12,
+                      type: 11,
                     },
                   ],
                   index: 1,
@@ -425,18 +449,18 @@ export const FACTORY_CONTRACT = {
           params: [
             {
               name: "T",
-              type: 11,
+              type: 10,
             },
             {
               name: "E",
-              type: 12,
+              type: 11,
             },
           ],
           path: ["Result"],
         },
       },
       {
-        id: 11,
+        id: 10,
         type: {
           def: {
             tuple: [],
@@ -444,7 +468,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 12,
+        id: 11,
         type: {
           def: {
             variant: {
@@ -452,7 +476,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 13,
+                      type: 12,
                       typeName: "PairError",
                     },
                   ],
@@ -471,6 +495,10 @@ export const FACTORY_CONTRACT = {
                   index: 3,
                   name: "IdenticalAddresses",
                 },
+                {
+                  index: 4,
+                  name: "PairExists",
+                },
               ],
             },
           },
@@ -478,7 +506,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 13,
+        id: 12,
         type: {
           def: {
             variant: {
@@ -486,7 +514,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 14,
+                      type: 13,
                       typeName: "PSP22Error",
                     },
                   ],
@@ -496,7 +524,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 16,
+                      type: 15,
                       typeName: "OwnableError",
                     },
                   ],
@@ -506,7 +534,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 17,
+                      type: 16,
                       typeName: "PausableError",
                     },
                   ],
@@ -516,7 +544,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 18,
+                      type: 17,
                       typeName: "ReentrancyGuardError",
                     },
                   ],
@@ -677,31 +705,35 @@ export const FACTORY_CONTRACT = {
                 },
                 {
                   index: 42,
-                  name: "MulOverFlow15",
-                },
-                {
-                  index: 43,
                   name: "DivByZero1",
                 },
                 {
-                  index: 44,
+                  index: 43,
                   name: "DivByZero2",
                 },
                 {
-                  index: 45,
+                  index: 44,
                   name: "DivByZero3",
                 },
                 {
-                  index: 46,
+                  index: 45,
                   name: "DivByZero4",
                 },
                 {
-                  index: 47,
+                  index: 46,
                   name: "DivByZero5",
                 },
                 {
-                  index: 48,
+                  index: 47,
                   name: "AddOverflow1",
+                },
+                {
+                  index: 48,
+                  name: "CastOverflow1",
+                },
+                {
+                  index: 49,
+                  name: "CastOverflow2",
                 },
               ],
             },
@@ -710,7 +742,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 14,
+        id: 13,
         type: {
           def: {
             variant: {
@@ -718,7 +750,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 15,
+                      type: 14,
                       typeName: "String",
                     },
                   ],
@@ -744,7 +776,7 @@ export const FACTORY_CONTRACT = {
                 {
                   fields: [
                     {
-                      type: 15,
+                      type: 14,
                       typeName: "String",
                     },
                   ],
@@ -764,7 +796,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 15,
+        id: 14,
         type: {
           def: {
             primitive: "str",
@@ -772,7 +804,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 16,
+        id: 15,
         type: {
           def: {
             variant: {
@@ -798,7 +830,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 17,
+        id: 16,
         type: {
           def: {
             variant: {
@@ -824,7 +856,7 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
-        id: 18,
+        id: 17,
         type: {
           def: {
             variant: {
@@ -846,7 +878,55 @@ export const FACTORY_CONTRACT = {
         },
       },
       {
+        id: 18,
+        type: {
+          def: {
+            variant: {
+              variants: [
+                {
+                  fields: [
+                    {
+                      type: 0,
+                    },
+                  ],
+                  index: 0,
+                  name: "Ok",
+                },
+                {
+                  fields: [
+                    {
+                      type: 11,
+                    },
+                  ],
+                  index: 1,
+                  name: "Err",
+                },
+              ],
+            },
+          },
+          params: [
+            {
+              name: "T",
+              type: 0,
+            },
+            {
+              name: "E",
+              type: 11,
+            },
+          ],
+          path: ["Result"],
+        },
+      },
+      {
         id: 19,
+        type: {
+          def: {
+            primitive: "u64",
+          },
+        },
+      },
+      {
+        id: 20,
         type: {
           def: {
             variant: {
@@ -874,46 +954,6 @@ export const FACTORY_CONTRACT = {
             },
           ],
           path: ["Option"],
-        },
-      },
-      {
-        id: 20,
-        type: {
-          def: {
-            variant: {
-              variants: [
-                {
-                  fields: [
-                    {
-                      type: 0,
-                    },
-                  ],
-                  index: 0,
-                  name: "Ok",
-                },
-                {
-                  fields: [
-                    {
-                      type: 12,
-                    },
-                  ],
-                  index: 1,
-                  name: "Err",
-                },
-              ],
-            },
-          },
-          params: [
-            {
-              name: "T",
-              type: 0,
-            },
-            {
-              name: "E",
-              type: 12,
-            },
-          ],
-          path: ["Result"],
         },
       },
     ],
