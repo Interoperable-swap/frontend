@@ -27,6 +27,7 @@ import { WNATIVE_ABI } from "../contract/abi/wnative";
 import FACTORY_WASM from "../contract/wasm/factory_wasm";
 import PAIR_WASM from "../contract/wasm/pair_wasm";
 import PSP22_WASM from "../contract/wasm/psp22_wasm";
+import ROUTER_CONTRACT from "../contract/abi/router";
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -46,7 +47,8 @@ const ONE = new BN(10).pow(new BN(18));
 const zeroAddress = encodeAddress(
   "0x0000000000000000000000000000000000000000000000000000000000000000"
 );
-const gasLimit = 18750000000;
+//const gasLimit = 18750000000;
+const gasLimit = 100000000000;
 const storageDepositLimit = null;
 const pair_code_hash = PAIR_CONTRACT.source.hash;
 
@@ -62,7 +64,14 @@ const Main = () => {
   const [token2Contract, setToken2Contract] = useState(undefined);
   const [UniI1Balance, setUni1Balance] = useState("");
   const [UniI2Balance, setUni2Balance] = useState("");
-
+  const [inputAmount1, setInputAmount1] = useState(0);
+  const [inputAmount2, setInputAmount2] = useState(0);
+  const handleInput1 = (e) => {
+    setInputAmount1(e.target.value);
+  };
+  const handleInput2 = (e) => {
+    setInputAmount2(e.target.value);
+  };
   //1. setup
   useEffect(() => {
     const setup = async () => {
@@ -77,7 +86,7 @@ const Main = () => {
         currentAccount.address
       );
       if (uni1balance.result.isOk) {
-        setUni1Balance(uni1balance.output.toString());
+        setUni1Balance(uni1balance.output.toString().slice(-6)); //TODO: FIX DECIMAL
       } else {
         console.error("Error", result.asErr);
       }
@@ -88,7 +97,7 @@ const Main = () => {
       );
       if (uni2balance.result.isOk) {
         // output the return value
-        setUni2Balance(uni2balance.output.toString());
+        setUni2Balance(uni2balance.output.toString().slice(-6)); //TODO FIX DECIMAL
       } else {
         console.error("Error", result.asErr);
       }
@@ -96,36 +105,15 @@ const Main = () => {
     setup();
   }, []);
 
-  const approve = async () => {
-    await Uni1Contract.tx["psp22::approve"](
-      {
-        gasLimit,
-        storageDepositLimit,
-      },
-      router_address,
-      amount
-    ).signAndSend(
-      currentAccount.address,
-      { signer: signer.signer },
-      ({ status }) => {
-        if (status.isInBlock) {
-          console.log(
-            `Completed at block hash #${status.asInBlock.toString()}`
-          );
-        } else {
-          console.log(`Current status: ${status.type}`);
-        }
-      }
-    );
-
+  const transfer = async () => {
     const data = "";
     await Uni1Contract.tx["psp22::transfer"](
       {
         gasLimit,
         storageDepositLimit,
       },
-      pair_address,
-      amount,
+      "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR",
+      inputAmount2,
       data
     ).signAndSend(
       currentAccount.address,
@@ -141,13 +129,17 @@ const Main = () => {
       }
     );
   };
+
   const runswap = async () => {
-    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
-    await pair.tx["pair::swap"](
+    const deadline = "111111111111111111";
+    const router = new ContractPromise(api, ROUTER_CONTRACT, router_address);
+    await router.tx["router::swapExactTokensForTokens"](
       { gasLimit, storageDepositLimit },
-      0,
-      222,
-      currentAccount.address
+      inputAmount1,
+      100,
+      [token2Contract.address, Uni1Contract.address],
+      currentAccount.address,
+      deadline
     ).signAndSend(
       currentAccount.address,
       { signer: signer.signer },
@@ -167,7 +159,7 @@ const Main = () => {
       <div className={style.content}>
         <div className={style.formHeader}>
           <div>Swap</div>
-          <div>
+          <div onClick={() => transfer()}>
             <RiSettings3Fill />
           </div>
         </div>
@@ -177,7 +169,7 @@ const Main = () => {
             className={style.transferPropInput}
             placeholder="0.0"
             pattern="^[0-9]*[.,]?[0-9]*$"
-            onChange={(e) => handleChange(e, "amount")}
+            onChange={(e) => handleInput1(e, "input1amount")}
           />
           <div className={style.currencySelector}>
             <button
@@ -185,9 +177,9 @@ const Main = () => {
               onClick={() => setShowList((prevState) => !prevState)}
             >
               <div className={style.currencySelectorIcon}>
-                <Image src={uniswap} alt="uniswap" height={20} width={20} />
+                <Image src={astar} alt="astar" height={20} width={20} />
               </div>
-              <div className={style.currencySelectorTicker}>UNI</div>
+              <div className={style.currencySelectorTicker}>WSBY</div>
               {showList ? (
                 <AiOutlineUp className={style.currencySelectorArrow} />
               ) : (
@@ -196,9 +188,9 @@ const Main = () => {
             </button>
           </div>
         </div>
-        {UniI1Balance ? (
+        {UniI2Balance ? (
           <div>
-            <div className={style.copyarea}>Balance :{UniI1Balance}</div>
+            <div className={style.copyarea}>Balance :{UniI2Balance}</div>
           </div>
         ) : (
           <div className={style.copyarea}>Balance :0</div>
@@ -212,7 +204,7 @@ const Main = () => {
             className={style.transferPropInput}
             placeholder="0.0"
             pattern="^[0-9]*[.,]?[0-9]*$"
-            onChange={(e) => handleChange(e, "amount")}
+            onChange={(e) => handleInput2(e, "input2amount")}
           />
           <div className={style.currencySelector}>
             <button
@@ -220,9 +212,9 @@ const Main = () => {
               onClick={() => setCurrency2((prevState) => !prevState)}
             >
               <div className={style.currencySelectorIcon}>
-                <Image src={astar} alt="astar" height={20} width={20} />
+                <Image src={uniswap} alt="uniswap" height={20} width={20} />
               </div>
-              <div className={style.currencySelectorTicker}>WSBY</div>
+              <div className={style.currencySelectorTicker}>UNI</div>
               {Currency2 ? (
                 <AiOutlineUp className={style.currencySelectorArrow} />
               ) : (
@@ -231,9 +223,9 @@ const Main = () => {
             </button>
           </div>
         </div>
-        {UniI2Balance ? (
+        {UniI1Balance ? (
           <div>
-            <div className={style.copyarea}>Balance :{UniI2Balance}</div>
+            <div className={style.copyarea}>Balance :{UniI1Balance}</div>
           </div>
         ) : (
           <div className={style.copyarea}>Balance :0</div>
