@@ -4,7 +4,7 @@ import { AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 import { IoSwapVertical } from "react-icons/io5";
 import astar from "../assets/astar.png";
 import shiden from "../assets/Shiden.png";
-import usdt from "../assets/usdt.svg";
+import uniswap from "../assets/uniswap.png";
 import { useContext, useEffect, useState } from "react";
 import Button from "./Button";
 import { TransactionContext } from "../context/TransactionContext";
@@ -16,6 +16,7 @@ import { encodeAddress } from "@polkadot/keyring";
 import PAIR_CONTRACT from "../contract/abi/pair";
 import FACTORY_CONTRACT from "../contract/abi/factory";
 import { PSP22_ABI } from "../contract/abi/psp22";
+import { WNATIVE_ABI } from "../contract/abi/wnative";
 //wasm
 import FACTORY_WASM from "../contract/wasm/factory_wasm";
 import PAIR_WASM from "../contract/wasm/pair_wasm";
@@ -39,70 +40,73 @@ const ONE = new BN(10).pow(new BN(18));
 const zeroAddress = encodeAddress(
   "0x0000000000000000000000000000000000000000000000000000000000000000"
 );
-const MINIMUM_LIQUIDITY = 1000;
 const gasLimit = 18750000000;
 const storageDepositLimit = null;
-const options = { gasLimit, storageDepositLimit };
 
 const factory_address = "aiPpAoWnzUuEXuQD8M75F42tgcaQ9MY6kbNqXxP8raYa73p";
 const router_address = "b7Vz6KZCVFrD6CpMxXohe5cKu2Zst71m13ruxv5jdJsxKoA"; // fee_to_setter = dev1
 const pair_address = "b4WSUKQu6Evooh4Rtz6s9LhLWs7XHpqCx2wsfmsP2uFWkUe";
 const pair_code_hash = PAIR_CONTRACT.source.hash;
-//UNI1
-const name0 = "Wrapped Ether1";
+//token0
+const name0 = "Uni1 Token";
 const symbol0 = "UNI1";
 const address0 = "aDGRyf3Q8jGYRisf3Aydt87ccongLCgdobaSiXJkW7Z2zrh";
-//UNI2
-const name1 = "Uniswap Token2";
-const symbol1 = "UNI2";
-const address1 = "aL3VQDDaMU38RYk9njg3RPz8Qzx2hDCA526GE6cvWZek4b5";
+//token1
+const name1 = "Wrapped SBY";
+const symbol1 = "WSBY";
+const address1 = "ZHF9zwK6S582RxGhYSyTGQ5rMYeNet8czcuuUZxFyv2AZwC";
 
 //get wasm
 const pair_wasm = PAIR_WASM.source.wasm;
 const factory_wasm = FACTORY_WASM.source.wasm;
 const fee_to_setter = "ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR"; //dev1 account
+// uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
 
 const Main = () => {
   const [showList, setShowList] = useState(false);
+  const [Currency2, setCurrency2] = useState(false);
   const { currentAccount, api, handleChange, amount, signer } =
     useContext(TransactionContext);
   const [Uni1Contract, setUni1Contract] = useState(undefined);
-  const [Uni2Contract, setUni2Contract] = useState(undefined);
+  const [token2Contract, setToken2Contract] = useState(undefined);
   const [UniI1Balance, setUni1Balance] = useState("");
   const [UniI2Balance, setUni2Balance] = useState("");
 
   //1. setup
-  const setup = async () => {
-    //initialize contracts
-    const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0);
-    const getUNI2Contract = new ContractPromise(api, PSP22_ABI, address1);
-    setUni1Contract(getUNI1Contract);
-    setUni2Contract(getUNI2Contract);
-    const factory = new ContractPromise(api, FACTORY_CONTRACT, factory_address);
-    const uni1balance = await getUNI1Contract.query["psp22::balanceOf"](
-      currentAccount.address,
-      { gasLimit: gasLimit },
-      currentAccount.address
-    );
-    if (uni1balance.result.isOk) {
-      setUni1Balance(uni1balance.output.toString());
-    } else {
-      console.error("Error", result.asErr);
-    }
+  useEffect(() => {
+    const setup = async () => {
+      //initialize contracts
+      const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0);
+      const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1);
+      setUni1Contract(getUNI1Contract);
+      setToken2Contract(getToken2Contract);
+      const uni1balance = await getUNI1Contract.query["psp22::balanceOf"](
+        currentAccount.address,
+        { gasLimit: gasLimit },
+        currentAccount.address
+      );
+      if (uni1balance.result.isOk) {
+        setUni1Balance(uni1balance.output.toString());
+      } else {
+        console.error("Error", result.asErr);
+      }
+      const uni2balance = await getToken2Contract.query["psp22::balanceOf"](
+        currentAccount.address,
+        { gasLimit: gasLimit },
+        currentAccount.address
+      );
+      if (uni2balance.result.isOk) {
+        // output the return value
+        setUni2Balance(uni2balance.output.toString());
+      } else {
+        console.error("Error", result.asErr);
+      }
+    };
+    setup();
+  }, []);
 
-    const uni2balance = await getUNI2Contract.query["psp22::balanceOf"](
-      currentAccount.address,
-      { gasLimit: gasLimit },
-      currentAccount.address
-    );
-    if (uni2balance.result.isOk) {
-      // output the return value
-      setUni2Balance(uni2balance.output.toString());
-    } else {
-      console.error("Error", result.asErr);
-    }
-		
-    await getUNI1Contract.tx["psp22::approve"](
+  const approve = async () => {
+    await Uni1Contract.tx["psp22::approve"](
       {
         gasLimit,
         storageDepositLimit,
@@ -122,20 +126,17 @@ const Main = () => {
         }
       }
     );
-    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
-    const swapAmount = amount;
-    const expectedOutputAmount = new BN(1111111111111111);
-  };
-  /*
-  //3.execute swap
-  const runswap = async () => {
-    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
-    const approveUni1 = await Uni1Contract.tx["psp22::approve"](
-      currentAccount.address,
-      router_address,
-      amount
-    );
-    approveUni1.signAndSend(
+
+    const data = "";
+    await Uni1Contract.tx["psp22::transfer"](
+      {
+        gasLimit,
+        storageDepositLimit,
+      },
+      pair_address,
+      amount,
+      data
+    ).signAndSend(
       currentAccount.address,
       { signer: signer.signer },
       ({ status }) => {
@@ -148,28 +149,27 @@ const Main = () => {
         }
       }
     );
-    const swapAmount = amount;
-    const expectedOutputAmount = new BN(1111111111111111);
+  };
+  const runswap = async () => {
+    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address);
     await pair.tx["pair::swap"](
+      { gasLimit, storageDepositLimit },
       0,
-      expectedOutputAmount,
+      222,
       currentAccount.address
+    ).signAndSend(
+      currentAccount.address,
+      { signer: signer.signer },
+      ({ status }) => {
+        if (status.isInBlock) {
+          console.log(
+            `Completed at block hash #${status.asInBlock.toString()}`
+          );
+        } else {
+          console.log(`Current status: ${status.type}`);
+        }
+      }
     );
-    //sighandsend
-  }; */
-  //addliquidity
-  const addLiquidity = async (
-    Uni1Contract,
-    Uni2Contract,
-    pair,
-    currentAccount,
-    token0Amount,
-    token1Amount
-  ) => {
-    await Uni1Contract.tx["psp22::transfer"](pair, token0Amount);
-    await Uni2Contract.tx["psp22::transfer"](pair, token1Amount);
-    //mint LPtoken to liquidity provider
-    await pair.tx["pair::mint"](currentAccount.address);
   };
   return (
     <div className={style.wrapper}>
@@ -194,9 +194,9 @@ const Main = () => {
               onClick={() => setShowList((prevState) => !prevState)}
             >
               <div className={style.currencySelectorIcon}>
-                <Image src={shiden} alt="shiden" height={20} width={20} />
+                <Image src={uniswap} alt="uniswap" height={20} width={20} />
               </div>
-              <div className={style.currencySelectorTicker}>SDN</div>
+              <div className={style.currencySelectorTicker}>UNI</div>
               {showList ? (
                 <AiOutlineUp className={style.currencySelectorArrow} />
               ) : (
@@ -224,12 +224,15 @@ const Main = () => {
             onChange={(e) => handleChange(e, "amount")}
           />
           <div className={style.currencySelector}>
-            <button className={style.currencySelectorContent}>
+            <button
+              className={style.currencySelectorContent}
+              onClick={() => setCurrency2((prevState) => !prevState)}
+            >
               <div className={style.currencySelectorIcon}>
-                <Image src={usdt} alt="USDT" height={20} width={20} />
+                <Image src={astar} alt="astar" height={20} width={20} />
               </div>
-              <div className={style.currencySelectorTicker}>USDT</div>
-              {showList ? (
+              <div className={style.currencySelectorTicker}>WSBY</div>
+              {Currency2 ? (
                 <AiOutlineUp className={style.currencySelectorArrow} />
               ) : (
                 <AiOutlineDown className={style.currencySelectorArrow} />
@@ -244,7 +247,7 @@ const Main = () => {
         ) : (
           <div className={style.copyarea}>Balance :0</div>
         )}
-        <div onClick={() => setup()}>
+        <div onClick={() => runswap()}>
           <Button title="swap" />
         </div>
       </div>

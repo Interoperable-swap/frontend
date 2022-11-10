@@ -24,28 +24,9 @@ const style = {
 const Liquidity = () => {
   const { currentAccount, api, handleChange, amount, signer } =
     useContext(TransactionContext);
-  const add_liquidity = async () => {
-    const recipient = "5Fn1QwMgoNtskdvnB34McbvKtEjF9ww5CWRbiN31mK5qqMEF"; //dev1
-    const account = currentAccount;
-    const transferExtrinsic = api.tx.balances.transfer(recipient, amount);
-    if (amount === "0" || amount === "") {
-      alert("please input amount");
-    } else {
-      transferExtrinsic.signAndSend(
-        account.address,
-        { signer: signer.signer },
-        ({ status }) => {
-          if (status.isInBlock) {
-            console.log(
-              `Completed at block hash #${status.asInBlock.toString()}`
-            );
-          } else {
-            console.log(`Current status: ${status.type}`);
-          }
-        }
-      );
-    }
-  };
+  const router_address = "b7Vz6KZCVFrD6CpMxXohe5cKu2Zst71m13ruxv5jdJsxKoA"; // fee_to_setter = dev1
+	
+  const add_liquidity = async () => {};
   return (
     <div className={style.wrapper}>
       <div className={style.content}>
