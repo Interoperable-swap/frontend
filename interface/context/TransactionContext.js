@@ -8,7 +8,13 @@ let pjs;
 if (typeof window !== "undefined") {
   pjs = window.injectedWeb3;
 }
-const WS_PROVIDER = "wss://rpc.shibuya.astar.network";
+/**
+ * BlastAPI: wss://shibuya.public.blastapi.io
+	Dwellir: wss://shibuya-rpc.dwellir.com
+	Astar Team: wss://rpc.shibuya.astar.network
+ * 
+ */
+const WS_PROVIDER = " wss://shibuya-rpc.dwellir.com";
 const DAPP_NAME = "Shiden DEX";
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState();
@@ -20,7 +26,7 @@ export const TransactionProvider = ({ children }) => {
   }, []);
 
   const handleChange = (e) => {
-    setAmount(e.target.value);
+    //setAmount(e.target.value);
   };
   const connectWallet = async () => {
     try {

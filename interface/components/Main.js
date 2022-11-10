@@ -11,7 +11,13 @@ import { TransactionContext } from "../context/TransactionContext";
 import { ContractPromise } from "@polkadot/api-contract";
 import { BN } from "bn.js";
 import { encodeAddress } from "@polkadot/keyring";
-
+import {
+  factory_address,
+  router_address,
+  pair_address,
+  address0,
+  address1,
+} from "../util/RouterUtil";
 //abi
 import PAIR_CONTRACT from "../contract/abi/pair";
 import FACTORY_CONTRACT from "../contract/abi/factory";
@@ -42,19 +48,14 @@ const zeroAddress = encodeAddress(
 );
 const gasLimit = 18750000000;
 const storageDepositLimit = null;
-
-const factory_address = "aiPpAoWnzUuEXuQD8M75F42tgcaQ9MY6kbNqXxP8raYa73p";
-const router_address = "b7Vz6KZCVFrD6CpMxXohe5cKu2Zst71m13ruxv5jdJsxKoA"; // fee_to_setter = dev1
-const pair_address = "b4WSUKQu6Evooh4Rtz6s9LhLWs7XHpqCx2wsfmsP2uFWkUe";
 const pair_code_hash = PAIR_CONTRACT.source.hash;
 //token0
 const name0 = "Uni1 Token";
 const symbol0 = "UNI1";
-const address0 = "aDGRyf3Q8jGYRisf3Aydt87ccongLCgdobaSiXJkW7Z2zrh";
+
 //token1
 const name1 = "Wrapped SBY";
 const symbol1 = "WSBY";
-const address1 = "ZHF9zwK6S582RxGhYSyTGQ5rMYeNet8czcuuUZxFyv2AZwC";
 
 //get wasm
 const pair_wasm = PAIR_WASM.source.wasm;
