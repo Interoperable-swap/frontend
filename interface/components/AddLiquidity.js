@@ -46,7 +46,7 @@ const Liquidity = () => {
   const add_liquidity = async () => {
     const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0)
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
-    //TODO: approve
+    //TODO:approve
     /**
 		 await getUNI1Contract.tx["psp22::approve"](
       {

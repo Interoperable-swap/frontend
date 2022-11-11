@@ -1,3 +1,9 @@
+//TODO: GET SWAPPRICE
+//TODO: quote function
+//TODO: APPROVE WAITING STATE
+//TODO: SELECT TOKEN
+//TODO: FIX SETUP
+
 import Image from 'next/image'
 import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
@@ -108,11 +114,6 @@ const Main = () => {
       }
     })
   }
-  //TODO: GET SWAPPRICE
-  //TODO: quote function
-  //TODO: APPROVE WAITING STATE
-  //TODO: SELECT TOKEN
-  //TODO: FIX SETUP
 
   const runswap = async () => {
     const deadline = '111111111111111111'
