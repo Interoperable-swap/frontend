@@ -16,3 +16,7 @@ export const address0 = 'aDGRyf3Q8jGYRisf3Aydt87ccongLCgdobaSiXJkW7Z2zrh'
 export const name1 = 'Wrapped SBY'
 export const symbol1 = 'WSBY'
 export const address1 = 'ZHF9zwK6S582RxGhYSyTGQ5rMYeNet8czcuuUZxFyv2AZwC'
+
+const name2 = 'UNI2'
+const symbol2 = 'UNI2'
+export const address2 = 'aL3VQDDaMU38RYk9njg3RPz8Qzx2hDCA526GE6cvWZek4b5'

@@ -17,7 +17,7 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 import { encodeAddress } from '@polkadot/keyring'
-import { factory_address, router_address, pair_address, address0, address1 } from '../util/RouterUtil'
+import { router_address, address0, address1, address2 } from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
@@ -39,7 +39,8 @@ const style = {
   currencySelectorArrow: `text-lg`,
   copyarea: `flex cursor-pointer`,
 }
-const ONE = new BN(10).pow(new BN(18))
+const Decimal = 18
+const ONE = new BN(10).pow(new BN(Decimal))
 const zeroAddress = encodeAddress('0x0000000000000000000000000000000000000000000000000000000000000000')
 //const gasLimit = 18750000000;
 const gasLimit = 100000000000
@@ -51,10 +52,10 @@ const Main = () => {
   const [showList, setShowList] = useState(false)
   const [Currency2, setCurrency2] = useState(false)
   const { currentAccount, api, handleChange, amount, signer } = useContext(TransactionContext)
-  const [Uni1Contract, setUni1Contract] = useState(undefined)
+  const [Token1Contract, setToken1Contract] = useState(undefined)
   const [token2Contract, setToken2Contract] = useState(undefined)
-  const [UniI1Balance, setUni1Balance] = useState('')
-  const [UniI2Balance, setUni2Balance] = useState('')
+  const [UniI1Balance, settoken1balance] = useState('')
+  const [UniI2Balance, settoken2balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
   const [inputAmount2, setInputAmount2] = useState(0)
   const handleInput1 = (e) => {
@@ -63,32 +64,32 @@ const Main = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
-  //1. setup
+  //TODO : fix setup error
   useEffect(() => {
     const setup = async () => {
       //initialize contracts
-      const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0)
-      const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
-      setUni1Contract(getUNI1Contract)
+      const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
+      const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
+      setToken1Contract(getToken1Contract)
       setToken2Contract(getToken2Contract)
-      const uni1balance = await getUNI1Contract.query['psp22::balanceOf'](
+      const token1balance = await getToken1Contract.query['psp22::balanceOf'](
         currentAccount.address,
         { gasLimit: gasLimit },
         currentAccount.address,
       )
-      if (uni1balance.result.isOk) {
-        setUni1Balance(uni1balance.output.toString().slice(-6)) //TODO: FIX DECIMAL
+      if (token1balance.result.isOk) {
+        settoken1balance(token1balance.output.toString()) //TODO: FIX DECIMAL / 10 ** Decimal
       } else {
         console.error('Error', result.asErr)
       }
-      const uni2balance = await getToken2Contract.query['psp22::balanceOf'](
+      const token2balance = await getToken2Contract.query['psp22::balanceOf'](
         currentAccount.address,
         { gasLimit: gasLimit },
         currentAccount.address,
       )
-      if (uni2balance.result.isOk) {
+      if (token2balance.result.isOk) {
         // output the return value
-        setUni2Balance(uni2balance.output.toString().slice(-6)) //TODO FIX DECIMAL
+        settoken2balance(token2balance.output.toString()) //TODO FIX DECIMAL / 10 ** Decimal
       } else {
         console.error('Error', result.asErr)
       }
@@ -98,7 +99,7 @@ const Main = () => {
 
   const transfer = async () => {
     const data = ''
-    await Uni1Contract.tx['psp22::transfer'](
+    await Token1Contract.tx['psp22::transfer'](
       {
         gasLimit,
         storageDepositLimit,
@@ -122,7 +123,7 @@ const Main = () => {
       { gasLimit, storageDepositLimit },
       inputAmount1,
       100,
-      [token2Contract.address, Uni1Contract.address],
+      [token2Contract.address, Token1Contract.address],
       currentAccount.address,
       deadline,
     ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {

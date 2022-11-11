@@ -11,7 +11,7 @@ import ROUTER_CONTRACT from '../contract/abi/router'
 import { ContractPromise } from '@polkadot/api-contract'
 import { PSP22_ABI } from '../contract/abi/psp22'
 import { WNATIVE_ABI } from '../contract/abi/wnative'
-import { factory_address, router_address, pair_address, address0, address1 } from '../util/RouterUtil'
+import { factory_address, router_address, pair_address, address0, address1, address2 } from '../util/RouterUtil'
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
   content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
@@ -34,7 +34,7 @@ const Liquidity = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
-  const [Uni1Contract, setUni1Contract] = useState(undefined)
+  const [Token1Contract, setToken1Contract] = useState(undefined)
   const [token2Contract, setToken2Contract] = useState(undefined)
 
   const [inputAmount1, setInputAmount1] = useState('')
@@ -44,11 +44,11 @@ const Liquidity = () => {
   const storageDepositLimit = null
   const data = ''
   const add_liquidity = async () => {
-    const getUNI1Contract = new ContractPromise(api, PSP22_ABI, address0)
-    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
+    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
+    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
     //TODO:approve
     /**
-		 await getUNI1Contract.tx["psp22::approve"](
+		 await getToken1Contract.tx["psp22::approve"](
       {
         gasLimit,
         storageDepositLimit,
@@ -91,11 +91,10 @@ const Liquidity = () => {
 		 */
     //add liquidity via router
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-    console.log(router)
     const deadline = '111111111111111111'
     await router.tx['router::addLiquidity'](
       { gasLimit, storageDepositLimit },
-      getUNI1Contract.address,
+      getToken1Contract.address,
       getToken2Contract.address,
       inputAmount1,
       inputAmount2,
