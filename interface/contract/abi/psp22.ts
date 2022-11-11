@@ -1,14 +1,14 @@
-export const PAIR_ADDRESS = "";
+export const PAIR_ADDRESS = ''
 export const PSP22_ABI = {
   source: {
-    hash: "0xbc9194904cb5059e6d187206142b46d4096202dee523bcd785b9f81ff4fab7af",
-    language: "ink! 3.3.1",
-    compiler: "rustc 1.65.0-nightly",
+    hash: '0xbc9194904cb5059e6d187206142b46d4096202dee523bcd785b9f81ff4fab7af',
+    language: 'ink! 3.3.1',
+    compiler: 'rustc 1.65.0-nightly',
   },
   contract: {
-    name: "psp22_token",
-    version: "2.1.0",
-    authors: ["Shuhei Tanaka <shuhei46491@gmail.com>"],
+    name: 'psp22_token',
+    version: '2.1.0',
+    authors: ['Shuhei Tanaka <shuhei46491@gmail.com>'],
   },
   V3: {
     spec: {
@@ -16,17 +16,17 @@ export const PSP22_ABI = {
         {
           args: [
             {
-              label: "total_supply",
+              label: 'total_supply',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
           ],
           docs: [],
-          label: "new",
+          label: 'new',
           payable: false,
-          selector: "0x9bae9d5e",
+          selector: '0x9bae9d5e',
         },
       ],
       docs: [],
@@ -36,397 +36,397 @@ export const PSP22_ABI = {
             {
               docs: [],
               indexed: true,
-              label: "from",
+              label: 'from',
               type: {
-                displayName: ["Option"],
+                displayName: ['Option'],
                 type: 17,
               },
             },
             {
               docs: [],
               indexed: true,
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["Option"],
+                displayName: ['Option'],
                 type: 17,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
           ],
           docs: [],
-          label: "Transfer",
+          label: 'Transfer',
         },
         {
           args: [
             {
               docs: [],
               indexed: true,
-              label: "owner",
+              label: 'owner',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
             {
               docs: [],
               indexed: true,
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 2,
               },
             },
             {
               docs: [],
               indexed: false,
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["Balance"],
+                displayName: ['Balance'],
                 type: 0,
               },
             },
           ],
           docs: [],
-          label: "Approval",
+          label: 'Approval',
         },
       ],
       messages: [
         {
           args: [
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "IncreaseAllowanceInput1"],
+                displayName: ['psp22_external', 'IncreaseAllowanceInput1'],
                 type: 2,
               },
             },
             {
-              label: "delta_value",
+              label: 'delta_value',
               type: {
-                displayName: ["psp22_external", "IncreaseAllowanceInput2"],
+                displayName: ['psp22_external', 'IncreaseAllowanceInput2'],
                 type: 0,
               },
             },
           ],
           docs: [
-            " Atomically increases the allowance granted to `spender` by the caller.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
+            ' Atomically increases the allowance granted to `spender` by the caller.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::increase_allowance",
+          label: 'PSP22::increase_allowance',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "IncreaseAllowanceOutput"],
+            displayName: ['psp22_external', 'IncreaseAllowanceOutput'],
             type: 13,
           },
-          selector: "0x96d6b57a",
+          selector: '0x96d6b57a',
         },
         {
           args: [
             {
-              label: "owner",
+              label: 'owner',
               type: {
-                displayName: ["psp22_external", "AllowanceInput1"],
+                displayName: ['psp22_external', 'AllowanceInput1'],
                 type: 2,
               },
             },
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "AllowanceInput2"],
+                displayName: ['psp22_external', 'AllowanceInput2'],
                 type: 2,
               },
             },
           ],
           docs: [
-            " Returns the amount which `spender` is still allowed to withdraw from `owner`.",
-            "",
-            " Returns `0` if no allowance has been set `0`.",
+            ' Returns the amount which `spender` is still allowed to withdraw from `owner`.',
+            '',
+            ' Returns `0` if no allowance has been set `0`.',
           ],
-          label: "PSP22::allowance",
+          label: 'PSP22::allowance',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "AllowanceOutput"],
+            displayName: ['psp22_external', 'AllowanceOutput'],
             type: 0,
           },
-          selector: "0x4d47d921",
+          selector: '0x4d47d921',
         },
         {
           args: [
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "DecreaseAllowanceInput1"],
+                displayName: ['psp22_external', 'DecreaseAllowanceInput1'],
                 type: 2,
               },
             },
             {
-              label: "delta_value",
+              label: 'delta_value',
               type: {
-                displayName: ["psp22_external", "DecreaseAllowanceInput2"],
+                displayName: ['psp22_external', 'DecreaseAllowanceInput2'],
                 type: 0,
               },
             },
           ],
           docs: [
-            " Atomically decreases the allowance granted to `spender` by the caller.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
-            " by owner for `spender`.",
-            "",
+            ' Atomically decreases the allowance granted to `spender` by the caller.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Returns `InsufficientAllowance` error if there are not enough tokens allowed',
+            ' by owner for `spender`.',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::decrease_allowance",
+          label: 'PSP22::decrease_allowance',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "DecreaseAllowanceOutput"],
+            displayName: ['psp22_external', 'DecreaseAllowanceOutput'],
             type: 13,
           },
-          selector: "0xfecb57d5",
+          selector: '0xfecb57d5',
         },
         {
           args: [
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["psp22_external", "TransferInput1"],
+                displayName: ['psp22_external', 'TransferInput1'],
                 type: 2,
               },
             },
             {
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["psp22_external", "TransferInput2"],
+                displayName: ['psp22_external', 'TransferInput2'],
                 type: 0,
               },
             },
             {
-              label: "data",
+              label: 'data',
               type: {
-                displayName: ["psp22_external", "TransferInput3"],
+                displayName: ['psp22_external', 'TransferInput3'],
                 type: 15,
               },
             },
           ],
           docs: [
             " Transfers `value` amount of tokens from the caller's account to account `to`",
-            " with additional `data` in unspecified format.",
-            "",
-            " On success a `Transfer` event is emitted.",
-            "",
-            " # Errors",
-            "",
-            " Returns `InsufficientBalance` error if there are not enough tokens on",
+            ' with additional `data` in unspecified format.',
+            '',
+            ' On success a `Transfer` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Returns `InsufficientBalance` error if there are not enough tokens on',
             " the caller's account Balance.",
-            "",
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::transfer",
+          label: 'PSP22::transfer',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TransferOutput"],
+            displayName: ['psp22_external', 'TransferOutput'],
             type: 13,
           },
-          selector: "0xdb20f9f5",
+          selector: '0xdb20f9f5',
         },
         {
           args: [
             {
-              label: "spender",
+              label: 'spender',
               type: {
-                displayName: ["psp22_external", "ApproveInput1"],
+                displayName: ['psp22_external', 'ApproveInput1'],
                 type: 2,
               },
             },
             {
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["psp22_external", "ApproveInput2"],
+                displayName: ['psp22_external', 'ApproveInput2'],
                 type: 0,
               },
             },
           ],
           docs: [
             " Allows `spender` to withdraw from the caller's account multiple times, up to",
-            " the `value` amount.",
-            "",
-            " If this function is called again it overwrites the current allowance with `value`.",
-            "",
-            " An `Approval` event is emitted.",
-            "",
-            " # Errors",
-            "",
+            ' the `value` amount.',
+            '',
+            ' If this function is called again it overwrites the current allowance with `value`.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::approve",
+          label: 'PSP22::approve',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "ApproveOutput"],
+            displayName: ['psp22_external', 'ApproveOutput'],
             type: 13,
           },
-          selector: "0xb20f1bbd",
+          selector: '0xb20f1bbd',
         },
         {
           args: [
             {
-              label: "from",
+              label: 'from',
               type: {
-                displayName: ["psp22_external", "TransferFromInput1"],
+                displayName: ['psp22_external', 'TransferFromInput1'],
                 type: 2,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["psp22_external", "TransferFromInput2"],
+                displayName: ['psp22_external', 'TransferFromInput2'],
                 type: 2,
               },
             },
             {
-              label: "value",
+              label: 'value',
               type: {
-                displayName: ["psp22_external", "TransferFromInput3"],
+                displayName: ['psp22_external', 'TransferFromInput3'],
                 type: 0,
               },
             },
             {
-              label: "data",
+              label: 'data',
               type: {
-                displayName: ["psp22_external", "TransferFromInput4"],
+                displayName: ['psp22_external', 'TransferFromInput4'],
                 type: 15,
               },
             },
           ],
           docs: [
-            " Transfers `value` tokens on the behalf of `from` to the account `to`",
-            " with additional `data` in unspecified format.",
-            "",
-            " This can be used to allow a contract to transfer tokens on ones behalf and/or",
-            " to charge fees in sub-currencies, for example.",
-            "",
-            " On success a `Transfer` and `Approval` events are emitted.",
-            "",
-            " # Errors",
-            "",
-            " Returns `InsufficientAllowance` error if there are not enough tokens allowed",
-            " for the caller to withdraw from `from`.",
-            "",
-            " Returns `InsufficientBalance` error if there are not enough tokens on",
-            " the the account Balance of `from`.",
-            "",
+            ' Transfers `value` tokens on the behalf of `from` to the account `to`',
+            ' with additional `data` in unspecified format.',
+            '',
+            ' This can be used to allow a contract to transfer tokens on ones behalf and/or',
+            ' to charge fees in sub-currencies, for example.',
+            '',
+            ' On success a `Transfer` and `Approval` events are emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Returns `InsufficientAllowance` error if there are not enough tokens allowed',
+            ' for the caller to withdraw from `from`.',
+            '',
+            ' Returns `InsufficientBalance` error if there are not enough tokens on',
+            ' the the account Balance of `from`.',
+            '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            "",
+            '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: "PSP22::transfer_from",
+          label: 'PSP22::transfer_from',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TransferFromOutput"],
+            displayName: ['psp22_external', 'TransferFromOutput'],
             type: 13,
           },
-          selector: "0x54b3c76e",
+          selector: '0x54b3c76e',
         },
         {
           args: [],
-          docs: [" Returns the total token supply."],
-          label: "PSP22::total_supply",
+          docs: [' Returns the total token supply.'],
+          label: 'PSP22::total_supply',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "TotalSupplyOutput"],
+            displayName: ['psp22_external', 'TotalSupplyOutput'],
             type: 0,
           },
-          selector: "0x162df8c2",
+          selector: '0x162df8c2',
         },
         {
           args: [
             {
-              label: "owner",
+              label: 'owner',
               type: {
-                displayName: ["psp22_external", "BalanceOfInput1"],
+                displayName: ['psp22_external', 'BalanceOfInput1'],
                 type: 2,
               },
             },
           ],
           docs: [
-            " Returns the account Balance for the specified `owner`.",
-            "",
-            " Returns `0` if the account is non-existent.",
+            ' Returns the account Balance for the specified `owner`.',
+            '',
+            ' Returns `0` if the account is non-existent.',
           ],
-          label: "PSP22::balance_of",
+          label: 'PSP22::balance_of',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22_external", "BalanceOfOutput"],
+            displayName: ['psp22_external', 'BalanceOfOutput'],
             type: 0,
           },
-          selector: "0x6568382f",
+          selector: '0x6568382f',
         },
         {
           args: [],
-          docs: [" Returns the token name."],
-          label: "PSP22Metadata::token_name",
+          docs: [' Returns the token name.'],
+          label: 'PSP22Metadata::token_name',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22metadata_external", "TokenNameOutput"],
+            displayName: ['psp22metadata_external', 'TokenNameOutput'],
             type: 16,
           },
-          selector: "0x3d261bd4",
+          selector: '0x3d261bd4',
         },
         {
           args: [],
-          docs: [" Returns the token symbol."],
-          label: "PSP22Metadata::token_symbol",
+          docs: [' Returns the token symbol.'],
+          label: 'PSP22Metadata::token_symbol',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22metadata_external", "TokenSymbolOutput"],
+            displayName: ['psp22metadata_external', 'TokenSymbolOutput'],
             type: 16,
           },
-          selector: "0x34205be5",
+          selector: '0x34205be5',
         },
         {
           args: [],
-          docs: [" Returns the token decimals."],
-          label: "PSP22Metadata::token_decimals",
+          docs: [' Returns the token decimals.'],
+          label: 'PSP22Metadata::token_decimals',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["psp22metadata_external", "TokenDecimalsOutput"],
+            displayName: ['psp22metadata_external', 'TokenDecimalsOutput'],
             type: 4,
           },
-          selector: "0x7271b782",
+          selector: '0x7271b782',
         },
       ],
     },
@@ -440,42 +440,41 @@ export const PSP22_ABI = {
                   {
                     layout: {
                       cell: {
-                        key: "0xf232311200000000000000000000000000000000000000000000000000000000",
+                        key: '0xf232311200000000000000000000000000000000000000000000000000000000',
                         ty: 0,
                       },
                     },
-                    name: "supply",
+                    name: 'supply',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xf332311200000000000000000000000000000000000000000000000000000000",
+                        key: '0xf332311200000000000000000000000000000000000000000000000000000000',
                         ty: 1,
                       },
                     },
-                    name: "balances",
+                    name: 'balances',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0xf432311200000000000000000000000000000000000000000000000000000000",
+                        key: '0xf432311200000000000000000000000000000000000000000000000000000000',
                         ty: 7,
                       },
                     },
-                    name: "allowances",
+                    name: 'allowances',
                   },
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0xf532311200000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0xf532311200000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0xf632311200000000000000000000000000000000000000000000000000000000",
+                                    key: '0xf632311200000000000000000000000000000000000000000000000000000000',
                                     ty: 11,
                                   },
                                 },
@@ -483,18 +482,18 @@ export const PSP22_ABI = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "_reserved",
+                    name: '_reserved',
                   },
                 ],
               },
             },
-            name: "psp22",
+            name: 'psp22',
           },
           {
             layout: {
@@ -503,15 +502,14 @@ export const PSP22_ABI = {
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0x89ae8e4b00000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0x89ae8e4b00000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0x8aae8e4b00000000000000000000000000000000000000000000000000000000",
+                                    key: '0x8aae8e4b00000000000000000000000000000000000000000000000000000000',
                                     ty: 12,
                                   },
                                 },
@@ -519,26 +517,25 @@ export const PSP22_ABI = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "name",
+                    name: 'name',
                   },
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0x8aae8e4b00000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0x8aae8e4b00000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0x8bae8e4b00000000000000000000000000000000000000000000000000000000",
+                                    key: '0x8bae8e4b00000000000000000000000000000000000000000000000000000000',
                                     ty: 12,
                                   },
                                 },
@@ -546,35 +543,34 @@ export const PSP22_ABI = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "symbol",
+                    name: 'symbol',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0x8bae8e4b00000000000000000000000000000000000000000000000000000000",
+                        key: '0x8bae8e4b00000000000000000000000000000000000000000000000000000000',
                         ty: 4,
                       },
                     },
-                    name: "decimals",
+                    name: 'decimals',
                   },
                   {
                     layout: {
                       enum: {
-                        dispatchKey:
-                          "0x8cae8e4b00000000000000000000000000000000000000000000000000000000",
+                        dispatchKey: '0x8cae8e4b00000000000000000000000000000000000000000000000000000000',
                         variants: {
-                          "0": {
+                          '0': {
                             fields: [
                               {
                                 layout: {
                                   cell: {
-                                    key: "0x8dae8e4b00000000000000000000000000000000000000000000000000000000",
+                                    key: '0x8dae8e4b00000000000000000000000000000000000000000000000000000000',
                                     ty: 11,
                                   },
                                 },
@@ -582,18 +578,18 @@ export const PSP22_ABI = {
                               },
                             ],
                           },
-                          "1": {
+                          '1': {
                             fields: [],
                           },
                         },
                       },
                     },
-                    name: "_reserved",
+                    name: '_reserved',
                   },
                 ],
               },
             },
-            name: "metadata",
+            name: 'metadata',
           },
         ],
       },
@@ -603,7 +599,7 @@ export const PSP22_ABI = {
         id: 0,
         type: {
           def: {
-            primitive: "u128",
+            primitive: 'u128',
           },
         },
       },
@@ -621,15 +617,15 @@ export const PSP22_ABI = {
           },
           params: [
             {
-              name: "K",
+              name: 'K',
               type: 2,
             },
             {
-              name: "V",
+              name: 'V',
               type: 0,
             },
           ],
-          path: ["openbrush_lang", "storage", "mapping", "Mapping"],
+          path: ['openbrush_lang', 'storage', 'mapping', 'Mapping'],
         },
       },
       {
@@ -640,12 +636,12 @@ export const PSP22_ABI = {
               fields: [
                 {
                   type: 3,
-                  typeName: "[u8; 32]",
+                  typeName: '[u8; 32]',
                 },
               ],
             },
           },
-          path: ["ink_env", "types", "AccountId"],
+          path: ['ink_env', 'types', 'AccountId'],
         },
       },
       {
@@ -663,7 +659,7 @@ export const PSP22_ABI = {
         id: 4,
         type: {
           def: {
-            primitive: "u8",
+            primitive: 'u8',
           },
         },
       },
@@ -699,15 +695,15 @@ export const PSP22_ABI = {
           },
           params: [
             {
-              name: "K",
+              name: 'K',
               type: 8,
             },
             {
-              name: "V",
+              name: 'V',
               type: 0,
             },
           ],
-          path: ["openbrush_lang", "storage", "mapping", "Mapping"],
+          path: ['openbrush_lang', 'storage', 'mapping', 'Mapping'],
         },
       },
       {
@@ -748,7 +744,7 @@ export const PSP22_ABI = {
         id: 12,
         type: {
           def: {
-            primitive: "str",
+            primitive: 'str',
           },
         },
       },
@@ -765,7 +761,7 @@ export const PSP22_ABI = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -774,22 +770,22 @@ export const PSP22_ABI = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 11,
             },
             {
-              name: "E",
+              name: 'E',
               type: 14,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -802,48 +798,42 @@ export const PSP22_ABI = {
                   fields: [
                     {
                       type: 12,
-                      typeName: "String",
+                      typeName: 'String',
                     },
                   ],
                   index: 0,
-                  name: "Custom",
+                  name: 'Custom',
                 },
                 {
                   index: 1,
-                  name: "InsufficientBalance",
+                  name: 'InsufficientBalance',
                 },
                 {
                   index: 2,
-                  name: "InsufficientAllowance",
+                  name: 'InsufficientAllowance',
                 },
                 {
                   index: 3,
-                  name: "ZeroRecipientAddress",
+                  name: 'ZeroRecipientAddress',
                 },
                 {
                   index: 4,
-                  name: "ZeroSenderAddress",
+                  name: 'ZeroSenderAddress',
                 },
                 {
                   fields: [
                     {
                       type: 12,
-                      typeName: "String",
+                      typeName: 'String',
                     },
                   ],
                   index: 5,
-                  name: "SafeTransferCheckFailed",
+                  name: 'SafeTransferCheckFailed',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "psp22",
-            "PSP22Error",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'psp22', 'PSP22Error'],
         },
       },
       {
@@ -864,7 +854,7 @@ export const PSP22_ABI = {
               variants: [
                 {
                   index: 0,
-                  name: "None",
+                  name: 'None',
                 },
                 {
                   fields: [
@@ -873,18 +863,18 @@ export const PSP22_ABI = {
                     },
                   ],
                   index: 1,
-                  name: "Some",
+                  name: 'Some',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 12,
             },
           ],
-          path: ["Option"],
+          path: ['Option'],
         },
       },
       {
@@ -895,7 +885,7 @@ export const PSP22_ABI = {
               variants: [
                 {
                   index: 0,
-                  name: "None",
+                  name: 'None',
                 },
                 {
                   fields: [
@@ -904,20 +894,20 @@ export const PSP22_ABI = {
                     },
                   ],
                   index: 1,
-                  name: "Some",
+                  name: 'Some',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 2,
             },
           ],
-          path: ["Option"],
+          path: ['Option'],
         },
       },
     ],
   },
-};
+}

@@ -1,13 +1,13 @@
 const ROUTER_CONTRACT = {
   source: {
-    hash: "0xe407b08eb683e398d51e4d885962ec43e530b0926da1cb7d250de25706445fff",
-    language: "ink! 3.3.1",
-    compiler: "rustc 1.65.0-nightly",
+    hash: '0xe407b08eb683e398d51e4d885962ec43e530b0926da1cb7d250de25706445fff',
+    language: 'ink! 3.3.1',
+    compiler: 'rustc 1.65.0-nightly',
   },
   contract: {
-    name: "router_contract",
-    version: "0.1.0",
-    authors: ["Shuhei Tanaka <shuhei46491@gmail.com>"],
+    name: 'router_contract',
+    version: '0.1.0',
+    authors: ['Shuhei Tanaka <shuhei46491@gmail.com>'],
   },
   V3: {
     spec: {
@@ -15,31 +15,31 @@ const ROUTER_CONTRACT = {
         {
           args: [
             {
-              label: "factory",
+              label: 'factory',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 0,
               },
             },
             {
-              label: "wnative",
+              label: 'wnative',
               type: {
-                displayName: ["AccountId"],
+                displayName: ['AccountId'],
                 type: 0,
               },
             },
             {
-              label: "pair_code_hash",
+              label: 'pair_code_hash',
               type: {
-                displayName: ["Hash"],
+                displayName: ['Hash'],
                 type: 3,
               },
             },
           ],
           docs: [],
-          label: "new",
+          label: 'new',
           payable: false,
-          selector: "0x9bae9d5e",
+          selector: '0x9bae9d5e',
         },
       ],
       docs: [],
@@ -48,781 +48,697 @@ const ROUTER_CONTRACT = {
         {
           args: [
             {
-              label: "amount_out",
+              label: 'amount_out',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactTokensInput1",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactTokensInput1'],
                 type: 4,
               },
             },
             {
-              label: "amount_in_max",
+              label: 'amount_in_max',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactTokensInput2",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactTokensInput2'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactTokensInput3",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactTokensInput3'],
                 type: 5,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactTokensInput4",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactTokensInput4'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactTokensInput5",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactTokensInput5'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::swap_tokens_for_exact_tokens",
+          label: 'Router::swap_tokens_for_exact_tokens',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "SwapTokensForExactTokensOutput"],
+            displayName: ['router_external', 'SwapTokensForExactTokensOutput'],
             type: 7,
           },
-          selector: "0xd8eafd67",
+          selector: '0xd8eafd67',
         },
         {
           args: [
             {
-              label: "amount_out",
+              label: 'amount_out',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapNativeForExactTokensInput1",
-                ],
+                displayName: ['router_external', 'SwapNativeForExactTokensInput1'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapNativeForExactTokensInput2",
-                ],
+                displayName: ['router_external', 'SwapNativeForExactTokensInput2'],
                 type: 5,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapNativeForExactTokensInput3",
-                ],
+                displayName: ['router_external', 'SwapNativeForExactTokensInput3'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapNativeForExactTokensInput4",
-                ],
+                displayName: ['router_external', 'SwapNativeForExactTokensInput4'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::swap_native_for_exact_tokens",
+          label: 'Router::swap_native_for_exact_tokens',
           mutates: true,
           payable: true,
           returnType: {
-            displayName: ["router_external", "SwapNativeForExactTokensOutput"],
+            displayName: ['router_external', 'SwapNativeForExactTokensOutput'],
             type: 7,
           },
-          selector: "0x1299fdf2",
+          selector: '0x1299fdf2',
         },
         {
           args: [
             {
-              label: "token",
+              label: 'token',
               type: {
-                displayName: ["router_external", "RemoveLiquidityNativeInput1"],
+                displayName: ['router_external', 'RemoveLiquidityNativeInput1'],
                 type: 0,
               },
             },
             {
-              label: "liquidity",
+              label: 'liquidity',
               type: {
-                displayName: ["router_external", "RemoveLiquidityNativeInput2"],
+                displayName: ['router_external', 'RemoveLiquidityNativeInput2'],
                 type: 4,
               },
             },
             {
-              label: "amount_token_min",
+              label: 'amount_token_min',
               type: {
-                displayName: ["router_external", "RemoveLiquidityNativeInput3"],
+                displayName: ['router_external', 'RemoveLiquidityNativeInput3'],
                 type: 4,
               },
             },
             {
-              label: "amount_native_min",
+              label: 'amount_native_min',
               type: {
-                displayName: ["router_external", "RemoveLiquidityNativeInput4"],
+                displayName: ['router_external', 'RemoveLiquidityNativeInput4'],
                 type: 4,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["router_external", "RemoveLiquidityNativeInput5"],
+                displayName: ['router_external', 'RemoveLiquidityNativeInput5'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: ["router_external", "RemoveLiquidityNativeInput6"],
+                displayName: ['router_external', 'RemoveLiquidityNativeInput6'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::remove_liquidity_native",
+          label: 'Router::remove_liquidity_native',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "RemoveLiquidityNativeOutput"],
+            displayName: ['router_external', 'RemoveLiquidityNativeOutput'],
             type: 19,
           },
-          selector: "0x3448bb5c",
+          selector: '0x3448bb5c',
         },
         {
           args: [
             {
-              label: "amount_out",
+              label: 'amount_out',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactNativeInput1",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactNativeInput1'],
                 type: 4,
               },
             },
             {
-              label: "amount_in_max",
+              label: 'amount_in_max',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactNativeInput2",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactNativeInput2'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactNativeInput3",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactNativeInput3'],
                 type: 5,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactNativeInput4",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactNativeInput4'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapTokensForExactNativeInput5",
-                ],
+                displayName: ['router_external', 'SwapTokensForExactNativeInput5'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::swap_tokens_for_exact_native",
+          label: 'Router::swap_tokens_for_exact_native',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "SwapTokensForExactNativeOutput"],
+            displayName: ['router_external', 'SwapTokensForExactNativeOutput'],
             type: 7,
           },
-          selector: "0xb2b28f92",
+          selector: '0xb2b28f92',
         },
         {
           args: [
             {
-              label: "amount_in",
+              label: 'amount_in',
               type: {
-                displayName: ["router_external", "GetAmountOutInput1"],
+                displayName: ['router_external', 'GetAmountOutInput1'],
                 type: 4,
               },
             },
             {
-              label: "reserve_in",
+              label: 'reserve_in',
               type: {
-                displayName: ["router_external", "GetAmountOutInput2"],
+                displayName: ['router_external', 'GetAmountOutInput2'],
                 type: 4,
               },
             },
             {
-              label: "reserve_out",
+              label: 'reserve_out',
               type: {
-                displayName: ["router_external", "GetAmountOutInput3"],
+                displayName: ['router_external', 'GetAmountOutInput3'],
                 type: 4,
               },
             },
           ],
           docs: [],
-          label: "Router::get_amount_out",
+          label: 'Router::get_amount_out',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "GetAmountOutOutput"],
+            displayName: ['router_external', 'GetAmountOutOutput'],
             type: 21,
           },
-          selector: "0x41e315fd",
+          selector: '0x41e315fd',
         },
         {
           args: [
             {
-              label: "amount_out_min",
+              label: 'amount_out_min',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactNativeForTokensInput1",
-                ],
+                displayName: ['router_external', 'SwapExactNativeForTokensInput1'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactNativeForTokensInput2",
-                ],
+                displayName: ['router_external', 'SwapExactNativeForTokensInput2'],
                 type: 5,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactNativeForTokensInput3",
-                ],
+                displayName: ['router_external', 'SwapExactNativeForTokensInput3'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactNativeForTokensInput4",
-                ],
+                displayName: ['router_external', 'SwapExactNativeForTokensInput4'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::swap_exact_native_for_tokens",
+          label: 'Router::swap_exact_native_for_tokens',
           mutates: true,
           payable: true,
           returnType: {
-            displayName: ["router_external", "SwapExactNativeForTokensOutput"],
+            displayName: ['router_external', 'SwapExactNativeForTokensOutput'],
             type: 7,
           },
-          selector: "0x0a78e251",
+          selector: '0x0a78e251',
         },
         {
           args: [],
           docs: [],
-          label: "Router::factory",
+          label: 'Router::factory',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "FactoryOutput"],
+            displayName: ['router_external', 'FactoryOutput'],
             type: 0,
           },
-          selector: "0xac3a4c18",
+          selector: '0xac3a4c18',
         },
         {
           args: [
             {
-              label: "amount_in",
+              label: 'amount_in',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForNativeInput1",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForNativeInput1'],
                 type: 4,
               },
             },
             {
-              label: "amount_out_min",
+              label: 'amount_out_min',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForNativeInput2",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForNativeInput2'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForNativeInput3",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForNativeInput3'],
                 type: 5,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForNativeInput4",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForNativeInput4'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForNativeInput5",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForNativeInput5'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::swap_exact_tokens_for_native",
+          label: 'Router::swap_exact_tokens_for_native',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "SwapExactTokensForNativeOutput"],
+            displayName: ['router_external', 'SwapExactTokensForNativeOutput'],
             type: 7,
           },
-          selector: "0xcb577423",
+          selector: '0xcb577423',
         },
         {
           args: [
             {
-              label: "token",
+              label: 'token',
               type: {
-                displayName: ["router_external", "AddLiquidityNativeInput1"],
+                displayName: ['router_external', 'AddLiquidityNativeInput1'],
                 type: 0,
               },
             },
             {
-              label: "amount_token_desired",
+              label: 'amount_token_desired',
               type: {
-                displayName: ["router_external", "AddLiquidityNativeInput2"],
+                displayName: ['router_external', 'AddLiquidityNativeInput2'],
                 type: 4,
               },
             },
             {
-              label: "amount_token_min",
+              label: 'amount_token_min',
               type: {
-                displayName: ["router_external", "AddLiquidityNativeInput3"],
+                displayName: ['router_external', 'AddLiquidityNativeInput3'],
                 type: 4,
               },
             },
             {
-              label: "amount_native_min",
+              label: 'amount_native_min',
               type: {
-                displayName: ["router_external", "AddLiquidityNativeInput4"],
+                displayName: ['router_external', 'AddLiquidityNativeInput4'],
                 type: 4,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["router_external", "AddLiquidityNativeInput5"],
+                displayName: ['router_external', 'AddLiquidityNativeInput5'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: ["router_external", "AddLiquidityNativeInput6"],
+                displayName: ['router_external', 'AddLiquidityNativeInput6'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::add_liquidity_native",
+          label: 'Router::add_liquidity_native',
           mutates: true,
           payable: true,
           returnType: {
-            displayName: ["router_external", "AddLiquidityNativeOutput"],
+            displayName: ['router_external', 'AddLiquidityNativeOutput'],
             type: 22,
           },
-          selector: "0x292d7221",
+          selector: '0x292d7221',
         },
         {
           args: [
             {
-              label: "amount_a",
+              label: 'amount_a',
               type: {
-                displayName: ["router_external", "QuoteInput1"],
+                displayName: ['router_external', 'QuoteInput1'],
                 type: 4,
               },
             },
             {
-              label: "reserve_a",
+              label: 'reserve_a',
               type: {
-                displayName: ["router_external", "QuoteInput2"],
+                displayName: ['router_external', 'QuoteInput2'],
                 type: 4,
               },
             },
             {
-              label: "reserve_b",
+              label: 'reserve_b',
               type: {
-                displayName: ["router_external", "QuoteInput3"],
+                displayName: ['router_external', 'QuoteInput3'],
                 type: 4,
               },
             },
           ],
           docs: [],
-          label: "Router::quote",
+          label: 'Router::quote',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "QuoteOutput"],
+            displayName: ['router_external', 'QuoteOutput'],
             type: 21,
           },
-          selector: "0x16347b10",
+          selector: '0x16347b10',
         },
         {
           args: [],
           docs: [],
-          label: "Router::wnative",
+          label: 'Router::wnative',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "WnativeOutput"],
+            displayName: ['router_external', 'WnativeOutput'],
             type: 0,
           },
-          selector: "0x5593eab6",
+          selector: '0x5593eab6',
         },
         {
           args: [
             {
-              label: "token_a",
+              label: 'token_a',
               type: {
-                displayName: ["router_external", "AddLiquidityInput1"],
+                displayName: ['router_external', 'AddLiquidityInput1'],
                 type: 0,
               },
             },
             {
-              label: "token_b",
+              label: 'token_b',
               type: {
-                displayName: ["router_external", "AddLiquidityInput2"],
+                displayName: ['router_external', 'AddLiquidityInput2'],
                 type: 0,
               },
             },
             {
-              label: "amount_a_desired",
+              label: 'amount_a_desired',
               type: {
-                displayName: ["router_external", "AddLiquidityInput3"],
+                displayName: ['router_external', 'AddLiquidityInput3'],
                 type: 4,
               },
             },
             {
-              label: "amount_b_desired",
+              label: 'amount_b_desired',
               type: {
-                displayName: ["router_external", "AddLiquidityInput4"],
+                displayName: ['router_external', 'AddLiquidityInput4'],
                 type: 4,
               },
             },
             {
-              label: "amount_a_min",
+              label: 'amount_a_min',
               type: {
-                displayName: ["router_external", "AddLiquidityInput5"],
+                displayName: ['router_external', 'AddLiquidityInput5'],
                 type: 4,
               },
             },
             {
-              label: "amount_b_min",
+              label: 'amount_b_min',
               type: {
-                displayName: ["router_external", "AddLiquidityInput6"],
+                displayName: ['router_external', 'AddLiquidityInput6'],
                 type: 4,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["router_external", "AddLiquidityInput7"],
+                displayName: ['router_external', 'AddLiquidityInput7'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: ["router_external", "AddLiquidityInput8"],
+                displayName: ['router_external', 'AddLiquidityInput8'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::add_liquidity",
+          label: 'Router::add_liquidity',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "AddLiquidityOutput"],
+            displayName: ['router_external', 'AddLiquidityOutput'],
             type: 22,
           },
-          selector: "0xa5b7d597",
+          selector: '0xa5b7d597',
         },
         {
           args: [
             {
-              label: "token_a",
+              label: 'token_a',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput1"],
+                displayName: ['router_external', 'RemoveLiquidityInput1'],
                 type: 0,
               },
             },
             {
-              label: "token_b",
+              label: 'token_b',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput2"],
+                displayName: ['router_external', 'RemoveLiquidityInput2'],
                 type: 0,
               },
             },
             {
-              label: "liquidity",
+              label: 'liquidity',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput3"],
+                displayName: ['router_external', 'RemoveLiquidityInput3'],
                 type: 4,
               },
             },
             {
-              label: "amount_a_min",
+              label: 'amount_a_min',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput4"],
+                displayName: ['router_external', 'RemoveLiquidityInput4'],
                 type: 4,
               },
             },
             {
-              label: "amount_b_min",
+              label: 'amount_b_min',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput5"],
+                displayName: ['router_external', 'RemoveLiquidityInput5'],
                 type: 4,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput6"],
+                displayName: ['router_external', 'RemoveLiquidityInput6'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: ["router_external", "RemoveLiquidityInput7"],
+                displayName: ['router_external', 'RemoveLiquidityInput7'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::remove_liquidity",
+          label: 'Router::remove_liquidity',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "RemoveLiquidityOutput"],
+            displayName: ['router_external', 'RemoveLiquidityOutput'],
             type: 19,
           },
-          selector: "0xd3abe5a3",
+          selector: '0xd3abe5a3',
         },
         {
           args: [
             {
-              label: "amount_in",
+              label: 'amount_in',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForTokensInput1",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForTokensInput1'],
                 type: 4,
               },
             },
             {
-              label: "amount_out_min",
+              label: 'amount_out_min',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForTokensInput2",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForTokensInput2'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForTokensInput3",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForTokensInput3'],
                 type: 5,
               },
             },
             {
-              label: "to",
+              label: 'to',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForTokensInput4",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForTokensInput4'],
                 type: 0,
               },
             },
             {
-              label: "deadline",
+              label: 'deadline',
               type: {
-                displayName: [
-                  "router_external",
-                  "SwapExactTokensForTokensInput5",
-                ],
+                displayName: ['router_external', 'SwapExactTokensForTokensInput5'],
                 type: 6,
               },
             },
           ],
           docs: [],
-          label: "Router::swap_exact_tokens_for_tokens",
+          label: 'Router::swap_exact_tokens_for_tokens',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ["router_external", "SwapExactTokensForTokensOutput"],
+            displayName: ['router_external', 'SwapExactTokensForTokensOutput'],
             type: 7,
           },
-          selector: "0xaf0a8836",
+          selector: '0xaf0a8836',
         },
         {
           args: [
             {
-              label: "amount_out",
+              label: 'amount_out',
               type: {
-                displayName: ["router_external", "GetAmountInInput1"],
+                displayName: ['router_external', 'GetAmountInInput1'],
                 type: 4,
               },
             },
             {
-              label: "reserve_in",
+              label: 'reserve_in',
               type: {
-                displayName: ["router_external", "GetAmountInInput2"],
+                displayName: ['router_external', 'GetAmountInInput2'],
                 type: 4,
               },
             },
             {
-              label: "reserve_out",
+              label: 'reserve_out',
               type: {
-                displayName: ["router_external", "GetAmountInInput3"],
+                displayName: ['router_external', 'GetAmountInInput3'],
                 type: 4,
               },
             },
           ],
           docs: [],
-          label: "Router::get_amount_in",
+          label: 'Router::get_amount_in',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "GetAmountInOutput"],
+            displayName: ['router_external', 'GetAmountInOutput'],
             type: 21,
           },
-          selector: "0xea4ac85d",
+          selector: '0xea4ac85d',
         },
         {
           args: [
             {
-              label: "amount_in",
+              label: 'amount_in',
               type: {
-                displayName: ["router_external", "GetAmountsOutInput1"],
+                displayName: ['router_external', 'GetAmountsOutInput1'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: ["router_external", "GetAmountsOutInput2"],
+                displayName: ['router_external', 'GetAmountsOutInput2'],
                 type: 5,
               },
             },
           ],
           docs: [],
-          label: "Router::get_amounts_out",
+          label: 'Router::get_amounts_out',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "GetAmountsOutOutput"],
+            displayName: ['router_external', 'GetAmountsOutOutput'],
             type: 7,
           },
-          selector: "0x7170b8f6",
+          selector: '0x7170b8f6',
         },
         {
           args: [
             {
-              label: "amount_out",
+              label: 'amount_out',
               type: {
-                displayName: ["router_external", "GetAmountsInInput1"],
+                displayName: ['router_external', 'GetAmountsInInput1'],
                 type: 4,
               },
             },
             {
-              label: "path",
+              label: 'path',
               type: {
-                displayName: ["router_external", "GetAmountsInInput2"],
+                displayName: ['router_external', 'GetAmountsInInput2'],
                 type: 5,
               },
             },
           ],
           docs: [],
-          label: "Router::get_amounts_in",
+          label: 'Router::get_amounts_in',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ["router_external", "GetAmountsInOutput"],
+            displayName: ['router_external', 'GetAmountsInOutput'],
             type: 7,
           },
-          selector: "0x707998fc",
+          selector: '0x707998fc',
         },
       ],
     },
@@ -836,34 +752,34 @@ const ROUTER_CONTRACT = {
                   {
                     layout: {
                       cell: {
-                        key: "0x7e833de500000000000000000000000000000000000000000000000000000000",
+                        key: '0x7e833de500000000000000000000000000000000000000000000000000000000',
                         ty: 0,
                       },
                     },
-                    name: "factory",
+                    name: 'factory',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0x7f833de500000000000000000000000000000000000000000000000000000000",
+                        key: '0x7f833de500000000000000000000000000000000000000000000000000000000',
                         ty: 0,
                       },
                     },
-                    name: "wnative",
+                    name: 'wnative',
                   },
                   {
                     layout: {
                       cell: {
-                        key: "0x80833de500000000000000000000000000000000000000000000000000000000",
+                        key: '0x80833de500000000000000000000000000000000000000000000000000000000',
                         ty: 3,
                       },
                     },
-                    name: "pair_code_hash",
+                    name: 'pair_code_hash',
                   },
                 ],
               },
             },
-            name: "router",
+            name: 'router',
           },
         ],
       },
@@ -877,12 +793,12 @@ const ROUTER_CONTRACT = {
               fields: [
                 {
                   type: 1,
-                  typeName: "[u8; 32]",
+                  typeName: '[u8; 32]',
                 },
               ],
             },
           },
-          path: ["ink_env", "types", "AccountId"],
+          path: ['ink_env', 'types', 'AccountId'],
         },
       },
       {
@@ -900,7 +816,7 @@ const ROUTER_CONTRACT = {
         id: 2,
         type: {
           def: {
-            primitive: "u8",
+            primitive: 'u8',
           },
         },
       },
@@ -912,19 +828,19 @@ const ROUTER_CONTRACT = {
               fields: [
                 {
                   type: 1,
-                  typeName: "[u8; 32]",
+                  typeName: '[u8; 32]',
                 },
               ],
             },
           },
-          path: ["ink_env", "types", "Hash"],
+          path: ['ink_env', 'types', 'Hash'],
         },
       },
       {
         id: 4,
         type: {
           def: {
-            primitive: "u128",
+            primitive: 'u128',
           },
         },
       },
@@ -942,7 +858,7 @@ const ROUTER_CONTRACT = {
         id: 6,
         type: {
           def: {
-            primitive: "u64",
+            primitive: 'u64',
           },
         },
       },
@@ -959,7 +875,7 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -968,22 +884,22 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 8,
             },
             {
-              name: "E",
+              name: 'E',
               type: 9,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1006,116 +922,116 @@ const ROUTER_CONTRACT = {
                   fields: [
                     {
                       type: 10,
-                      typeName: "PSP22Error",
+                      typeName: 'PSP22Error',
                     },
                   ],
                   index: 0,
-                  name: "PSP22Error",
+                  name: 'PSP22Error',
                 },
                 {
                   fields: [
                     {
                       type: 12,
-                      typeName: "FactoryError",
+                      typeName: 'FactoryError',
                     },
                   ],
                   index: 1,
-                  name: "FactoryError",
+                  name: 'FactoryError',
                 },
                 {
                   fields: [
                     {
                       type: 13,
-                      typeName: "PairError",
+                      typeName: 'PairError',
                     },
                   ],
                   index: 2,
-                  name: "PairError",
+                  name: 'PairError',
                 },
                 {
                   fields: [
                     {
                       type: 17,
-                      typeName: "HelperError",
+                      typeName: 'HelperError',
                     },
                   ],
                   index: 3,
-                  name: "HelperError",
+                  name: 'HelperError',
                 },
                 {
                   fields: [
                     {
                       type: 18,
-                      typeName: "TransferHelperError",
+                      typeName: 'TransferHelperError',
                     },
                   ],
                   index: 4,
-                  name: "TransferHelperError",
+                  name: 'TransferHelperError',
                 },
                 {
                   index: 5,
-                  name: "PairNotFound",
+                  name: 'PairNotFound',
                 },
                 {
                   index: 6,
-                  name: "InsufficientAmount",
+                  name: 'InsufficientAmount',
                 },
                 {
                   index: 7,
-                  name: "InsufficientAAmount",
+                  name: 'InsufficientAAmount',
                 },
                 {
                   index: 8,
-                  name: "InsufficientOutputAmount",
+                  name: 'InsufficientOutputAmount',
                 },
                 {
                   index: 9,
-                  name: "ExcessiveInputAmount",
+                  name: 'ExcessiveInputAmount',
                 },
                 {
                   index: 10,
-                  name: "InsufficientBAmount",
+                  name: 'InsufficientBAmount',
                 },
                 {
                   index: 11,
-                  name: "InsufficientLiquidity",
+                  name: 'InsufficientLiquidity',
                 },
                 {
                   index: 12,
-                  name: "ZeroAddress",
+                  name: 'ZeroAddress',
                 },
                 {
                   index: 13,
-                  name: "IdenticalAddresses",
+                  name: 'IdenticalAddresses',
                 },
                 {
                   index: 14,
-                  name: "Expired",
+                  name: 'Expired',
                 },
                 {
                   index: 15,
-                  name: "SubUnderFlow",
+                  name: 'SubUnderFlow',
                 },
                 {
                   index: 16,
-                  name: "MulOverFlow",
+                  name: 'MulOverFlow',
                 },
                 {
                   index: 17,
-                  name: "DivByZero",
+                  name: 'DivByZero',
                 },
                 {
                   index: 18,
-                  name: "TransferFailed",
+                  name: 'TransferFailed',
                 },
                 {
                   index: 19,
-                  name: "InvalidPath",
+                  name: 'InvalidPath',
                 },
               ],
             },
           },
-          path: ["uniswap_v2", "traits", "router", "RouterError"],
+          path: ['uniswap_v2', 'traits', 'router', 'RouterError'],
         },
       },
       {
@@ -1128,55 +1044,49 @@ const ROUTER_CONTRACT = {
                   fields: [
                     {
                       type: 11,
-                      typeName: "String",
+                      typeName: 'String',
                     },
                   ],
                   index: 0,
-                  name: "Custom",
+                  name: 'Custom',
                 },
                 {
                   index: 1,
-                  name: "InsufficientBalance",
+                  name: 'InsufficientBalance',
                 },
                 {
                   index: 2,
-                  name: "InsufficientAllowance",
+                  name: 'InsufficientAllowance',
                 },
                 {
                   index: 3,
-                  name: "ZeroRecipientAddress",
+                  name: 'ZeroRecipientAddress',
                 },
                 {
                   index: 4,
-                  name: "ZeroSenderAddress",
+                  name: 'ZeroSenderAddress',
                 },
                 {
                   fields: [
                     {
                       type: 11,
-                      typeName: "String",
+                      typeName: 'String',
                     },
                   ],
                   index: 5,
-                  name: "SafeTransferCheckFailed",
+                  name: 'SafeTransferCheckFailed',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "psp22",
-            "PSP22Error",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'psp22', 'PSP22Error'],
         },
       },
       {
         id: 11,
         type: {
           def: {
-            primitive: "str",
+            primitive: 'str',
           },
         },
       },
@@ -1190,32 +1100,32 @@ const ROUTER_CONTRACT = {
                   fields: [
                     {
                       type: 13,
-                      typeName: "PairError",
+                      typeName: 'PairError',
                     },
                   ],
                   index: 0,
-                  name: "PairError",
+                  name: 'PairError',
                 },
                 {
                   index: 1,
-                  name: "CallerIsNotFeeSetter",
+                  name: 'CallerIsNotFeeSetter',
                 },
                 {
                   index: 2,
-                  name: "ZeroAddress",
+                  name: 'ZeroAddress',
                 },
                 {
                   index: 3,
-                  name: "IdenticalAddresses",
+                  name: 'IdenticalAddresses',
                 },
                 {
                   index: 4,
-                  name: "PairExists",
+                  name: 'PairExists',
                 },
               ],
             },
           },
-          path: ["uniswap_v2", "traits", "factory", "FactoryError"],
+          path: ['uniswap_v2', 'traits', 'factory', 'FactoryError'],
         },
       },
       {
@@ -1228,230 +1138,230 @@ const ROUTER_CONTRACT = {
                   fields: [
                     {
                       type: 10,
-                      typeName: "PSP22Error",
+                      typeName: 'PSP22Error',
                     },
                   ],
                   index: 0,
-                  name: "PSP22Error",
+                  name: 'PSP22Error',
                 },
                 {
                   fields: [
                     {
                       type: 14,
-                      typeName: "OwnableError",
+                      typeName: 'OwnableError',
                     },
                   ],
                   index: 1,
-                  name: "OwnableError",
+                  name: 'OwnableError',
                 },
                 {
                   fields: [
                     {
                       type: 15,
-                      typeName: "PausableError",
+                      typeName: 'PausableError',
                     },
                   ],
                   index: 2,
-                  name: "PausableError",
+                  name: 'PausableError',
                 },
                 {
                   fields: [
                     {
                       type: 16,
-                      typeName: "ReentrancyGuardError",
+                      typeName: 'ReentrancyGuardError',
                     },
                   ],
                   index: 3,
-                  name: "ReentrancyGuardError",
+                  name: 'ReentrancyGuardError',
                 },
                 {
                   index: 4,
-                  name: "K",
+                  name: 'K',
                 },
                 {
                   index: 5,
-                  name: "InsufficientLiquidityMinted",
+                  name: 'InsufficientLiquidityMinted',
                 },
                 {
                   index: 6,
-                  name: "InsufficientLiquidityBurned",
+                  name: 'InsufficientLiquidityBurned',
                 },
                 {
                   index: 7,
-                  name: "InsufficientOutputAmount",
+                  name: 'InsufficientOutputAmount',
                 },
                 {
                   index: 8,
-                  name: "InsufficientLiquidity",
+                  name: 'InsufficientLiquidity',
                 },
                 {
                   index: 9,
-                  name: "InsufficientInputAmount",
+                  name: 'InsufficientInputAmount',
                 },
                 {
                   index: 10,
-                  name: "SafeTransferFailed",
+                  name: 'SafeTransferFailed',
                 },
                 {
                   index: 11,
-                  name: "InvalidTo",
+                  name: 'InvalidTo',
                 },
                 {
                   index: 12,
-                  name: "Overflow",
+                  name: 'Overflow',
                 },
                 {
                   index: 13,
-                  name: "Locked",
+                  name: 'Locked',
                 },
                 {
                   index: 14,
-                  name: "SubUnderFlow1",
+                  name: 'SubUnderFlow1',
                 },
                 {
                   index: 15,
-                  name: "SubUnderFlow2",
+                  name: 'SubUnderFlow2',
                 },
                 {
                   index: 16,
-                  name: "SubUnderFlow3",
+                  name: 'SubUnderFlow3',
                 },
                 {
                   index: 17,
-                  name: "SubUnderFlow4",
+                  name: 'SubUnderFlow4',
                 },
                 {
                   index: 18,
-                  name: "SubUnderFlow5",
+                  name: 'SubUnderFlow5',
                 },
                 {
                   index: 19,
-                  name: "SubUnderFlow6",
+                  name: 'SubUnderFlow6',
                 },
                 {
                   index: 20,
-                  name: "SubUnderFlow7",
+                  name: 'SubUnderFlow7',
                 },
                 {
                   index: 21,
-                  name: "SubUnderFlow8",
+                  name: 'SubUnderFlow8',
                 },
                 {
                   index: 22,
-                  name: "SubUnderFlow9",
+                  name: 'SubUnderFlow9',
                 },
                 {
                   index: 23,
-                  name: "SubUnderFlow10",
+                  name: 'SubUnderFlow10',
                 },
                 {
                   index: 24,
-                  name: "SubUnderFlow11",
+                  name: 'SubUnderFlow11',
                 },
                 {
                   index: 25,
-                  name: "SubUnderFlow12",
+                  name: 'SubUnderFlow12',
                 },
                 {
                   index: 26,
-                  name: "SubUnderFlow13",
+                  name: 'SubUnderFlow13',
                 },
                 {
                   index: 27,
-                  name: "SubUnderFlow14",
+                  name: 'SubUnderFlow14',
                 },
                 {
                   index: 28,
-                  name: "MulOverFlow1",
+                  name: 'MulOverFlow1',
                 },
                 {
                   index: 29,
-                  name: "MulOverFlow2",
+                  name: 'MulOverFlow2',
                 },
                 {
                   index: 30,
-                  name: "MulOverFlow3",
+                  name: 'MulOverFlow3',
                 },
                 {
                   index: 31,
-                  name: "MulOverFlow4",
+                  name: 'MulOverFlow4',
                 },
                 {
                   index: 32,
-                  name: "MulOverFlow5",
+                  name: 'MulOverFlow5',
                 },
                 {
                   index: 33,
-                  name: "MulOverFlow6",
+                  name: 'MulOverFlow6',
                 },
                 {
                   index: 34,
-                  name: "MulOverFlow7",
+                  name: 'MulOverFlow7',
                 },
                 {
                   index: 35,
-                  name: "MulOverFlow8",
+                  name: 'MulOverFlow8',
                 },
                 {
                   index: 36,
-                  name: "MulOverFlow9",
+                  name: 'MulOverFlow9',
                 },
                 {
                   index: 37,
-                  name: "MulOverFlow10",
+                  name: 'MulOverFlow10',
                 },
                 {
                   index: 38,
-                  name: "MulOverFlow11",
+                  name: 'MulOverFlow11',
                 },
                 {
                   index: 39,
-                  name: "MulOverFlow12",
+                  name: 'MulOverFlow12',
                 },
                 {
                   index: 40,
-                  name: "MulOverFlow13",
+                  name: 'MulOverFlow13',
                 },
                 {
                   index: 41,
-                  name: "MulOverFlow14",
+                  name: 'MulOverFlow14',
                 },
                 {
                   index: 42,
-                  name: "DivByZero1",
+                  name: 'DivByZero1',
                 },
                 {
                   index: 43,
-                  name: "DivByZero2",
+                  name: 'DivByZero2',
                 },
                 {
                   index: 44,
-                  name: "DivByZero3",
+                  name: 'DivByZero3',
                 },
                 {
                   index: 45,
-                  name: "DivByZero4",
+                  name: 'DivByZero4',
                 },
                 {
                   index: 46,
-                  name: "DivByZero5",
+                  name: 'DivByZero5',
                 },
                 {
                   index: 47,
-                  name: "AddOverflow1",
+                  name: 'AddOverflow1',
                 },
                 {
                   index: 48,
-                  name: "CastOverflow1",
+                  name: 'CastOverflow1',
                 },
                 {
                   index: 49,
-                  name: "CastOverflow2",
+                  name: 'CastOverflow2',
                 },
               ],
             },
           },
-          path: ["uniswap_v2", "traits", "pair", "PairError"],
+          path: ['uniswap_v2', 'traits', 'pair', 'PairError'],
         },
       },
       {
@@ -1462,22 +1372,16 @@ const ROUTER_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "CallerIsNotOwner",
+                  name: 'CallerIsNotOwner',
                 },
                 {
                   index: 1,
-                  name: "NewOwnerIsZero",
+                  name: 'NewOwnerIsZero',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "ownable",
-            "OwnableError",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'ownable', 'OwnableError'],
         },
       },
       {
@@ -1488,22 +1392,16 @@ const ROUTER_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "Paused",
+                  name: 'Paused',
                 },
                 {
                   index: 1,
-                  name: "NotPaused",
+                  name: 'NotPaused',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "pausable",
-            "PausableError",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'pausable', 'PausableError'],
         },
       },
       {
@@ -1514,18 +1412,12 @@ const ROUTER_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "ReentrantCall",
+                  name: 'ReentrantCall',
                 },
               ],
             },
           },
-          path: [
-            "openbrush_contracts",
-            "traits",
-            "errors",
-            "reentrancy_guard",
-            "ReentrancyGuardError",
-          ],
+          path: ['openbrush_contracts', 'traits', 'errors', 'reentrancy_guard', 'ReentrancyGuardError'],
         },
       },
       {
@@ -1536,56 +1428,56 @@ const ROUTER_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "IdenticalAddresses",
+                  name: 'IdenticalAddresses',
                 },
                 {
                   index: 1,
-                  name: "ZeroAddress",
+                  name: 'ZeroAddress',
                 },
                 {
                   index: 2,
-                  name: "InsufficientAmount",
+                  name: 'InsufficientAmount',
                 },
                 {
                   index: 3,
-                  name: "InsufficientLiquidity",
+                  name: 'InsufficientLiquidity',
                 },
                 {
                   index: 4,
-                  name: "DivByZero",
+                  name: 'DivByZero',
                 },
                 {
                   index: 5,
-                  name: "CastOverflow",
+                  name: 'CastOverflow',
                 },
                 {
                   index: 6,
-                  name: "MulOverFlow",
+                  name: 'MulOverFlow',
                 },
                 {
                   index: 7,
-                  name: "AddOverFlow",
+                  name: 'AddOverFlow',
                 },
                 {
                   index: 8,
-                  name: "DivByZero2",
+                  name: 'DivByZero2',
                 },
                 {
                   index: 9,
-                  name: "CastOverflow2",
+                  name: 'CastOverflow2',
                 },
                 {
                   index: 10,
-                  name: "InvalidPath",
+                  name: 'InvalidPath',
                 },
                 {
                   index: 11,
-                  name: "SubUnderFlow",
+                  name: 'SubUnderFlow',
                 },
               ],
             },
           },
-          path: ["uniswap_v2", "helpers", "helper", "HelperError"],
+          path: ['uniswap_v2', 'helpers', 'helper', 'HelperError'],
         },
       },
       {
@@ -1596,17 +1488,12 @@ const ROUTER_CONTRACT = {
               variants: [
                 {
                   index: 0,
-                  name: "TransferFailed",
+                  name: 'TransferFailed',
                 },
               ],
             },
           },
-          path: [
-            "uniswap_v2",
-            "helpers",
-            "transfer_helper",
-            "TransferHelperError",
-          ],
+          path: ['uniswap_v2', 'helpers', 'transfer_helper', 'TransferHelperError'],
         },
       },
       {
@@ -1622,7 +1509,7 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1631,22 +1518,22 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 20,
             },
             {
-              name: "E",
+              name: 'E',
               type: 9,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1670,7 +1557,7 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1679,22 +1566,22 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 4,
             },
             {
-              name: "E",
+              name: 'E',
               type: 9,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1710,7 +1597,7 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 0,
-                  name: "Ok",
+                  name: 'Ok',
                 },
                 {
                   fields: [
@@ -1719,22 +1606,22 @@ const ROUTER_CONTRACT = {
                     },
                   ],
                   index: 1,
-                  name: "Err",
+                  name: 'Err',
                 },
               ],
             },
           },
           params: [
             {
-              name: "T",
+              name: 'T',
               type: 23,
             },
             {
-              name: "E",
+              name: 'E',
               type: 9,
             },
           ],
-          path: ["Result"],
+          path: ['Result'],
         },
       },
       {
@@ -1747,6 +1634,6 @@ const ROUTER_CONTRACT = {
       },
     ],
   },
-};
+}
 
-export default ROUTER_CONTRACT;
+export default ROUTER_CONTRACT
