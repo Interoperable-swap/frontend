@@ -17,7 +17,7 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 import { encodeAddress } from '@polkadot/keyring'
-import { router_address, address0, address1, address2 } from '../util/RouterUtil'
+import { router_address, address0, address1, address2, pair_address, factory_address } from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
@@ -95,31 +95,32 @@ const Main = () => {
         console.error('Error', result.asErr)
       }
     }
+    const getReserve = async () => {
+      // https://github.com/AstarNetwork/wasm-showcase-dapps/blob/7c3009d8110558239c21592f0ae02dd99bb35fa5/uniswap-v2/logics/helpers/helper.rs#L71
+      const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
+      const reserve = await router.query['router::getAmountOut'](currentAccount.address, 10, 10, 10, {
+        gasLimit: gasLimit,
+      })
+      if (reserve.result.isOk) {
+        console.log(`AmountOut: #${reserve.output.toString()}`)
+      } else {
+        console.error('Error', result.asErr)
+      }
+    }
+    getReserve()
     setup()
   }, [api, currentAccount])
-
-  const transfer = async () => {
-    const data = ''
-    await Token1Contract.tx['psp22::transfer'](
-      {
-        gasLimit,
-        storageDepositLimit,
-      },
-      'ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR',
-      inputAmount2,
-      data,
-    ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
-      if (status.isInBlock) {
-        console.log(`Completed at block hash #${status.asInBlock.toString()}`)
-      } else {
-        console.log(`Current status: ${status.type}`)
-      }
-    })
-  }
 
   const runswap = async () => {
     const deadline = '111111111111111111'
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
+    const reserve = await router.query['router::getAmountOut']({ gasLimit: gasLimit, storageDepositLimit })
+    if (reserve.result.isOk) {
+      console.log(`Reserve: #${reserve.output.toString()}`)
+    } else {
+      console.error('Error', result.asErr)
+    }
+
     await router.tx['router::swapExactTokensForTokens'](
       { gasLimit, storageDepositLimit },
       inputAmount1,
@@ -140,7 +141,7 @@ const Main = () => {
       <div className={style.content}>
         <div className={style.formHeader}>
           <div>Swap</div>
-          <div onClick={() => transfer()}>
+          <div onClick={() => getReserve()}>
             <RiSettings3Fill />
           </div>
         </div>

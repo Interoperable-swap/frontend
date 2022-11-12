@@ -1,4 +1,3 @@
-export const PAIR_ADDRESS = ''
 const PAIR_CONTRACT = {
   source: {
     hash: '0x8767c887f29bca911480a4b5bba7ccf8dcb1fb1c35a53d5909a0b1d9611c11a0',
