@@ -51,7 +51,7 @@ const fee_to_setter = 'ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR' //dev1 a
 const Main = () => {
   const [showList, setShowList] = useState(false)
   const [Currency2, setCurrency2] = useState(false)
-  const { currentAccount, api, handleChange, amount, signer } = useContext(TransactionContext)
+  const { currentAccount, api, signer } = useContext(TransactionContext)
   const [Token1Contract, setToken1Contract] = useState(undefined)
   const [token2Contract, setToken2Contract] = useState(undefined)
   const [UniI1Balance, settoken1balance] = useState('')
@@ -64,6 +64,7 @@ const Main = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
+
   //TODO : fix setup error
   useEffect(() => {
     const setup = async () => {
@@ -123,7 +124,7 @@ const Main = () => {
       { gasLimit, storageDepositLimit },
       inputAmount1,
       100,
-      [token2Contract.address, Token1Contract.address],
+      [Token1Contract.address, token2Contract.address], //path [input, output]
       currentAccount.address,
       deadline,
     ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
