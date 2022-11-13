@@ -4,6 +4,7 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
+import uniswap from '../assets/uniswap.png'
 import Button from './Button'
 import { TransactionContext } from '../context/TransactionContext'
 
@@ -69,57 +70,51 @@ const Liquidity = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
-
+  const [isapproving, setIsApproving] = useState(false)
   const gasLimit = 100000000000
   const storageDepositLimit = null
   const data = ''
+
+  const approve = async () => {
+    setIsApproving(true)
+    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
+    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
+    await getToken1Contract.tx['psp22::approve'](
+      {
+        gasLimit,
+        storageDepositLimit,
+      },
+      router_address,
+      inputAmount1,
+    ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
+      if (status.isInBlock) {
+        console.log(`Completed at block hash #${status.asInBlock.toString()}`)
+        setIsApproving(false)
+      } else {
+        console.log(`Current status: ${status.type}`)
+      }
+    })
+    await getToken2Contract.tx['psp22::approve'](
+      {
+        gasLimit,
+        storageDepositLimit,
+      },
+      router_address,
+      inputAmount2,
+    ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
+      if (status.isInBlock) {
+        console.log(`Completed at block hash #${status.asInBlock.toString()}`)
+        setIsApproving(false)
+      } else {
+        console.log(`Current status: ${status.type}`)
+      }
+    })
+  }
+
   const add_liquidity = async () => {
     setIsLoading(true)
     const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
-    //TODO:approve
-    /**
-		 await getToken1Contract.tx["psp22::approve"](
-      {
-        gasLimit,
-        storageDepositLimit,
-      },
-      router_address,
-      inputAmount1
-    ).signAndSend(
-      currentAccount.address,
-      { signer: signer.signer },
-      ({ status }) => {
-        if (status.isInBlock) {
-          console.log(
-            `Completed at block hash #${status.asInBlock.toString()}`
-          );
-        } else {
-          console.log(`Current status: ${status.type}`);
-        }
-      }
-    );
-		await getToken2Contract.tx["psp22::approve"](
-      {
-        gasLimit,
-        storageDepositLimit,
-      },
-      router_address,
-      inputAmount2
-    ).signAndSend(
-      currentAccount.address,
-      { signer: signer.signer },
-      ({ status }) => {
-        if (status.isInBlock) {
-          console.log(
-            `Completed at block hash #${status.asInBlock.toString()}`
-          );
-        } else {
-          console.log(`Current status: ${status.type}`);
-        }
-      }
-    );
-		 */
     //add liquidity via router
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     const deadline = '111111111111111111'
@@ -139,7 +134,6 @@ const Liquidity = () => {
         setIsLoading(false)
       } else {
         console.log(`Current status: ${status.type}`)
-        
       }
     })
   }
@@ -163,9 +157,9 @@ const Liquidity = () => {
           <div className={style.currencySelector}>
             <div className={style.currencySelectorContent}>
               <div className={style.currencySelectorIcon}>
-                <Image src={Shiden} alt='shiden' height={20} width={20} />
+                <Image src={astar} alt='astar' height={20} width={20} />
               </div>
-              <div className={style.currencySelectorTicker}>SDN</div>
+              <div className={style.currencySelectorTicker}>WSBY</div>
               <AiOutlineDown className={style.currencySelectorArrow} />
             </div>
           </div>
@@ -185,9 +179,9 @@ const Liquidity = () => {
           <div className={style.currencySelector}>
             <div className={style.currencySelectorContent}>
               <div className={style.currencySelectorIcon}>
-                <Image src={astar} alt='astar logo' height={20} width={20} />
+                <Image src={uniswap} alt='uniswap' height={20} width={20} />
               </div>
-              <div className={style.currencySelectorTicker}>SBY</div>
+              <div className={style.currencySelectorTicker}>UNI</div>
               <AiOutlineDown className={style.currencySelectorArrow} />
             </div>
           </div>
