@@ -1,3 +1,5 @@
+<img width="1680" alt="Screenshot 2022-11-14 at 5 11 20" src="https://user-images.githubusercontent.com/67859510/201542246-bf10a6c8-163e-42ce-b686-8c36b53bcbcc.png">
+
 ### A. Project Description x1.
 
 ***InteroperableDEX, not Multi-chainDEX.***
@@ -13,6 +15,7 @@ steve tanaka(tg:shutanaka)
 ### 3.- The actual challenge statement you are submitting to and a general description of the problem you are addressing
 
 ***Liquidity aggregation and interoperability among DEXs***
+
 
 The Polkadot Ecosystem includes a variety of chains, including application-based chains, in addition to chains as Smartcontract execution environments. Even now, each chain is developing its own liquidity solutions and DEXs, and from the user's point of view, the liquidity offered is distributed and very UX-unfriendly. Although development was not completed in time for this hackathon, we will continue to develop solutions to these issues.
 
@@ -35,14 +38,13 @@ This is a recorded presentation of your team presenting your project and solutio
 
 ## C. Link to GitHub Repo x1
 
-Each team must designate 1 (one) person to create the team's GitHub repository and share access with the team to collaborate. During the presentation, the team must submit the link to this GitHub repository that can be accessible to the judges.
+https://github.com/Interoperable-swap/frontend/tree/main/interface
 
+## D. List of technology stack used x1
+- ink! /WASM Smartcontract
+- Polkadot{js} API
+- React/Next.js
 
-D. List of technology stack used x1
+## E. Project demo link
 
-This is a list of the technology stack used by the team to build their project.
-
-
-E. Project demo link
-
-This is the URL to the live working environment of the solution that has been developed.
+https://frontend-liard-tau.vercel.app/
