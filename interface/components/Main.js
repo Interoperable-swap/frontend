@@ -52,8 +52,8 @@ const Main = () => {
   const { currentAccount, api, signer } = useContext(TransactionContext)
   const [Token1Contract, setToken1Contract] = useState(undefined)
   const [token2Contract, setToken2Contract] = useState(undefined)
-  const [UniI1Balance, settoken1balance] = useState('')
-  const [UniI2Balance, settoken2balance] = useState('')
+  const [Token1Balance, settoken1balance] = useState('')
+  const [Token2Balance, settoken2balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
   const [inputAmount2, setInputAmount2] = useState(0)
   const handleInput1 = (e) => {
@@ -99,16 +99,10 @@ const Main = () => {
   const runswap = async () => {
     const deadline = '111111111111111111'
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-    //reserveによって変わる
-    const getreserve = await router.query['router::getAmountOut'](
-      currentAccount.address,
-      inputAmount1,
-      inputAmount1,
-      500,
-      {
-        gasLimit: gasLimit,
-      },
-    )
+		//TODO:reserve amount
+    const getreserve = await router.query['router::getAmountOut'](currentAccount.address, inputAmount1, 500, 500, {
+      gasLimit: gasLimit,
+    })
     if (getreserve.result.isOk) {
       console.log(`AmountOut: #${getreserve.output.toString()}`)
     } else {
@@ -161,9 +155,9 @@ const Main = () => {
             </button>
           </div>
         </div>
-        {UniI2Balance ? (
+        {Token2Balance ? (
           <div>
-            <div className={style.copyarea}>Balance :{UniI2Balance}</div>
+            <div className={style.copyarea}>Balance :{Token2Balance}</div>
           </div>
         ) : (
           <div className={style.copyarea}>Balance :0</div>
@@ -193,9 +187,9 @@ const Main = () => {
             </button>
           </div>
         </div>
-        {UniI1Balance ? (
+        {Token1Balance ? (
           <div>
-            <div className={style.copyarea}>Balance :{UniI1Balance}</div>
+            <div className={style.copyarea}>Balance :{Token1Balance}</div>
           </div>
         ) : (
           <div className={style.copyarea}>Balance :0</div>
