@@ -28,13 +28,7 @@ Thanks to the Polkadot community for the heads up!
 We uses Pallet Contract based on Substrate framework and can achieve interoperability with existing EVM Dapps utilizing AstarNetwork's XVM feature
 
 ## B. Video presentation up to 5 minutes x1
-
-This is a recorded presentation of your team presenting your project and solution. The video presentation must include at least the following:
-
-1.- Name of the project
-
-2.- Description of the design, novelty/originality, technical complexity, daily/mass usability and impact of the project (these are the evaluation criteria!).
-
+https://youtu.be/MoF5ddS8OaQ
 
 ## C. Link to GitHub Repo x1
 
