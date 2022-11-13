@@ -17,7 +17,16 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 import { encodeAddress } from '@polkadot/keyring'
-import { router_address, address0, address1, address2, pair_address, factory_address, ONE } from '../util/RouterUtil'
+import {
+  router_address,
+  address0,
+  address1,
+  address2,
+  pair_address,
+  factory_address,
+  ONE,
+  Decimal,
+} from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
@@ -43,7 +52,6 @@ const style = {
   currencySelectorArrow: `text-lg`,
   copyarea: `flex cursor-pointer`,
 }
-const zeroAddress = encodeAddress('0x0000000000000000000000000000000000000000000000000000000000000000')
 //const gasLimit = 18750000000;
 const gasLimit = 100000000000
 const storageDepositLimit = null
@@ -62,6 +70,7 @@ const Main = () => {
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [amountout, setAmountOut] = useState('Input Amount')
   const customStyles = {
     content: {
       top: '50%',
@@ -90,58 +99,68 @@ const Main = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
-
+  const token = BigInt(inputAmount1 * 10 ** Decimal)
   //TODO : fix setup error
   useEffect(() => {
     const setup = async () => {
-      //initialize contracts
+      // initialize contracts
       const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
-      const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
+      const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
       setToken1Contract(getToken1Contract)
       setToken2Contract(getToken2Contract)
-      const token1balance = await getToken1Contract.query['psp22::balanceOf'](
-        currentAccount.address,
-        { gasLimit: gasLimit },
-        currentAccount.address,
-      )
-      if (token1balance.result.isOk) {
-        settoken1balance(token1balance.output.toString()) //TODO: FIX DECIMAL / 10 ** Decimal
-      } else {
-        console.error('Error', result.asErr)
-      }
-      const token2balance = await getToken2Contract.query['psp22::balanceOf'](
-        currentAccount.address,
-        { gasLimit: gasLimit },
-        currentAccount.address,
-      )
-      if (token2balance.result.isOk) {
-        // output the return value
-        settoken2balance(token2balance.output.toString()) //TODO FIX DECIMAL / 10 ** Decimal
-      } else {
-        console.error('Error', result.asErr)
-      }
     }
     setup()
+    getBalance()
   }, [api, currentAccount])
+
+  useEffect(() => {
+    getPrice()
+  }, [inputAmount1])
+
+  const getPrice = async () => {
+    const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
+    //TODO:reserve amount
+    const getreserve = await router.query['router::getAmountOut'](currentAccount.address, inputAmount1, 10, 10, {
+      gasLimit: gasLimit,
+    })
+    if (getreserve.result.isOk) {
+      //setAmountOut(getreserve.output.toJSON()['ok']) // / BigInt(10 ** Decimal)
+    } else {
+      console.error('Error', result.asErr)
+    }
+  }
+  const getBalance = async () => {
+    const token1balance = await Token1Contract.query['psp22::balanceOf'](
+      currentAccount.address,
+      { gasLimit: gasLimit },
+      currentAccount.address,
+    )
+    if (token1balance.result.isOk) {
+      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
+    } else {
+      console.error('Error', result.asErr)
+    }
+    const token2balance = await token2Contract.query['psp22::balanceOf'](
+      currentAccount.address,
+      { gasLimit: gasLimit },
+      currentAccount.address,
+    )
+    if (token2balance.result.isOk) {
+      // output the return value
+      settoken2balance(token2balance.output.toString()/ 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
+    } else {
+      console.error('Error', result.asErr)
+    }
+  }
 
   const runswap = async () => {
     setIsLoading(true)
     const deadline = '111111111111111111'
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-    //TODO:reserve amount
-    const getreserve = await router.query['router::getAmountOut'](currentAccount.address, inputAmount1, 500, 500, {
-      gasLimit: gasLimit,
-    })
-    if (getreserve.result.isOk) {
-      console.log(`AmountOut: #${getreserve.output.toString()}`)
-    } else {
-      console.error('Error', result.asErr)
-    }
-
     await router.tx['router::swapExactTokensForTokens'](
       { gasLimit, storageDepositLimit },
       inputAmount1,
-      100,
+      0,
       [Token1Contract.address, token2Contract.address], //path [input, output]
       currentAccount.address,
       deadline,
@@ -149,9 +168,9 @@ const Main = () => {
       if (status.isInBlock) {
         console.log(`Completed at block hash #${status.asInBlock.toString()}`)
         setIsLoading(false)
+        getBalance()
       } else {
         console.log(`Current status: ${status.type}`)
-        setIsLoading(false)
       }
     })
   }
@@ -200,7 +219,7 @@ const Main = () => {
           <input
             type='text'
             className={style.transferPropInput}
-            placeholder='0.0'
+            placeholder={amountout}
             pattern='^[0-9]*[.,]?[0-9]*$'
             onChange={(e) => handleInput2(e, 'input2amount')}
           />

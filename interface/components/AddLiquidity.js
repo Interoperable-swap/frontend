@@ -12,7 +12,16 @@ import ROUTER_CONTRACT from '../contract/abi/router'
 import { ContractPromise } from '@polkadot/api-contract'
 import { PSP22_ABI } from '../contract/abi/psp22'
 import { WNATIVE_ABI } from '../contract/abi/wnative'
-import { factory_address, router_address, pair_address, address0, address1, address2, ONE } from '../util/RouterUtil'
+import {
+  factory_address,
+  router_address,
+  pair_address,
+  address0,
+  address1,
+  address2,
+  ONE,
+  Decimal,
+} from '../util/RouterUtil'
 import { BN } from 'bn.js'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
@@ -73,8 +82,6 @@ const Liquidity = () => {
   const [isapproving, setIsApproving] = useState(false)
   const gasLimit = 100000000000
   const storageDepositLimit = null
-  const data = ''
-
   const approve = async () => {
     setIsApproving(true)
     const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
