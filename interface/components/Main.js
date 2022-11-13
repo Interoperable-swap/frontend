@@ -24,6 +24,10 @@ import FACTORY_CONTRACT from '../contract/abi/factory'
 import { PSP22_ABI } from '../contract/abi/psp22'
 import { WNATIVE_ABI } from '../contract/abi/wnative'
 import ROUTER_CONTRACT from '../contract/abi/router'
+import Modal from 'react-modal'
+import { useRouter } from 'next/router'
+import LoadingTransaction from './Modal/LoadingTransaction'
+Modal.setAppElement('#__next')
 
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
@@ -56,6 +60,30 @@ const Main = () => {
   const [Token2Balance, settoken2balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
   const [inputAmount2, setInputAmount2] = useState(0)
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#0a0b0d',
+      padding: 0,
+      border: 'none',
+    },
+    overlay: {
+      backgroundColor: 'rgba(10, 11, 13, 0.75)',
+    },
+  }
+  useEffect(() => {
+    if (isLoading) {
+      router.push(`/?loading=${currentAccount}`)
+    } else {
+      router.push(`/`)
+    }
+  }, [isLoading])
   const handleInput1 = (e) => {
     setInputAmount1(e.target.value)
   }
@@ -97,9 +125,10 @@ const Main = () => {
   }, [api, currentAccount])
 
   const runswap = async () => {
+    setIsLoading(true)
     const deadline = '111111111111111111'
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-		//TODO:reserve amount
+    //TODO:reserve amount
     const getreserve = await router.query['router::getAmountOut'](currentAccount.address, inputAmount1, 500, 500, {
       gasLimit: gasLimit,
     })
@@ -119,8 +148,10 @@ const Main = () => {
     ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
       if (status.isInBlock) {
         console.log(`Completed at block hash #${status.asInBlock.toString()}`)
+        setIsLoading(false)
       } else {
         console.log(`Current status: ${status.type}`)
+        setIsLoading(false)
       }
     })
   }
@@ -198,6 +229,9 @@ const Main = () => {
           <Button title='swap' />
         </div>
       </div>
+      <Modal isOpen={!!router.query.loading} style={customStyles}>
+        <LoadingTransaction />
+      </Modal>{' '}
     </div>
   )
 }

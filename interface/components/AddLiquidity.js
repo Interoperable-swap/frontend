@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { RiSettings3Fill } from 'react-icons/ri'
 import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
@@ -13,6 +13,11 @@ import { PSP22_ABI } from '../contract/abi/psp22'
 import { WNATIVE_ABI } from '../contract/abi/wnative'
 import { factory_address, router_address, pair_address, address0, address1, address2, ONE } from '../util/RouterUtil'
 import { BN } from 'bn.js'
+import Modal from 'react-modal'
+import { useRouter } from 'next/router'
+import LoadingTransaction from './Modal/LoadingTransaction'
+Modal.setAppElement('#__next')
+
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
   content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
@@ -29,22 +34,47 @@ const style = {
 }
 const Liquidity = () => {
   const { currentAccount, api, signer } = useContext(TransactionContext)
+  const [Token1Contract, setToken1Contract] = useState(undefined)
+  const [token2Contract, setToken2Contract] = useState(undefined)
+
+  const [inputAmount1, setInputAmount1] = useState('')
+  const [inputAmount2, setInputAmount2] = useState('')
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      transform: 'translate(-50%, -50%)',
+      backgroundColor: '#0a0b0d',
+      padding: 0,
+      border: 'none',
+    },
+    overlay: {
+      backgroundColor: 'rgba(10, 11, 13, 0.75)',
+    },
+  }
+  useEffect(() => {
+    if (isLoading) {
+      router.push(`/?loading=${currentAccount}`)
+    } else {
+      router.push(`/`)
+    }
+  }, [isLoading])
   const handleInput1 = (e) => {
     setInputAmount1(e.target.value)
   }
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
-  const [Token1Contract, setToken1Contract] = useState(undefined)
-  const [token2Contract, setToken2Contract] = useState(undefined)
-
-  const [inputAmount1, setInputAmount1] = useState('')
-  const [inputAmount2, setInputAmount2] = useState('')
 
   const gasLimit = 100000000000
   const storageDepositLimit = null
   const data = ''
   const add_liquidity = async () => {
+    setIsLoading(true)
     const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
     //TODO:approve
@@ -106,8 +136,10 @@ const Liquidity = () => {
     ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
       if (status.isInBlock) {
         console.log(`Completed at block hash #${status.asInBlock.toString()}`)
+        setIsLoading(false)
       } else {
         console.log(`Current status: ${status.type}`)
+        
       }
     })
   }
@@ -164,6 +196,9 @@ const Liquidity = () => {
           <Button title='Add liquidity' />
         </div>
       </div>
+      <Modal isOpen={!!router.query.loading} style={customStyles}>
+        <LoadingTransaction />
+      </Modal>{' '}
     </div>
   )
 }
