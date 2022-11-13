@@ -1,6 +1,6 @@
 import React from 'react'
 import { WalletSelect } from '@talismn/connect-components'
-//TODO
+//TODO:Talismanconnect
 const ConnectWallet = () => {
   return (
     <WalletSelect
