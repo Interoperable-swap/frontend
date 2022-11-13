@@ -17,7 +17,7 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 import { encodeAddress } from '@polkadot/keyring'
-import { router_address, address0, address1, address2, pair_address, factory_address } from '../util/RouterUtil'
+import { router_address, address0, address1, address2, pair_address, factory_address, ONE } from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
@@ -39,13 +39,11 @@ const style = {
   currencySelectorArrow: `text-lg`,
   copyarea: `flex cursor-pointer`,
 }
-const Decimal = 18
-const ONE = new BN(10).pow(new BN(Decimal))
 const zeroAddress = encodeAddress('0x0000000000000000000000000000000000000000000000000000000000000000')
 //const gasLimit = 18750000000;
 const gasLimit = 100000000000
 const storageDepositLimit = null
-const fee_to_setter = 'ZebrEKmacXyyTxcfLWUeG5byHSN8AdpDhvjx5Esdg5oR7yR' //dev1 account
+
 // uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
 
 const Main = () => {
@@ -95,28 +93,24 @@ const Main = () => {
         console.error('Error', result.asErr)
       }
     }
-    const getReserve = async () => {
-      // https://github.com/AstarNetwork/wasm-showcase-dapps/blob/7c3009d8110558239c21592f0ae02dd99bb35fa5/uniswap-v2/logics/helpers/helper.rs#L71
-      const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-      const reserve = await router.query['router::getAmountOut'](currentAccount.address, 10, 10, 10, {
-        gasLimit: gasLimit,
-      })
-      if (reserve.result.isOk) {
-        console.log(`AmountOut: #${reserve.output.toString()}`)
-      } else {
-        console.error('Error', result.asErr)
-      }
-    }
-    getReserve()
     setup()
   }, [api, currentAccount])
 
   const runswap = async () => {
     const deadline = '111111111111111111'
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-    const reserve = await router.query['router::getAmountOut']({ gasLimit: gasLimit, storageDepositLimit })
-    if (reserve.result.isOk) {
-      console.log(`Reserve: #${reserve.output.toString()}`)
+    //reserveによって変わる
+    const getreserve = await router.query['router::getAmountOut'](
+      currentAccount.address,
+      inputAmount1,
+      inputAmount1,
+      500,
+      {
+        gasLimit: gasLimit,
+      },
+    )
+    if (getreserve.result.isOk) {
+      console.log(`AmountOut: #${getreserve.output.toString()}`)
     } else {
       console.error('Error', result.asErr)
     }
@@ -141,7 +135,7 @@ const Main = () => {
       <div className={style.content}>
         <div className={style.formHeader}>
           <div>Swap</div>
-          <div onClick={() => getReserve()}>
+          <div>
             <RiSettings3Fill />
           </div>
         </div>

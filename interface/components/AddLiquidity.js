@@ -11,7 +11,8 @@ import ROUTER_CONTRACT from '../contract/abi/router'
 import { ContractPromise } from '@polkadot/api-contract'
 import { PSP22_ABI } from '../contract/abi/psp22'
 import { WNATIVE_ABI } from '../contract/abi/wnative'
-import { factory_address, router_address, pair_address, address0, address1, address2 } from '../util/RouterUtil'
+import { factory_address, router_address, pair_address, address0, address1, address2, ONE } from '../util/RouterUtil'
+import { BN } from 'bn.js'
 const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
   content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
