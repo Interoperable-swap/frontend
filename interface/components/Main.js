@@ -70,7 +70,7 @@ const Main = () => {
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [amountout, setAmountOut] = useState('Input Amount')
+  const [amountout, setAmountOut] = useState('0.0')
   const customStyles = {
     content: {
       top: '50%',
@@ -100,7 +100,6 @@ const Main = () => {
     setInputAmount2(e.target.value)
   }
   const token = BigInt(inputAmount1 * 10 ** Decimal)
-  //TODO : fix setup error
   useEffect(() => {
     const setup = async () => {
       // initialize contracts
@@ -108,50 +107,53 @@ const Main = () => {
       const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
       setToken1Contract(getToken1Contract)
       setToken2Contract(getToken2Contract)
+      const token1balance = await getToken1Contract.query['psp22::balanceOf'](
+        currentAccount.address,
+        { gasLimit: gasLimit },
+        currentAccount.address,
+      )
+      if (token1balance.result.isOk) {
+        settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
+      } else {
+        console.error('Error', result.asErr)
+      }
+      const token2balance = await getToken2Contract.query['psp22::balanceOf'](
+        currentAccount.address,
+        { gasLimit: gasLimit },
+        currentAccount.address,
+      )
+      if (token2balance.result.isOk) {
+        // output the return value
+        settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
+      } else {
+        console.error('Error', result.asErr)
+      }
     }
-    setup()
-    getBalance()
-  }, [api, currentAccount])
-
-  useEffect(() => {
-    getPrice()
-  }, [inputAmount1])
-
+    if (api) {
+      setup()
+      getBalance()
+      getPrice()
+    }
+  }, [api, currentAccount, inputAmount1, inputAmount2])
   const getPrice = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     //TODO:reserve amount
-    const getreserve = await router.query['router::getAmountOut'](currentAccount.address, inputAmount1, 10, 10, {
-      gasLimit: gasLimit,
-    })
+    const getreserve = await router.query['router::getAmountOut'](
+      currentAccount.address,
+      inputAmount1,
+      10,
+      inputAmount1,
+      {
+        gasLimit: gasLimit,
+      },
+    )
     if (getreserve.result.isOk) {
-      //setAmountOut(getreserve.output.toJSON()['ok']) // / BigInt(10 ** Decimal)
+      setAmountOut(getreserve.output.toJSON()['ok']) // / BigInt(10 ** Decimal)
     } else {
       console.error('Error', result.asErr)
     }
   }
-  const getBalance = async () => {
-    const token1balance = await Token1Contract.query['psp22::balanceOf'](
-      currentAccount.address,
-      { gasLimit: gasLimit },
-      currentAccount.address,
-    )
-    if (token1balance.result.isOk) {
-      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
-    } else {
-      console.error('Error', result.asErr)
-    }
-    const token2balance = await token2Contract.query['psp22::balanceOf'](
-      currentAccount.address,
-      { gasLimit: gasLimit },
-      currentAccount.address,
-    )
-    if (token2balance.result.isOk) {
-      // output the return value
-      settoken2balance(token2balance.output.toString()/ 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
-    } else {
-      console.error('Error', result.asErr)
-    }
-  }
+  const getBalance = async () => {}
 
   const runswap = async () => {
     setIsLoading(true)
