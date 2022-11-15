@@ -131,7 +131,6 @@ const Main = () => {
     }
     if (api) {
       setup()
-      getBalance()
       getPrice()
     }
   }, [api, currentAccount, inputAmount1, inputAmount2])
@@ -153,7 +152,6 @@ const Main = () => {
       console.error('Error', result.asErr)
     }
   }
-  const getBalance = async () => {}
 
   const runswap = async () => {
     setIsLoading(true)
