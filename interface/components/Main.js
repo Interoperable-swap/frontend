@@ -56,14 +56,12 @@ const style = {
 const gasLimit = 100000000000
 const storageDepositLimit = null
 
-// uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
-
 const Main = () => {
   const [showList, setShowList] = useState(false)
   const [Currency2, setCurrency2] = useState(false)
   const { currentAccount, api, signer } = useContext(TransactionContext)
   const [Token1Contract, setToken1Contract] = useState(undefined)
-  const [token2Contract, setToken2Contract] = useState(undefined)
+  const [Token2Contract, setToken2Contract] = useState(undefined)
   const [Token1Balance, settoken1balance] = useState('')
   const [Token2Balance, settoken2balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
@@ -99,11 +97,10 @@ const Main = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
-  const token = BigInt(inputAmount1 * 10 ** Decimal)
   useEffect(() => {
     if (api && currentAccount) {
       setup()
-      getPrice()
+      getReserves()
     }
   }, [api, currentAccount, inputAmount1, inputAmount2])
 
@@ -137,24 +134,28 @@ const Main = () => {
   }
   ///////////////////////////////////////////////////////////////////
   /**
-   * Create token0:WSBY <> token1:Uni2 pair
-   * approve
-   * add lipuidity
-   * ONE : ONE
-   * sync
-   * getreserve
+	 * // uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
+		// wsby<>UNI2 pair ZZmi8jq7LtDecomVXcAuKXxkrCdX26PyLtsiNJopDvy3Hwc
+   *done Create token0:WSBY <> token1:Uni2 pair
+   *done approve
+   *done add lipuidity
+   *done 1: 1,1:0.1
+   *done sync how to sync by UI......
+   *error getreserve
    */
   //TODO:reserve amount
-  const getPrice = async () => {
+  const getReserves = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address)
-    const reserve = await pair.query['pair::getReserves']('bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q', {
+    const reserve = await pair.query['pair::getReserves'](pair_address, {
       gasLimit: gasLimit,
     })
     if (reserve.result.isOk) {
       console.log(reserve.output.toHuman())
     }
-    const getreserve = await router.query['router::getAmountOut'](
+    const token0 = BigInt(inputAmount1 * 10 ** Decimal)
+    const token1 = BigInt(inputAmount2 * 10 ** Decimal)
+    const getAmountOut = await router.query['router::getAmountOut'](
       currentAccount.address,
       inputAmount1,
       10,
@@ -163,8 +164,8 @@ const Main = () => {
         gasLimit: gasLimit,
       },
     )
-    if (getreserve.result.isOk) {
-      setAmountOut(getreserve.output.toJSON()['ok']) // / BigInt(10 ** Decimal)
+    if (getAmountOut.result.isOk) {
+      setAmountOut(getAmountOut.output.toJSON()['ok']) // / BigInt(10 ** Decimal)
     } else {
       console.error('Error', result.asErr)
     }
@@ -178,7 +179,7 @@ const Main = () => {
       { gasLimit, storageDepositLimit },
       inputAmount1,
       0,
-      [Token1Contract.address, token2Contract.address], //path [input, output]
+      [Token2Contract.address, Token1Contract.address], //path [input, output]
       currentAccount.address,
       deadline,
     ).signAndSend(currentAccount.address, { signer: signer.signer }, ({ status }) => {
