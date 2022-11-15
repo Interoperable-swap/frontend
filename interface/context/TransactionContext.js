@@ -48,8 +48,7 @@ export const TransactionProvider = ({ children }) => {
   const checkIfWalletIsConnected = async (pjs = 'polkadot-js') => {
     try {
       if (!currentAccount) {
-        console.log('account is not connected')
-        const { web3Enable, web3Accounts, web3FromAddress } = await import('@polkadot/extension-dapp')
+        const { web3Enable } = await import('@polkadot/extension-dapp')
         const extensions = await web3Enable(DAPP_NAME)
         if (extensions.length === 0) {
           return
