@@ -107,7 +107,6 @@ const Main = () => {
     }
   }, [api, currentAccount, inputAmount1, inputAmount2])
 
-	
   const setup = async () => {
     // initialize contracts
     const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
@@ -136,9 +135,17 @@ const Main = () => {
       console.error('Error', result.asErr)
     }
   }
+  ///////////////////////////////////////////////////////////////////
+  //TODO:reserve amount
   const getPrice = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-    //TODO:reserve amount
+    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address)
+    const reserve = await pair.tx['pair::getReserves']({ gasLimit, storageDepositLimit })
+    if (reserve) {
+      console.log(reserve.toJSON()[0])
+      console.log(reserve.toJSON()[1])
+      console.log(reserve.toJSON()[2])
+    }
     const getreserve = await router.query['router::getAmountOut'](
       currentAccount.address,
       inputAmount1,
@@ -154,7 +161,7 @@ const Main = () => {
       console.error('Error', result.asErr)
     }
   }
-
+  ///////////////////////////////////////////////////////////////////
   const runswap = async () => {
     setIsLoading(true)
     const deadline = '111111111111111111'
