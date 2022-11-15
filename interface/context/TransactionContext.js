@@ -22,9 +22,9 @@ export const TransactionProvider = ({ children }) => {
   useEffect(() => {
     checkIfWalletIsConnected()
   }, [])
-  const connectWallet = async () => {
+  const connectWallet = async (pjs = 'polkadot-js') => {
     try {
-      const { web3Enable, web3Accounts, web3FromSource } = await import('@polkadot/extension-dapp')
+      const { web3Enable, web3Accounts, web3FromAddress } = await import('@polkadot/extension-dapp')
       const extensions = await web3Enable(DAPP_NAME)
       if (extensions.length === 0) {
         // no extension installed, or the user did not accept the authorization
@@ -32,38 +32,44 @@ export const TransactionProvider = ({ children }) => {
         return
       }
       const provider = new WsProvider(WS_PROVIDER)
-
       const api = await ApiPromise.create({ provider })
       setapi(api)
       const allaccounts = await web3Accounts()
       const account = allaccounts[0]
       setCurrentAccount(account)
-      const injector = await web3FromSource(account.meta.source)
-
-      setSigner(injector)
+      if (account.address) {
+        const injector = await web3FromAddress(account.address)
+        setSigner(injector)
+      }
     } catch (error) {
       console.error(error)
     }
   }
-  const checkIfWalletIsConnected = async () => {
+  const checkIfWalletIsConnected = async (pjs = 'polkadot-js') => {
     try {
-      const { web3Enable, web3Accounts, web3FromSource } = await import('@polkadot/extension-dapp')
+      if (!currentAccount) {
+        console.log('account is not connected')
+        const { web3Enable, web3Accounts, web3FromAddress } = await import('@polkadot/extension-dapp')
+        const extensions = await web3Enable(DAPP_NAME)
+        if (extensions.length === 0) {
+          return
+        }
+      }
+      const { web3Enable, web3Accounts, web3FromAddress } = await import('@polkadot/extension-dapp')
       const extensions = await web3Enable(DAPP_NAME)
       if (extensions.length === 0) {
         return
       }
       const allaccounts = await web3Accounts()
-      if (allaccounts.length) {
-        setCurrentAccount(allaccounts[0])
-      }
       const provider = new WsProvider(WS_PROVIDER)
       const api = await ApiPromise.create({ provider })
       setapi(api)
-      api.isReady
       const account = allaccounts[0]
       setCurrentAccount(account)
-      const injector = await web3FromSource(account.meta.source)
-      setSigner(injector)
+      if (account.address) {
+        const injector = await web3FromAddress(account.address)
+        setSigner(injector)
+      }
     } catch (error) {
       console.error(error)
     }
