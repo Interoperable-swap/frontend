@@ -36,6 +36,7 @@ import ROUTER_CONTRACT from '../contract/abi/router'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
 import LoadingTransaction from './Modal/LoadingTransaction'
+
 Modal.setAppElement('#__next')
 
 const style = {
@@ -138,12 +139,15 @@ const Main = () => {
 		// wsby<>UNI2 pair ZZmi8jq7LtDecomVXcAuKXxkrCdX26PyLtsiNJopDvy3Hwc
    *done Create token0:WSBY <> token1:Uni2 pair
    *done approve
-   *done add lipuidity
+   *done add lipuidity →transfer asset to pair_address(pair contract address)
    *done 1: 1,1:0.1
    *done sync how to sync by UI......
    *error getreserve
    */
   //TODO:reserve amount
+  const [reserve0, setReserve0] = useState()
+  const [reserve1, setReserve1] = useState()
+
   const getReserves = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address)
@@ -152,6 +156,12 @@ const Main = () => {
     })
     if (reserve.result.isOk) {
       console.log(reserve.output.toHuman())
+      setReserve0(reserve.output[0].toHuman())
+      setReserve1(reserve.output[1].toHuman())
+      let timestamp = reserve.output[2].toHuman()
+      console.log('reserve0:', reserve0)
+      console.log('reserve1:', reserve1)
+      console.log('timestamp:', timestamp)
     }
     const token0 = BigInt(inputAmount1 * 10 ** Decimal)
     const token1 = BigInt(inputAmount2 * 10 ** Decimal)
