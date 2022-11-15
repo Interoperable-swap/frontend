@@ -6,7 +6,7 @@
 
 import Image from 'next/image'
 import { RiSettings3Fill } from 'react-icons/ri'
-import { AiOutlineDown, AiOutlineUp } from 'react-icons/ai'
+import { AiOutlineDown, AiOutlineUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { IoSwapVertical } from 'react-icons/io5'
 import astar from '../assets/astar.png'
 import shiden from '../assets/Shiden.png'
@@ -16,7 +16,7 @@ import Button from './Button'
 import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
-import { encodeAddress } from '@polkadot/keyring'
+
 import {
   router_address,
   address0,
@@ -109,7 +109,7 @@ const Main = () => {
 
   const setup = async () => {
     // initialize contracts
-    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
+    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address2)
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
@@ -136,15 +136,23 @@ const Main = () => {
     }
   }
   ///////////////////////////////////////////////////////////////////
+  /**
+   * Create token0:WSBY <> token1:Uni2 pair
+   * approve
+   * add lipuidity
+   * ONE : ONE
+   * sync
+   * getreserve
+   */
   //TODO:reserve amount
   const getPrice = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address)
-    const reserve = await pair.tx['pair::getReserves']({ gasLimit, storageDepositLimit })
-    if (reserve) {
-      console.log(reserve.toJSON()[0])
-      console.log(reserve.toJSON()[1])
-      console.log(reserve.toJSON()[2])
+    const reserve = await pair.query['pair::getReserves']('bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q', {
+      gasLimit: gasLimit,
+    })
+    if (reserve.result.isOk) {
+      console.log(reserve.output.toHuman())
     }
     const getreserve = await router.query['router::getAmountOut'](
       currentAccount.address,
@@ -222,7 +230,7 @@ const Main = () => {
           <div className={style.copyarea}>Balance :0</div>
         )}
         <div className={style.swapIcon}>
-          <IoSwapVertical size={42} />
+          <AiOutlineArrowDown size={42} />
         </div>
         <div className={style.transferPropContainer}>
           <input
