@@ -117,20 +117,23 @@ const Liquidity = () => {
       }
     })
   }
-
+  const token0 = BigInt(inputAmount1 * 10 ** Decimal)
+  const token1 = BigInt(inputAmount2 * 10 ** Decimal)
+  console.log('WSBY:', token0, 'UNI2', token1)
   const add_liquidity = async () => {
     setIsLoading(true)
-    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address0)
-    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address2)
+    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address2)
+    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
     //add liquidity via router
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     const deadline = '111111111111111111'
+
     await router.tx['router::addLiquidity'](
       { gasLimit, storageDepositLimit },
       getToken1Contract.address,
       getToken2Contract.address,
-      inputAmount1,
-      inputAmount2,
+      token0,
+      token1,
       0,
       0,
       currentAccount.address,
