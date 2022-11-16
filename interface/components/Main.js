@@ -107,8 +107,8 @@ const Main = () => {
 
   const setup = async () => {
     // initialize contracts
-    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address2)
-    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1)
+    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address2) //uni2
+    const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1) //wsby
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
     const token1balance = await getToken1Contract.query['psp22::balanceOf'](
@@ -117,7 +117,7 @@ const Main = () => {
       currentAccount.address,
     )
     if (token1balance.result.isOk) {
-      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
+      settoken1balance(token1balance.output.toString()) //TODO: FIX DECIMAL / 10 ** Decimal
     } else {
       console.error('Error', result.asErr)
     }
@@ -128,7 +128,7 @@ const Main = () => {
     )
     if (token2balance.result.isOk) {
       // output the return value
-      settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
+      settoken2balance(token2balance.output.toString()) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
       console.error('Error', result.asErr)
     }
@@ -142,11 +142,13 @@ const Main = () => {
    *done add lipuidity →transfer asset to pair_address(pair contract address)
    *done 1: 1,1:0.1
    *done sync how to sync by UI......
-   *error getreserve
+   *error getres
+	 *done execute swap 
    */
   //TODO:reserve amount
   const [reserve0, setReserve0] = useState()
   const [reserve1, setReserve1] = useState()
+  const [AmountOutMin, setAmountOutMin] = useState()
 
   const getReserves = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
@@ -155,27 +157,25 @@ const Main = () => {
       gasLimit: gasLimit,
     })
     if (reserve.result.isOk) {
-      console.log(reserve.output.toHuman())
       setReserve0(reserve.output[0].toHuman())
       setReserve1(reserve.output[1].toHuman())
       let timestamp = reserve.output[2].toHuman()
-      console.log('reserve0:', reserve0)
-      console.log('reserve1:', reserve1)
-      console.log('timestamp:', timestamp)
+      // console.log(reserve.output.toHuman())
+      // console.log('reserve0:', reserve0)
+      // console.log('reserve1:', reserve1)
+      // console.log('timestamp:', timestamp)
     }
     const token0 = BigInt(inputAmount1 * 10 ** Decimal)
     const token1 = BigInt(inputAmount2 * 10 ** Decimal)
-    const getAmountOut = await router.query['router::getAmountOut'](
+    // return [AmountIn,AmountOut]
+    const getAmountOut = await router.query['router::getAmountsOut'](
       currentAccount.address,
+      { gasLimit, storageDepositLimit },
       inputAmount1,
-      10,
-      inputAmount1,
-      {
-        gasLimit: gasLimit,
-      },
+      [Token2Contract.address, Token1Contract.address],
     )
     if (getAmountOut.result.isOk) {
-      setAmountOut(getAmountOut.output.toJSON()['ok']) // / BigInt(10 ** Decimal)
+      setAmountOutMin(BigInt(getAmountOut.output.toJSON()['ok'][1]))
     } else {
       console.error('Error', result.asErr)
     }
@@ -247,7 +247,7 @@ const Main = () => {
           <input
             type='text'
             className={style.transferPropInput}
-            placeholder={amountout}
+            placeholder={AmountOutMin}
             pattern='^[0-9]*[.,]?[0-9]*$'
             onChange={(e) => handleInput2(e, 'input2amount')}
           />
