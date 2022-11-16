@@ -1,8 +1,6 @@
-//TODO: GET SWAPPRICE
-//TODO: quote function
 //TODO: APPROVE WAITING STATE
 //TODO: SELECT TOKEN
-//TODO: FIX SETUP
+//TODO: AmountOut
 
 import Image from 'next/image'
 import { RiSettings3Fill } from 'react-icons/ri'
