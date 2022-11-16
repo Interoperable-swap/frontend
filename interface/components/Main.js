@@ -67,7 +67,8 @@ const Main = () => {
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [AmountOutMin, setAmountOutMin] = useState('0.0')
+  const [AmountOutMin, setAmountOutMin] = useState()
+  const [AmountInMax, setAmountInMax] = useState()
   const customStyles = {
     content: {
       top: '50%',
@@ -96,18 +97,28 @@ const Main = () => {
   const handleInput2 = (e) => {
     setInputAmount2(e.target.value)
   }
+
   useEffect(() => {
     if (api && currentAccount) {
       setup()
-      // getReserves()
     }
-  }, [api, currentAccount, inputAmount1, inputAmount2])
+  }, [api, currentAccount])
   useEffect(() => {
     if (api && currentAccount && inputAmount1 > 0) {
-      getReserves()
+      getAmountOut()
+    }
+    if (inputAmount1 == '') {
+      setAmountOutMin(0)
     }
   }, [inputAmount1])
-
+  useEffect(() => {
+    if (api && currentAccount && inputAmount2 > 0) {
+      getAmountIn()
+    }
+    if (inputAmount2 == '') {
+      setAmountInMax(0)
+    }
+  }, [inputAmount2])
   const setup = async () => {
     // initialize contracts
     const getToken1Contract = new ContractPromise(api, PSP22_ABI, address2) //uni2
@@ -135,23 +146,42 @@ const Main = () => {
       console.error('Error', result.asErr)
     }
   }
-  const getReserves = async () => {
+  const getAmountOut = async () => {
     // const token0 = BigInt(inputAmount1 * 10 ** Decimal)
     // const token1 = BigInt(inputAmount2 * 10 ** Decimal)
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
     // return [AmountIn,AmountOut]
-    const getAmountOut = await router.query['router::getAmountsOut'](
+    const AmountOut = await router.query['router::getAmountsOut'](
       currentAccount.address,
       { gasLimit, storageDepositLimit },
       inputAmount1,
       [Token2Contract.address, Token1Contract.address],
     )
-    if (getAmountOut.result.isOk) {
-      setAmountOutMin(BigInt(getAmountOut.output.toJSON()['ok'][1]))
+    if (AmountOut.result.isOk) {
+      setAmountOutMin(BigInt(AmountOut.output.toJSON()['ok'][1]))
     } else {
       console.error('Error', result.asErr)
     }
   }
+  const getAmountIn = async () => {
+    // const token0 = BigInt(inputAmount1 * 10 ** Decimal)
+    // const token1 = BigInt(inputAmount2 * 10 ** Decimal)
+    const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
+    // return [AmountIn,AmountOut]
+    const AmountIn = await router.query['router::getAmountsIn'](
+      currentAccount.address,
+      { gasLimit, storageDepositLimit },
+      inputAmount2,
+      [Token2Contract.address, Token1Contract.address],
+    )
+    if (AmountIn.result.isOk) {
+      setAmountInMax(BigInt(AmountIn.output.toJSON()['ok'][0]))
+      console.log(AmountInMax)
+    } else {
+      console.error('Error', result.asErr)
+    }
+  }
+  // TODO: Add other swap functions
   const runswap = async () => {
     setIsLoading(true)
     const deadline = '111111111111111111'
@@ -186,7 +216,7 @@ const Main = () => {
           <input
             type='text'
             className={style.transferPropInput}
-            placeholder='0.0'
+            placeholder={AmountInMax}
             pattern='^[0-9]*[.,]?[0-9]*$'
             onChange={(e) => handleInput1(e, 'input1amount')}
           />
