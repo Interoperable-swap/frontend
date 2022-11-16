@@ -69,7 +69,9 @@ const Main = () => {
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  const [amountout, setAmountOut] = useState('0.0')
+  // const [reserve0, setReserve0] = useState()
+  // const [reserve1, setReserve1] = useState()
+  const [AmountOutMin, setAmountOutMin] = useState(0)
   const customStyles = {
     content: {
       top: '50%',
@@ -146,12 +148,10 @@ const Main = () => {
 	 *done execute swap 
    */
   //TODO:reserve amount
-  const [reserve0, setReserve0] = useState()
-  const [reserve1, setReserve1] = useState()
-  const [AmountOutMin, setAmountOutMin] = useState()
 
   const getReserves = async () => {
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
+    /*
     const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address)
     const reserve = await pair.query['pair::getReserves'](pair_address, {
       gasLimit: gasLimit,
@@ -165,6 +165,7 @@ const Main = () => {
       // console.log('reserve1:', reserve1)
       // console.log('timestamp:', timestamp)
     }
+		*/
     const token0 = BigInt(inputAmount1 * 10 ** Decimal)
     const token1 = BigInt(inputAmount2 * 10 ** Decimal)
     // return [AmountIn,AmountOut]
