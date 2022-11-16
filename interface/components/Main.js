@@ -69,9 +69,7 @@ const Main = () => {
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  // const [reserve0, setReserve0] = useState()
-  // const [reserve1, setReserve1] = useState()
-  const [AmountOutMin, setAmountOutMin] = useState(0)
+  const [AmountOutMin, setAmountOutMin] = useState('0.0')
   const customStyles = {
     content: {
       top: '50%',
@@ -103,9 +101,14 @@ const Main = () => {
   useEffect(() => {
     if (api && currentAccount) {
       setup()
-      getReserves()
+      // getReserves()
     }
   }, [api, currentAccount, inputAmount1, inputAmount2])
+  useEffect(() => {
+    if (api && currentAccount && inputAmount1 > 0) {
+      getReserves()
+    }
+  }, [inputAmount1])
 
   const setup = async () => {
     // initialize contracts
@@ -129,45 +132,15 @@ const Main = () => {
       currentAccount.address,
     )
     if (token2balance.result.isOk) {
-      // output the return value
       settoken2balance(token2balance.output.toString()) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
       console.error('Error', result.asErr)
     }
   }
-  ///////////////////////////////////////////////////////////////////
-  /**
-	 * // uni1<>wsby pair bL7zEmpzvxdhNdxHLYibQBWk24r1LRUuPtdpXNCbRzLgM1Q
-		// wsby<>UNI2 pair ZZmi8jq7LtDecomVXcAuKXxkrCdX26PyLtsiNJopDvy3Hwc
-   *done Create token0:WSBY <> token1:Uni2 pair
-   *done approve
-   *done add lipuidity →transfer asset to pair_address(pair contract address)
-   *done 1: 1,1:0.1
-   *done sync how to sync by UI......
-   *error getres
-	 *done execute swap 
-   */
-  //TODO:reserve amount
-
   const getReserves = async () => {
+    // const token0 = BigInt(inputAmount1 * 10 ** Decimal)
+    // const token1 = BigInt(inputAmount2 * 10 ** Decimal)
     const router = new ContractPromise(api, ROUTER_CONTRACT, router_address)
-    /*
-    const pair = new ContractPromise(api, PAIR_CONTRACT, pair_address)
-    const reserve = await pair.query['pair::getReserves'](pair_address, {
-      gasLimit: gasLimit,
-    })
-    if (reserve.result.isOk) {
-      setReserve0(reserve.output[0].toHuman())
-      setReserve1(reserve.output[1].toHuman())
-      let timestamp = reserve.output[2].toHuman()
-      // console.log(reserve.output.toHuman())
-      // console.log('reserve0:', reserve0)
-      // console.log('reserve1:', reserve1)
-      // console.log('timestamp:', timestamp)
-    }
-		*/
-    const token0 = BigInt(inputAmount1 * 10 ** Decimal)
-    const token1 = BigInt(inputAmount2 * 10 ** Decimal)
     // return [AmountIn,AmountOut]
     const getAmountOut = await router.query['router::getAmountsOut'](
       currentAccount.address,
@@ -181,7 +154,6 @@ const Main = () => {
       console.error('Error', result.asErr)
     }
   }
-  ///////////////////////////////////////////////////////////////////
   const runswap = async () => {
     setIsLoading(true)
     const deadline = '111111111111111111'
