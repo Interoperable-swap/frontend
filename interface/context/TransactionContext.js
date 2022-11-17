@@ -8,30 +8,23 @@ let pjs
 if (typeof window !== 'undefined') {
   pjs = window.injectedWeb3
 }
-/**
- * BlastAPI: wss://shibuya.public.blastapi.io
-	Dwellir: wss://shibuya-rpc.dwellir.com
-	Astar Team: wss://rpc.shibuya.astar.network
- * 
+/* EndPoint
+  'wss://shibuya.public.blastapi.io'
+	'wss://shibuya-rpc.dwellir.com'
+	'wss://rpc.shibuya.astar.network' 
  */
-const WS_PROVIDER = 'wss://shibuya-rpc.dwellir.com'
+const WS_PROVIDER = 'wss://rpc.shibuya.astar.network'
 const DAPP_NAME = 'Shiden DEX'
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState()
   const [api, setapi] = useState()
-  const [amount, setAmount] = useState()
   const [signer, setSigner] = useState()
   useEffect(() => {
     checkIfWalletIsConnected()
   }, [])
-
-  const handleChange = (e) => {
-    //setAmount(e.target.value);
-  }
-  const connectWallet = async () => {
+  const connectWallet = async (pjs = 'polkadot-js') => {
     try {
-      if (!pjs) return alert('Please install polkadot-js ')
-      const { web3Enable, web3Accounts, web3FromSource } = await import('@polkadot/extension-dapp')
+      const { web3Enable, web3Accounts, web3FromAddress } = await import('@polkadot/extension-dapp')
       const extensions = await web3Enable(DAPP_NAME)
       if (extensions.length === 0) {
         // no extension installed, or the user did not accept the authorization
@@ -39,39 +32,43 @@ export const TransactionProvider = ({ children }) => {
         return
       }
       const provider = new WsProvider(WS_PROVIDER)
-
       const api = await ApiPromise.create({ provider })
       setapi(api)
       const allaccounts = await web3Accounts()
       const account = allaccounts[0]
       setCurrentAccount(account)
-      const injector = await web3FromSource(account.meta.source)
-
-      setSigner(injector)
-      if (!pjs) return alert('Please install polkadot-js ')
+      if (account.address) {
+        const injector = await web3FromAddress(account.address)
+        setSigner(injector)
+      }
     } catch (error) {
       console.error(error)
     }
   }
-  const checkIfWalletIsConnected = async () => {
+  const checkIfWalletIsConnected = async (pjs = 'polkadot-js') => {
     try {
-      const { web3Enable, web3Accounts, web3FromSource } = await import('@polkadot/extension-dapp')
+      if (!currentAccount) {
+        const { web3Enable } = await import('@polkadot/extension-dapp')
+        const extensions = await web3Enable(DAPP_NAME)
+        if (extensions.length === 0) {
+          return
+        }
+      }
+      const { web3Enable, web3Accounts, web3FromAddress } = await import('@polkadot/extension-dapp')
       const extensions = await web3Enable(DAPP_NAME)
       if (extensions.length === 0) {
         return
       }
       const allaccounts = await web3Accounts()
-      if (allaccounts.length) {
-        setCurrentAccount(allaccounts[0])
-      }
       const provider = new WsProvider(WS_PROVIDER)
       const api = await ApiPromise.create({ provider })
       setapi(api)
-      api.isReady
       const account = allaccounts[0]
       setCurrentAccount(account)
-      const injector = await web3FromSource(account.meta.source)
-      setSigner(injector)
+      if (account.address) {
+        const injector = await web3FromAddress(account.address)
+        setSigner(injector)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -82,8 +79,6 @@ export const TransactionProvider = ({ children }) => {
         currentAccount,
         connectWallet,
         api,
-        handleChange,
-        amount,
         signer,
       }}
     >

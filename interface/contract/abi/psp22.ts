@@ -1,4 +1,3 @@
-export const PAIR_ADDRESS = ''
 export const PSP22_ABI = {
   source: {
     hash: '0xbc9194904cb5059e6d187206142b46d4096202dee523bcd785b9f81ff4fab7af',
