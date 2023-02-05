@@ -84,19 +84,19 @@ const Main = () => {
       backgroundColor: 'rgba(10, 11, 13, 0.75)',
     },
   }
-  useEffect(() => {
-    if (isLoading) {
-      router.push(`/?loading=${currentAccount}`)
-    } else {
-      router.push(`/`)
-    }
-  }, [isLoading])
-  const handleInput1 = (e) => {
-    setInputAmount1(e.target.value)
-  }
-  const handleInput2 = (e) => {
-    setInputAmount2(e.target.value)
-  }
+  // useEffect(() => {
+  //   if (isLoading) {
+  //     router.push(`/?loading=${currentAccount}`)
+  //   } else {
+  //     router.push(`/`)
+  //   }
+  // }, [isLoading])
+  // const handleInput1 = (e) => {
+  //   setInputAmount1(e.target.value)
+  // }
+  // const handleInput2 = (e) => {
+  //   setInputAmount2(e.target.value)
+  // }
 
   useEffect(() => {
     if (api && currentAccount) {
