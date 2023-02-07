@@ -80,6 +80,7 @@ const Navbar = () => {
             <AiOutlineDown />
           </div>
         </div>
+				
         {currentAccount ? (
           <div className={`${style.button} ${style.buttonPadding}`}>
             <div className={style.buttonIconContainer}>
@@ -92,7 +93,6 @@ const Navbar = () => {
             <div className={`${style.buttonAccent} ${style.buttonPadding}`}>Connect Wallet</div>
           </div>
         )}
-
         <div className={`${style.button} ${style.buttonPadding}`}>
           <div className={`${style.buttonIconContainer} mx-2`}>
             <HiOutlineDotsVertical />
