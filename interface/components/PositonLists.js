@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Card from './LP/Card'
-import PositionList from './LP/PositionList'
-import Empty_position from './LP/EmptyPosition'
-const AccountList = () => {
+import Card from './positons/Card'
+import PositionList from './positons/PositionList'
+import Empty_position from './positons/EmptyPosition'
+const PositonList = () => {
   const [positon, setPosition] = useState(false)
   return (
     <div>
@@ -48,4 +48,4 @@ const AccountList = () => {
   )
 }
 
-export default AccountList
+export default PositonList
