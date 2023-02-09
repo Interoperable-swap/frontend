@@ -5,13 +5,13 @@ import { AiOutlineDown, AiOutlinePlus } from 'react-icons/ai'
 import astar from '../assets/astar.png'
 import Shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
-import Button from './Button'
-import { TransactionContext } from '../context/TransactionContext'
+import Button from '../Button'
+import { TransactionContext } from '../../context/TransactionContext'
 
-import ROUTER_CONTRACT from '../contract/abi/router'
+import ROUTER_CONTRACT from '../../contract/abi/router'
 import { ContractPromise } from '@polkadot/api-contract'
-import { PSP22_ABI } from '../contract/abi/psp22'
-import { WNATIVE_ABI } from '../contract/abi/wnative'
+import { PSP22_ABI } from '../../contract/abi/psp22'
+import { WNATIVE_ABI } from '../../contract/abi/wnative'
 import {
   factory_address,
   router_address,
@@ -21,11 +21,11 @@ import {
   address2,
   ONE,
   Decimal,
-} from '../util/RouterUtil'
+} from '../../util/RouterUtil'
 import { BN } from 'bn.js'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
-import LoadingTransaction from './Modal/LoadingTransaction'
+import LoadingTransaction from '../Modal/LoadingTransaction'
 Modal.setAppElement('#__next')
 
 const style = {

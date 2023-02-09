@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Card from './positons/Card'
-import PositionList from './positons/PositionList'
-import Empty_position from './positons/EmptyPosition'
+import Card from './Card'
+import PositionList from './Position'
+import Empty_position from './EmptyPosition'
 const PositonList = () => {
-  const [positon, setPosition] = useState(false)
+  const [positon, setPosition] = useState(true)
   return (
     <div>
       <Card
