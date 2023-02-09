@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
-import Card from './Card'
+import Card from './PositonContainer'
+import Link from 'next/link'
 import PositionList from './Position'
 import Empty_position from './EmptyPosition'
+
 const PositonList = () => {
   const [positon, setPosition] = useState(true)
   return (
     <div>
       <Card
         button={
-          <button className='bg-blue-500 text-white py-2 px-4 rounded-full' onClick={() => setPosition(!positon)}>
-            New Position
+          <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full font-medium'>
+            <Link href='/pools'>New Position</Link>
           </button>
         }
       >

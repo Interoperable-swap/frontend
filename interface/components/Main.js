@@ -10,8 +10,8 @@ import astar from '../assets/astar.png'
 import shiden from '../assets/Shiden.png'
 import uniswap from '../assets/uniswap.png'
 import { useContext, useEffect, useState } from 'react'
-import Button from '../Button'
-import { TransactionContext } from '../../context/TransactionContext'
+import Button from './Button'
+import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 
@@ -24,16 +24,16 @@ import {
   factory_address,
   ONE,
   Decimal,
-} from '../../util/RouterUtil'
+} from '../util/RouterUtil'
 //abi
-import PAIR_CONTRACT from '../../contract/abi/pair'
-import FACTORY_CONTRACT from '../../contract/abi/factory'
-import { PSP22_ABI } from '../../contract/abi/psp22'
-import { WNATIVE_ABI } from '../../contract/abi/wnative'
-import ROUTER_CONTRACT from '../../contract/abi/router'
+import PAIR_CONTRACT from '../contract/abi/pair'
+import FACTORY_CONTRACT from '../contract/abi/factory'
+import { PSP22_ABI } from '../contract/abi/psp22'
+import { WNATIVE_ABI } from '../contract/abi/wnative'
+import ROUTER_CONTRACT from '../contract/abi/router'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
-import LoadingTransaction from '../Modal/LoadingTransaction'
+import LoadingTransaction from './Modal/LoadingTransaction'
 
 Modal.setAppElement('#__next')
 
@@ -84,19 +84,19 @@ const Main = () => {
       backgroundColor: 'rgba(10, 11, 13, 0.75)',
     },
   }
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     router.push(`/?loading=${currentAccount}`)
-  //   } else {
-  //     router.push(`/`)
-  //   }
-  // }, [isLoading])
-  // const handleInput1 = (e) => {
-  //   setInputAmount1(e.target.value)
-  // }
-  // const handleInput2 = (e) => {
-  //   setInputAmount2(e.target.value)
-  // }
+  useEffect(() => {
+    if (isLoading) {
+      router.push(`/?loading=${currentAccount}`)
+    } else {
+      router.push(`/`)
+    }
+  }, [isLoading])
+  const handleInput1 = (e) => {
+    setInputAmount1(e.target.value)
+  }
+  const handleInput2 = (e) => {
+    setInputAmount2(e.target.value)
+  }
 
   useEffect(() => {
     if (api && currentAccount) {
