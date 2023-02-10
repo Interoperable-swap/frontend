@@ -18,7 +18,7 @@ const NumberSelector = (props) => {
     setNumber(parseFloat(e.target.value))
   }
   return (
-    <div className='flex items-center justify-center'>
+    <div className='flex rounded-2xl p-4'>
       <button
         className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full mr-2'
         onClick={handleDecrement}
@@ -29,7 +29,7 @@ const NumberSelector = (props) => {
         type='text'
         value={number}
         onChange={(e) => handleInput(e)}
-        className='bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-2xl text-center'
+        className=' text-gray-700 font-bold py-2 px-4 rounded-2xl text-center w-24'
       />
       <button
         className='bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full ml-2'

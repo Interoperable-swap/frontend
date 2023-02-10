@@ -10,9 +10,11 @@ const PositonList = () => {
     <div>
       <Card
         button={
-          <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full font-medium'>
-            <Link href='/pools'>New Position</Link>
-          </button>
+          <Link href='/pools'>
+            <button className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-full font-medium'>
+              New Position
+            </button>
+          </Link>
         }
       >
         {positon ? (
