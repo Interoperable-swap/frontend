@@ -123,9 +123,9 @@ const Main = () => {
       currentAccount.address,
     )
     if (token1balance.result.isOk) {
-      settoken1balance(token1balance.output.toString()) //TODO: FIX DECIMAL / 10 ** Decimal
+      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
     } else {
-      // console.error('Error', result.asErr)
+      console.error('Error', result.asErr)
     }
     const token2balance = await getToken2Contract.query['psp22::balanceOf'](
       currentAccount.address,
@@ -133,9 +133,9 @@ const Main = () => {
       currentAccount.address,
     )
     if (token2balance.result.isOk) {
-      settoken2balance(token2balance.output.toString()) //TODO FIX DECIMAL / 10 ** Decimal
+      settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
-      // console.error('Error', result.asErr)
+      console.error('Error', result.asErr)
     }
   }
   const getAmountOut = async () => {
