@@ -1,4 +1,4 @@
-const ROUTER_CONTRACT = {
+{
   "source": {
     "hash": "0x74ca77ac90a721cabd0673703bbe204c67250cb0670bb72102ab1302602bc89d",
     "language": "ink! 3.4.0",
@@ -1972,5 +1972,3 @@ const ROUTER_CONTRACT = {
     ]
   }
 }
-
-export default ROUTER_CONTRACT
