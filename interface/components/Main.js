@@ -15,16 +15,7 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 
-import {
-  router_address,
-  address0,
-  address1,
-  address2,
-  pair_address,
-  factory_address,
-  ONE,
-  Decimal,
-} from '../util/RouterUtil'
+import { router_address, address0, address1, address2, ONE, Decimal } from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
