@@ -1,11 +1,11 @@
 export const WNATIVE_ABI = {
   source: {
-    hash: '0x981ff19bf6b058597b74c2ead890b719f135a2f098dc34ccc439ce05159daf27',
-    language: 'ink! 3.4.0',
+    hash: '0x6b616ae7cc55120c76dcf49e94a0b9ca321c342d77ac4e618092d40d425738d1',
+    language: 'ink! 3.3.1',
     compiler: 'rustc 1.65.0-nightly',
   },
   contract: {
-    name: 'wnative_contract',
+    name: 'w_native_token',
     version: '0.1.0',
     authors: ['Stake Technologies <devops@stake.co.jp>'],
   },
@@ -30,7 +30,7 @@ export const WNATIVE_ABI = {
               label: 'from',
               type: {
                 displayName: ['Option'],
-                type: 16,
+                type: 17,
               },
             },
             {
@@ -39,7 +39,7 @@ export const WNATIVE_ABI = {
               label: 'to',
               type: {
                 displayName: ['Option'],
-                type: 16,
+                type: 17,
               },
             },
             {
@@ -91,6 +91,166 @@ export const WNATIVE_ABI = {
       ],
       messages: [
         {
+          args: [],
+          docs: [],
+          label: 'deposit',
+          mutates: true,
+          payable: true,
+          returnType: {
+            displayName: ['Result'],
+            type: 13,
+          },
+          selector: '0x2d10c9bd',
+        },
+        {
+          args: [
+            {
+              label: 'amount',
+              type: {
+                displayName: ['Balance'],
+                type: 0,
+              },
+            },
+          ],
+          docs: [],
+          label: 'withdraw',
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ['Result'],
+            type: 13,
+          },
+          selector: '0x410fcc9d',
+        },
+        {
+          args: [],
+          docs: [' Returns the total token supply.'],
+          label: 'PSP22::total_supply',
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ['psp22_external', 'TotalSupplyOutput'],
+            type: 0,
+          },
+          selector: '0x162df8c2',
+        },
+        {
+          args: [
+            {
+              label: 'spender',
+              type: {
+                displayName: ['psp22_external', 'IncreaseAllowanceInput1'],
+                type: 2,
+              },
+            },
+            {
+              label: 'delta_value',
+              type: {
+                displayName: ['psp22_external', 'IncreaseAllowanceInput2'],
+                type: 0,
+              },
+            },
+          ],
+          docs: [
+            ' Atomically increases the allowance granted to `spender` by the caller.',
+            '',
+            ' An `Approval` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            " Returns `ZeroSenderAddress` error if sender's address is zero.",
+            '',
+            " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
+          ],
+          label: 'PSP22::increase_allowance',
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ['psp22_external', 'IncreaseAllowanceOutput'],
+            type: 13,
+          },
+          selector: '0x96d6b57a',
+        },
+        {
+          args: [
+            {
+              label: 'owner',
+              type: {
+                displayName: ['psp22_external', 'AllowanceInput1'],
+                type: 2,
+              },
+            },
+            {
+              label: 'spender',
+              type: {
+                displayName: ['psp22_external', 'AllowanceInput2'],
+                type: 2,
+              },
+            },
+          ],
+          docs: [
+            ' Returns the amount which `spender` is still allowed to withdraw from `owner`.',
+            '',
+            ' Returns `0` if no allowance has been set `0`.',
+          ],
+          label: 'PSP22::allowance',
+          mutates: false,
+          payable: false,
+          returnType: {
+            displayName: ['psp22_external', 'AllowanceOutput'],
+            type: 0,
+          },
+          selector: '0x4d47d921',
+        },
+        {
+          args: [
+            {
+              label: 'to',
+              type: {
+                displayName: ['psp22_external', 'TransferInput1'],
+                type: 2,
+              },
+            },
+            {
+              label: 'value',
+              type: {
+                displayName: ['psp22_external', 'TransferInput2'],
+                type: 0,
+              },
+            },
+            {
+              label: 'data',
+              type: {
+                displayName: ['psp22_external', 'TransferInput3'],
+                type: 15,
+              },
+            },
+          ],
+          docs: [
+            " Transfers `value` amount of tokens from the caller's account to account `to`",
+            ' with additional `data` in unspecified format.',
+            '',
+            ' On success a `Transfer` event is emitted.',
+            '',
+            ' # Errors',
+            '',
+            ' Returns `InsufficientBalance` error if there are not enough tokens on',
+            " the caller's account Balance.",
+            '',
+            " Returns `ZeroSenderAddress` error if sender's address is zero.",
+            '',
+            " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
+          ],
+          label: 'PSP22::transfer',
+          mutates: true,
+          payable: false,
+          returnType: {
+            displayName: ['psp22_external', 'TransferOutput'],
+            type: 13,
+          },
+          selector: '0xdb20f9f5',
+        },
+        {
           args: [
             {
               label: 'spender',
@@ -133,118 +293,63 @@ export const WNATIVE_ABI = {
         {
           args: [
             {
-              label: 'spender',
+              label: 'from',
               type: {
-                displayName: ['psp22_external', 'IncreaseAllowanceInput1'],
+                displayName: ['psp22_external', 'TransferFromInput1'],
                 type: 2,
               },
             },
             {
-              label: 'delta_value',
-              type: {
-                displayName: ['psp22_external', 'IncreaseAllowanceInput2'],
-                type: 0,
-              },
-            },
-          ],
-          docs: [
-            ' Atomically increases the allowance granted to `spender` by the caller.',
-            '',
-            ' An `Approval` event is emitted.',
-            '',
-            ' # Errors',
-            '',
-            " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            '',
-            " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
-          ],
-          label: 'PSP22::increase_allowance',
-          mutates: true,
-          payable: false,
-          returnType: {
-            displayName: ['psp22_external', 'IncreaseAllowanceOutput'],
-            type: 13,
-          },
-          selector: '0x96d6b57a',
-        },
-        {
-          args: [
-            {
               label: 'to',
               type: {
-                displayName: ['psp22_external', 'TransferInput1'],
+                displayName: ['psp22_external', 'TransferFromInput2'],
                 type: 2,
               },
             },
             {
               label: 'value',
               type: {
-                displayName: ['psp22_external', 'TransferInput2'],
+                displayName: ['psp22_external', 'TransferFromInput3'],
                 type: 0,
               },
             },
             {
               label: 'data',
               type: {
-                displayName: ['psp22_external', 'TransferInput3'],
-                type: 12,
+                displayName: ['psp22_external', 'TransferFromInput4'],
+                type: 15,
               },
             },
           ],
           docs: [
-            " Transfers `value` amount of tokens from the caller's account to account `to`",
+            ' Transfers `value` tokens on the behalf of `from` to the account `to`',
             ' with additional `data` in unspecified format.',
             '',
-            ' On success a `Transfer` event is emitted.',
+            ' This can be used to allow a contract to transfer tokens on ones behalf and/or',
+            ' to charge fees in sub-currencies, for example.',
+            '',
+            ' On success a `Transfer` and `Approval` events are emitted.',
             '',
             ' # Errors',
             '',
+            ' Returns `InsufficientAllowance` error if there are not enough tokens allowed',
+            ' for the caller to withdraw from `from`.',
+            '',
             ' Returns `InsufficientBalance` error if there are not enough tokens on',
-            " the caller's account Balance.",
+            ' the the account Balance of `from`.',
             '',
             " Returns `ZeroSenderAddress` error if sender's address is zero.",
             '',
             " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
           ],
-          label: 'PSP22::transfer',
+          label: 'PSP22::transfer_from',
           mutates: true,
           payable: false,
           returnType: {
-            displayName: ['psp22_external', 'TransferOutput'],
+            displayName: ['psp22_external', 'TransferFromOutput'],
             type: 13,
           },
-          selector: '0xdb20f9f5',
-        },
-        {
-          args: [
-            {
-              label: 'owner',
-              type: {
-                displayName: ['psp22_external', 'AllowanceInput1'],
-                type: 2,
-              },
-            },
-            {
-              label: 'spender',
-              type: {
-                displayName: ['psp22_external', 'AllowanceInput2'],
-                type: 2,
-              },
-            },
-          ],
-          docs: [
-            ' Returns the amount which `spender` is still allowed to withdraw from `owner`.',
-            '',
-            ' Returns `0` if no allowance has been set `0`.',
-          ],
-          label: 'PSP22::allowance',
-          mutates: false,
-          payable: false,
-          returnType: {
-            displayName: ['psp22_external', 'AllowanceOutput'],
-            type: 0,
-          },
-          selector: '0x4d47d921',
+          selector: '0x54b3c76e',
         },
         {
           args: [
@@ -312,108 +417,27 @@ export const WNATIVE_ABI = {
         },
         {
           args: [],
-          docs: [' Returns the total token supply.'],
-          label: 'PSP22::total_supply',
+          docs: [' Returns the token symbol.'],
+          label: 'PSP22Metadata::token_symbol',
           mutates: false,
           payable: false,
           returnType: {
-            displayName: ['psp22_external', 'TotalSupplyOutput'],
-            type: 0,
+            displayName: ['psp22metadata_external', 'TokenSymbolOutput'],
+            type: 16,
           },
-          selector: '0x162df8c2',
-        },
-        {
-          args: [
-            {
-              label: 'from',
-              type: {
-                displayName: ['psp22_external', 'TransferFromInput1'],
-                type: 2,
-              },
-            },
-            {
-              label: 'to',
-              type: {
-                displayName: ['psp22_external', 'TransferFromInput2'],
-                type: 2,
-              },
-            },
-            {
-              label: 'value',
-              type: {
-                displayName: ['psp22_external', 'TransferFromInput3'],
-                type: 0,
-              },
-            },
-            {
-              label: 'data',
-              type: {
-                displayName: ['psp22_external', 'TransferFromInput4'],
-                type: 12,
-              },
-            },
-          ],
-          docs: [
-            ' Transfers `value` tokens on the behalf of `from` to the account `to`',
-            ' with additional `data` in unspecified format.',
-            '',
-            ' This can be used to allow a contract to transfer tokens on ones behalf and/or',
-            ' to charge fees in sub-currencies, for example.',
-            '',
-            ' On success a `Transfer` and `Approval` events are emitted.',
-            '',
-            ' # Errors',
-            '',
-            ' Returns `InsufficientAllowance` error if there are not enough tokens allowed',
-            ' for the caller to withdraw from `from`.',
-            '',
-            ' Returns `InsufficientBalance` error if there are not enough tokens on',
-            ' the the account Balance of `from`.',
-            '',
-            " Returns `ZeroSenderAddress` error if sender's address is zero.",
-            '',
-            " Returns `ZeroRecipientAddress` error if recipient's address is zero.",
-          ],
-          label: 'PSP22::transfer_from',
-          mutates: true,
-          payable: false,
-          returnType: {
-            displayName: ['psp22_external', 'TransferFromOutput'],
-            type: 13,
-          },
-          selector: '0x54b3c76e',
-        },
-        {
-          args: [
-            {
-              label: 'amount',
-              type: {
-                displayName: ['wnative_external', 'WithdrawInput1'],
-                type: 0,
-              },
-            },
-          ],
-          docs: [' Unwrap NATIVE'],
-          label: 'Wnative::withdraw',
-          mutates: true,
-          payable: false,
-          returnType: {
-            displayName: ['wnative_external', 'WithdrawOutput'],
-            type: 13,
-          },
-          selector: '0x5711e810',
+          selector: '0x34205be5',
         },
         {
           args: [],
-          docs: [' Deposit NATIVE to wrap it'],
-          label: 'Wnative::deposit',
-          mutates: true,
-          payable: true,
+          docs: [' Returns the token name.'],
+          label: 'PSP22Metadata::token_name',
+          mutates: false,
+          payable: false,
           returnType: {
-            displayName: ['wnative_external', 'DepositOutput'],
-            type: 13,
+            displayName: ['psp22metadata_external', 'TokenNameOutput'],
+            type: 16,
           },
-          selector: '0x9e1de11d',
+          selector: '0x3d261bd4',
         },
         {
           args: [],
@@ -426,30 +450,6 @@ export const WNATIVE_ABI = {
             type: 4,
           },
           selector: '0x7271b782',
-        },
-        {
-          args: [],
-          docs: [' Returns the token name.'],
-          label: 'PSP22Metadata::token_name',
-          mutates: false,
-          payable: false,
-          returnType: {
-            displayName: ['psp22metadata_external', 'TokenNameOutput'],
-            type: 15,
-          },
-          selector: '0x3d261bd4',
-        },
-        {
-          args: [],
-          docs: [' Returns the token symbol.'],
-          label: 'PSP22Metadata::token_symbol',
-          mutates: false,
-          payable: false,
-          returnType: {
-            displayName: ['psp22metadata_external', 'TokenSymbolOutput'],
-            type: 15,
-          },
-          selector: '0x34205be5',
         },
       ],
     },
@@ -767,9 +767,7 @@ export const WNATIVE_ABI = {
         id: 12,
         type: {
           def: {
-            sequence: {
-              type: 4,
-            },
+            primitive: 'str',
           },
         },
       },
@@ -865,6 +863,16 @@ export const WNATIVE_ABI = {
         id: 15,
         type: {
           def: {
+            sequence: {
+              type: 4,
+            },
+          },
+        },
+      },
+      {
+        id: 16,
+        type: {
+          def: {
             variant: {
               variants: [
                 {
@@ -893,7 +901,7 @@ export const WNATIVE_ABI = {
         },
       },
       {
-        id: 16,
+        id: 17,
         type: {
           def: {
             variant: {
