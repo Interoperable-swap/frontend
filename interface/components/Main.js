@@ -125,6 +125,7 @@ const Main = () => {
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1) //wsby
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
+
     const token1balance = await getToken1Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
