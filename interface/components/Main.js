@@ -195,6 +195,7 @@ const Main = () => {
       }
     })
   }
+
   return (
     <div className={style.wrapper}>
       <div className={style.content}>

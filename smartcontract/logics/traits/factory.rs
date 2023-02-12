@@ -1,5 +1,5 @@
 use crate::traits::pair::PairError;
-use ink_env::Hash;
+use ink::primitives::Hash;
 use openbrush::traits::AccountId;
 
 #[openbrush::wrapper]
@@ -47,6 +47,7 @@ pub enum FactoryError {
     ZeroAddress,
     IdenticalAddresses,
     PairExists,
+    PairInstantiationFailed,
 }
 
 impl From<PairError> for FactoryError {

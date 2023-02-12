@@ -12,6 +12,7 @@ if (typeof window !== 'undefined') {
   'wss://shibuya.public.blastapi.io'
 	'wss://shibuya-rpc.dwellir.com'
 	'wss://rpc.shibuya.astar.network' 
+	'ws://127.0.0.1:9944'
  */
 const WS_PROVIDER = 'ws://127.0.0.1:9944'
 const DAPP_NAME = 'Shiden DEX'
