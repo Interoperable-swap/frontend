@@ -1,6 +1,8 @@
 use crate::traits::wnative::WnativeRef;
-use ink_env::DefaultEnvironment;
-use ink_prelude::vec::Vec;
+use ink::{
+    env::DefaultEnvironment,
+    prelude::vec::Vec,
+};
 use openbrush::{
     contracts::psp22::{
         PSP22Error,
@@ -9,6 +11,7 @@ use openbrush::{
     traits::{
         AccountId,
         Balance,
+        String,
     },
 };
 
@@ -18,7 +21,7 @@ pub fn safe_transfer(token: AccountId, to: AccountId, value: Balance) -> Result<
 }
 
 pub fn safe_transfer_native(to: AccountId, value: Balance) -> Result<(), TransferHelperError> {
-    ink_env::transfer::<DefaultEnvironment>(to, value)
+    ink::env::transfer::<DefaultEnvironment>(to, value)
         .map_err(|_| TransferHelperError::TransferFailed)
 }
 
@@ -34,10 +37,18 @@ pub fn safe_transfer_from(
 
 #[inline]
 pub fn wrap(wnative: &AccountId, value: Balance) -> Result<(), PSP22Error> {
-    WnativeRef::deposit_builder(wnative)
+    match WnativeRef::deposit_builder(wnative)
         .transferred_value(value)
         .fire()
-        .unwrap()
+    {
+        Ok(res) => {
+            match res {
+                Ok(_) => Ok(()),
+                Err(_) => Err(PSP22Error::Custom(String::from("deposit failed"))),
+            }
+        }
+        Err(_) => Err(PSP22Error::Custom(String::from("deposit failed"))),
+    }
 }
 
 #[inline]
