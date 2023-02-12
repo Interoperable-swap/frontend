@@ -66,7 +66,6 @@ export const TransactionProvider = ({ children }) => {
       const api = await ApiPromise.create({ provider })
       setapi(api)
       const properties = await api.rpc.system.properties()
-      console.log(properties.toHuman())
       const account = allaccounts[0]
       setCurrentAccount(account)
       if (account.address) {
