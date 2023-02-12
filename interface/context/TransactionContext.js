@@ -12,8 +12,9 @@ if (typeof window !== 'undefined') {
   'wss://shibuya.public.blastapi.io'
 	'wss://shibuya-rpc.dwellir.com'
 	'wss://rpc.shibuya.astar.network' 
+	'ws://127.0.0.1:9944'
  */
-const WS_PROVIDER = 'wss://rpc.shibuya.astar.network'
+const WS_PROVIDER = 'ws://127.0.0.1:9944'
 const DAPP_NAME = 'Shiden DEX'
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState()
@@ -65,7 +66,6 @@ export const TransactionProvider = ({ children }) => {
       const api = await ApiPromise.create({ provider })
       setapi(api)
       const properties = await api.rpc.system.properties()
-      console.log(properties.toHuman())
       const account = allaccounts[0]
       setCurrentAccount(account)
       if (account.address) {

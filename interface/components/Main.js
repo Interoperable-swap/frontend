@@ -15,16 +15,7 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 
-import {
-  router_address,
-  address0,
-  address1,
-  address2,
-  pair_address,
-  factory_address,
-  ONE,
-  Decimal,
-} from '../util/RouterUtil'
+import { router_address, address0, address1, address2, ONE, Decimal } from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
@@ -84,19 +75,19 @@ const Main = () => {
       backgroundColor: 'rgba(10, 11, 13, 0.75)',
     },
   }
-  // useEffect(() => {
-  //   if (isLoading) {
-  //     router.push(`/?loading=${currentAccount}`)
-  //   } else {
-  //     router.push(`/`)
-  //   }
-  // }, [isLoading])
-  // const handleInput1 = (e) => {
-  //   setInputAmount1(e.target.value)
-  // }
-  // const handleInput2 = (e) => {
-  //   setInputAmount2(e.target.value)
-  // }
+  useEffect(() => {
+    if (isLoading) {
+      router.push(`/?loading=${currentAccount}`)
+    } else {
+      router.push(`/`)
+    }
+  }, [isLoading])
+  const handleInput1 = (e) => {
+    setInputAmount1(e.target.value)
+  }
+  const handleInput2 = (e) => {
+    setInputAmount2(e.target.value)
+  }
 
   useEffect(() => {
     if (api && currentAccount) {
@@ -125,15 +116,16 @@ const Main = () => {
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1) //wsby
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
+
     const token1balance = await getToken1Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
       currentAccount.address,
     )
     if (token1balance.result.isOk) {
-      settoken1balance(token1balance.output.toString()) //TODO: FIX DECIMAL / 10 ** Decimal
+      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
     } else {
-      // console.error('Error', result.asErr)
+      console.error('Error', result.asErr)
     }
     const token2balance = await getToken2Contract.query['psp22::balanceOf'](
       currentAccount.address,
@@ -141,9 +133,9 @@ const Main = () => {
       currentAccount.address,
     )
     if (token2balance.result.isOk) {
-      settoken2balance(token2balance.output.toString()) //TODO FIX DECIMAL / 10 ** Decimal
+      settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
-      // console.error('Error', result.asErr)
+      console.error('Error', result.asErr)
     }
   }
   const getAmountOut = async () => {
@@ -203,6 +195,7 @@ const Main = () => {
       }
     })
   }
+
   return (
     <div className={style.wrapper}>
       <div className={style.content}>

@@ -3,14 +3,13 @@
 
 #[openbrush::contract]
 pub mod factory {
-    use ink_lang::{
+    use ink::{
         codegen::{
             EmitEvent,
             Env,
         },
         ToAccountId,
     };
-    use ink_storage::traits::SpreadAllocate;
     use openbrush::traits::Storage;
     use pair_contract::pair::PairContractRef;
     use uniswap_v2::{
@@ -29,7 +28,7 @@ pub mod factory {
     }
 
     #[ink(storage)]
-    #[derive(Default, SpreadAllocate, Storage)]
+    #[derive(Default, Storage)]
     pub struct FactoryContract {
         #[storage_field]
         factory: data::Data,
@@ -38,15 +37,15 @@ pub mod factory {
     impl Factory for FactoryContract {}
 
     impl factory::Internal for FactoryContract {
-        fn _instantiate_pair(&mut self, salt_bytes: &[u8]) -> AccountId {
+        fn _instantiate_pair(&mut self, salt_bytes: &[u8]) -> Result<AccountId, FactoryError> {
             let pair_hash = self.factory.pair_contract_code_hash;
             let pair = PairContractRef::new()
                 .endowment(0)
                 .code_hash(pair_hash)
                 .salt_bytes(&salt_bytes[..4])
                 .instantiate()
-                .unwrap();
-            pair.to_account_id()
+                .map_err(|_| FactoryError::PairInstantiationFailed)?;
+            Ok(pair.to_account_id())
         }
 
         fn _emit_create_pair_event(
@@ -71,10 +70,10 @@ pub mod factory {
     impl FactoryContract {
         #[ink(constructor)]
         pub fn new(fee_to_setter: AccountId, pair_code_hash: Hash) -> Self {
-            ink_lang::codegen::initialize_contract(|instance: &mut Self| {
-                instance.factory.pair_contract_code_hash = pair_code_hash;
-                instance.factory.fee_to_setter = fee_to_setter;
-            })
+            let mut instance = Self::default();
+            instance.factory.pair_contract_code_hash = pair_code_hash;
+            instance.factory.fee_to_setter = fee_to_setter;
+            instance
         }
     }
     #[cfg(test)]
