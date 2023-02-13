@@ -41,7 +41,7 @@ const style = {
   swapIcon: `flex items-center justify-center`,
   currencySelectorTicker: `mx-2`,
   currencySelectorArrow: `text-lg w-5`,
-  copyarea: `text-right text-[#B2B9D2]`,
+  copyarea: `mt-2 text-right text-[#B2B9D2]`,
 }
 
 const Main = () => {
