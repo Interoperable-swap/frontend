@@ -17,7 +17,7 @@ export const address1 = '5F7or44nX3Re7Tr3kBEaHKJr79ja2dT7zwK1bdz5YthS54bb' // lo
 
 const name2 = 'UNI2'
 const symbol2 = 'UNI2'
-// export const address2 = 'aL3VQDDaMU38RYk9njg3RPz8Qzx2hDCA526GE6cvWZek4b5'
-export const address2 = '5Hmf7UNr6YhQ2kVTxa6r9gjTdXCMboXJkmceczckgGtn3bRQ'
+export const address2 = 'ZzGx1HQjVQPVYZthHwMuS3rXNAwcVAUUJW5NjbzMDx3tqgh' // usdt ink!4.0
+// export const address2 = '5Hmf7UNr6YhQ2kVTxa6r9gjTdXCMboXJkmceczckgGtn3bRQ'// local
 export const Decimal = 18
 export const ONE = new BN(10).pow(new BN(Decimal))

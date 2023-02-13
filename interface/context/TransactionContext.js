@@ -14,8 +14,8 @@ if (typeof window !== 'undefined') {
 	'wss://rpc.shibuya.astar.network' 
 	'ws://127.0.0.1:9944'
  */
-const WS_PROVIDER = 'ws://127.0.0.1:9944'
-const DAPP_NAME = 'Shiden DEX'
+const WS_PROVIDER = 'wss://shibuya-rpc.dwellir.com'
+const DAPP_NAME = 'CLAMM'
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState()
   const [api, setapi] = useState()
