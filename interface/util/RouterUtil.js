@@ -12,9 +12,9 @@ export const address0 = 'aDGRyf3Q8jGYRisf3Aydt87ccongLCgdobaSiXJkW7Z2zrh'
 //token1
 export const name1 = 'Wrapped SBY'
 export const symbol1 = 'WSBY'
-// export const address1 = 'ZHF9zwK6S582RxGhYSyTGQ5rMYeNet8czcuuUZxFyv2AZwC'
-export const address1 = '5F7or44nX3Re7Tr3kBEaHKJr79ja2dT7zwK1bdz5YthS54bb' // local
-
+// export const address1 = 'ZHF9zwK6S582RxGhYSyTGQ5rMYeNet8czcuuUZxFyv2AZwC'ink3.4
+// export const address1 = '5F7or44nX3Re7Tr3kBEaHKJr79ja2dT7zwK1bdz5YthS54bb' // local
+export const address1 = 'bGAqbaFvSKtKZYFR3KGW9AZHFroiifWUWPjwXCPDvcbjrHN'
 const name2 = 'UNI2'
 const symbol2 = 'UNI2'
 // export const address2 = '5Hmf7UNr6YhQ2kVTxa6r9gjTdXCMboXJkmceczckgGtn3bRQ'// local
