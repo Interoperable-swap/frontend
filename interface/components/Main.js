@@ -32,15 +32,16 @@ const style = {
   wrapper: `w-screen flex items-center justify-center mt-14`,
   content: `bg-[#191B1F] w-[40rem] rounded-2xl p-4`,
   formHeader: `px-2 flex items-center justify-between font-semibold text-xl`,
-  transferPropContainer: `bg-[#20242A] my-3 rounded-2xl p-6 text-3xl  border border-[#20242A] hover:border-[#41444F]  flex justify-between`,
-  transferPropInput: `bg-transparent placeholder:text-[#B2B9D2] outline-none mb-6 w-full text-2xl`,
-  currencySelector: `flex w-1/4`,
+  transferPropContainer: `bg-[#20242A] my-3 rounded-2xl p-6 border border-[#20242A] hover:border-[#41444F]`,
+  transferPropInput: `bg-transparent placeholder:text-[#B2B9D2] outline-none w-full text-2xl`,
+  currencySelector: `flex-col ml-auto`,
+  inputnum: `w-3/4`,
   currencySelectorContent: `w-full h-min flex justify-between items-center bg-[#2D2F36] hover:bg-[#41444F] rounded-2xl text-xl font-medium cursor-pointer p-2 mt-[-0.2rem]`,
-  currencySelectorIcon: `flex items-center`,
+  currencySelectorIcon: `flex`,
   swapIcon: `flex items-center justify-center`,
   currencySelectorTicker: `mx-2`,
-  currencySelectorArrow: `text-lg`,
-  copyarea: `flex cursor-pointer`,
+  currencySelectorArrow: `text-lg w-5`,
+  copyarea: `text-right text-[#B2B9D2]`,
 }
 //const gasLimit = 18750000000;
 const gasLimit = 100000000000
@@ -52,8 +53,8 @@ const Main = () => {
   const { currentAccount, api, signer } = useContext(TransactionContext)
   const [Token1Contract, setToken1Contract] = useState(undefined)
   const [Token2Contract, setToken2Contract] = useState(undefined)
-  const [Token1Balance, setToken1Balance] = useState('')
-  const [Token2Balance, setToken2Balance] = useState('')
+  const [Token1Balance, settoken1balance] = useState('')
+  const [Token2Balance, settoken2balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
@@ -117,24 +118,23 @@ const Main = () => {
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
 
-    const Token1Balance = await getToken1Contract.query['psp22::balanceOf'](
+    const token1balance = await getToken1Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
       currentAccount.address,
     )
-    if (Token1Balance.result.isOk) {
-      setToken1Balance(Token1Balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
-      console.log('Token1Balance:', Token1Balance)
+    if (token1balance.result.isOk) {
+      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
     } else {
       // console.error('Error', result.asErr)
     }
-    const Token2Balance = await getToken2Contract.query['psp22::balanceOf'](
+    const token2balance = await getToken2Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
       currentAccount.address,
     )
-    if (Token2Balance.result.isOk) {
-      setToken2Balance(Token2Balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
+    if (token2balance.result.isOk) {
+      settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
       // console.error('Error', result.asErr)
     }
@@ -171,7 +171,7 @@ const Main = () => {
       setAmountInMax(BigInt(AmountIn.output.toJSON()['ok'][0]))
       console.log(AmountInMax)
     } else {
-      console.error('Error', result.asErr)
+      // console.error('Error', result.asErr)
     }
   }
   // TODO: Add other swap functions
@@ -207,73 +207,86 @@ const Main = () => {
           </div>
         </div>
         <div className={style.transferPropContainer}>
-          <input
-            type='text'
-            className={style.transferPropInput}
-            placeholder={AmountInMax}
-            pattern='^[0-9]*[.,]?[0-9]*$'
-            onChange={(e) => handleInput1(e, 'input1amount')}
-          />
-          <div className={style.currencySelector}>
-            <button className={style.currencySelectorContent} onClick={() => setShowList((prevState) => !prevState)}>
-              <div className={style.currencySelectorIcon}>
-                <Image src={astar} alt='astar' height={20} width={20} />
+          <div className='flex'>
+            <div className={style.inputnum}>
+              <input
+                type='text'
+                className={style.transferPropInput}
+                placeholder={AmountInMax}
+                pattern='^[0-9]*[.,]?[0-9]*$'
+                onChange={(e) => handleInput1(e, 'input1amount')}
+              />
+            </div>
+            <div className={style.currencySelector}>
+              <button className={style.currencySelectorContent} onClick={() => setShowList((prevState) => !prevState)}>
+                <div className={style.currencySelectorIcon}>
+                  <Image src={astar} alt='astar' height={20} width={20} />
+                </div>
+                <div className={style.currencySelectorTicker}>WSBY</div>
+                {showList ? (
+                  <AiOutlineUp className={style.currencySelectorArrow} />
+                ) : (
+                  <AiOutlineDown className={style.currencySelectorArrow} />
+                )}
+              </button>
+            </div>
+          </div>
+          <div>
+            {Token2Balance ? (
+              <div>
+                <div className={style.copyarea}>Balance: {Token2Balance}</div>
               </div>
-              <div className={style.currencySelectorTicker}>WSBY</div>
-              {showList ? (
-                <AiOutlineUp className={style.currencySelectorArrow} />
-              ) : (
-                <AiOutlineDown className={style.currencySelectorArrow} />
-              )}
-            </button>
+            ) : (
+              <div className={style.copyarea}>Balance: 0</div>
+            )}
           </div>
         </div>
-        {Token2Balance ? (
-          <div>
-            <div className={style.copyarea}>Balance :{Token2Balance}</div>
-          </div>
-        ) : (
-          <div className={style.copyarea}>Balance :0</div>
-        )}
         <div className={style.swapIcon}>
           <AiOutlineArrowDown size={42} />
         </div>
         <div className={style.transferPropContainer}>
-          <input
-            type='text'
-            className={style.transferPropInput}
-            placeholder={AmountOutMin}
-            pattern='^[0-9]*[.,]?[0-9]*$'
-            onChange={(e) => handleInput2(e, 'input2amount')}
-          />
-          <div className={style.currencySelector}>
-            <button className={style.currencySelectorContent} onClick={() => setCurrency2((prevState) => !prevState)}>
-              <div className={style.currencySelectorIcon}>
-                <Image src={uniswap} alt='uniswap' height={20} width={20} />
+          <div className='flex'>
+            <div className={style.inputnum}>
+              <input
+                type='text'
+                className={style.transferPropInput}
+                placeholder={AmountInMax}
+                pattern='^[0-9]*[.,]?[0-9]*$'
+                onChange={(e) => handleInput1(e, 'input1amount')}
+              />
+            </div>
+            <div className={style.currencySelector}>
+              <button className={style.currencySelectorContent} onClick={() => setShowList((prevState) => !prevState)}>
+                <div className={style.currencySelectorIcon}>
+                  <Image src={uniswap} alt='UNI' height={20} width={20} />
+                </div>
+                <div className={style.currencySelectorTicker}>UNI</div>
+                {showList ? (
+                  <AiOutlineUp className={style.currencySelectorArrow} />
+                ) : (
+                  <AiOutlineDown className={style.currencySelectorArrow} />
+                )}
+              </button>
+            </div>
+          </div>
+          <div>
+            {Token2Balance ? (
+              <div>
+                <div className={style.copyarea}>Balance: {Token1Balance}</div>
               </div>
-              <div className={style.currencySelectorTicker}>UNI</div>
-              {Currency2 ? (
-                <AiOutlineUp className={style.currencySelectorArrow} />
-              ) : (
-                <AiOutlineDown className={style.currencySelectorArrow} />
-              )}
-            </button>
+            ) : (
+              <div className={style.copyarea}>Balance: 0</div>
+            )}
           </div>
         </div>
-        {Token1Balance ? (
-          <div>
-            <div className={style.copyarea}>Balance :{Token1Balance}</div>
-          </div>
-        ) : (
-          <div className={style.copyarea}>Balance :0</div>
-        )}
+
         <div onClick={() => runswap()}>
           <Button title='swap' />
         </div>
       </div>
       <Modal isOpen={!!router.query.loading} style={customStyles}>
         <LoadingTransaction />
-      </Modal>{' '}
+      </Modal>
     </div>
   )
 }
