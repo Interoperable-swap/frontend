@@ -15,7 +15,7 @@ import { TransactionContext } from '../context/TransactionContext'
 import { ContractPromise } from '@polkadot/api-contract'
 import { BN } from 'bn.js'
 
-import { router_address, address0, address1, address2, ONE, Decimal } from '../util/RouterUtil'
+import { router_address, address0, address1, address2, address3, ONE, Decimal } from '../util/RouterUtil'
 //abi
 import PAIR_CONTRACT from '../contract/abi/pair'
 import FACTORY_CONTRACT from '../contract/abi/factory'
@@ -25,7 +25,6 @@ import ROUTER_CONTRACT from '../contract/abi/router'
 import Modal from 'react-modal'
 import { useRouter } from 'next/router'
 import LoadingTransaction from './Modal/LoadingTransaction'
-
 Modal.setAppElement('#__next')
 
 const style = {
@@ -43,9 +42,6 @@ const style = {
   currencySelectorArrow: `text-lg w-5`,
   copyarea: `text-right text-[#B2B9D2]`,
 }
-//const gasLimit = 18750000000;
-const gasLimit = 100000000000
-const storageDepositLimit = null
 
 const Main = () => {
   const [showList, setShowList] = useState(false)
@@ -53,14 +49,22 @@ const Main = () => {
   const { currentAccount, api, signer } = useContext(TransactionContext)
   const [Token1Contract, setToken1Contract] = useState(undefined)
   const [Token2Contract, setToken2Contract] = useState(undefined)
-  const [Token1Balance, settoken1balance] = useState('')
-  const [Token2Balance, settoken2balance] = useState('')
+  const [Token1Balance, setToken1balance] = useState('')
+  const [Token2Balance, setToken2balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [AmountOutMin, setAmountOutMin] = useState()
   const [AmountInMax, setAmountInMax] = useState()
+
+  //const gasLimit = 18750000000;
+  const proofSize = 100000000000
+  const refTime = 100000000000
+
+  // const gasLimit = 100000000000
+  const storageDepositLimit = null
+
   const customStyles = {
     content: {
       top: '50%',
@@ -112,29 +116,34 @@ const Main = () => {
     }
   }, [inputAmount2])
   const setup = async () => {
+    const gasLimit = await api.registry.createType('WeightV2', {
+      refTime,
+      proofSize,
+    })
     // initialize contracts
-    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address2) //uni2
+    const getToken1Contract = new ContractPromise(api, PSP22_ABI, address3) //USDT
     const getToken2Contract = new ContractPromise(api, WNATIVE_ABI, address1) //wsby
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
-
-    const token1balance = await getToken1Contract.query['psp22::balanceOf'](
+    const balance1 = await getToken1Contract.query['psp22::balanceOf'](
       currentAccount.address,
-      { gasLimit: gasLimit },
+      { gasLimit: gasLimit, storageDepositLimit: storageDepositLimit },
       currentAccount.address,
     )
-    if (token1balance.result.isOk) {
-      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
+    if (balance1.result.isOk) {
+      setToken1balance(balance1.output.toString()) //TODO: FIX DECIMAL / 10 ** Decimal
+      console.log('Token1Balance: ', balance1.output.toString())
     } else {
       // console.error('Error', result.asErr)
     }
-    const token2balance = await getToken2Contract.query['psp22::balanceOf'](
+
+    const balance2 = await getToken2Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
       currentAccount.address,
     )
-    if (token2balance.result.isOk) {
-      settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
+    if (balance2.result.isOk) {
+      setToken2balance(balance2.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
       // console.error('Error', result.asErr)
     }
@@ -146,7 +155,7 @@ const Main = () => {
     // return [AmountIn,AmountOut]
     const AmountOut = await router.query['router::getAmountsOut'](
       currentAccount.address,
-      { gasLimit, storageDepositLimit },
+      { gasLimit: gasLimit, storageDepositLimit },
       inputAmount1,
       [Token2Contract.address, Token1Contract.address],
     )
@@ -232,9 +241,9 @@ const Main = () => {
             </div>
           </div>
           <div>
-            {Token2Balance ? (
+            {Token1Balance !== '0' ? (
               <div>
-                <div className={style.copyarea}>Balance: {Token2Balance}</div>
+                <div className={style.copyarea}>Balance: {Token1Balance}</div>
               </div>
             ) : (
               <div className={style.copyarea}>Balance: 0</div>
@@ -272,7 +281,7 @@ const Main = () => {
           <div>
             {Token2Balance ? (
               <div>
-                <div className={style.copyarea}>Balance: {Token1Balance}</div>
+                <div className={style.copyarea}>Balance: {Token2Balance}</div>
               </div>
             ) : (
               <div className={style.copyarea}>Balance: 0</div>
@@ -281,7 +290,7 @@ const Main = () => {
         </div>
 
         <div onClick={() => runswap()}>
-          <Button title='swap' />
+          <Button title='Swap' />
         </div>
       </div>
       <Modal isOpen={!!router.query.loading} style={customStyles}>

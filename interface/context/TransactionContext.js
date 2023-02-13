@@ -14,7 +14,7 @@ if (typeof window !== 'undefined') {
 	'wss://rpc.shibuya.astar.network' 
 	'ws://127.0.0.1:9944'
  */
-const WS_PROVIDER = 'ws://127.0.0.1:9944'
+const WS_PROVIDER = 'wss://rpc.shibuya.astar.network'
 const DAPP_NAME = 'CLAMM'
 export const TransactionProvider = ({ children }) => {
   const [currentAccount, setCurrentAccount] = useState()
