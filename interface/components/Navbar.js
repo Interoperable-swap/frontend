@@ -22,7 +22,7 @@ const style = {
   buttonsContainer: `flex w-1/4 justify-end items-center`,
   button: `flex items-center bg-[#191B1F] rounded-2xl mx-2 text-[0.9rem] font-semibold cursor-pointer`,
   buttonPadding: `p-2`,
-  buttonTextContainer: `h-8 flex items-center`,
+  buttonTextContainer: `h-8 p-2 flex items-center`,
   buttonIconContainer: `flex items-center justify-center w-8 h-8`,
   buttonAccent: `bg-[#172A42] border border-[#163256] hover:border-[#234169] h-full rounded-2xl flex items-center justify-center text-[#4F90EA]`,
 }
