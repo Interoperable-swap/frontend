@@ -52,8 +52,8 @@ const Main = () => {
   const { currentAccount, api, signer } = useContext(TransactionContext)
   const [Token1Contract, setToken1Contract] = useState(undefined)
   const [Token2Contract, setToken2Contract] = useState(undefined)
-  const [Token1Balance, settoken1balance] = useState('')
-  const [Token2Balance, settoken2balance] = useState('')
+  const [Token1Balance, setToken1Balance] = useState('')
+  const [Token2Balance, setToken2Balance] = useState('')
   const [inputAmount1, setInputAmount1] = useState(0)
   const [inputAmount2, setInputAmount2] = useState(0)
   const router = useRouter()
@@ -117,23 +117,24 @@ const Main = () => {
     setToken1Contract(getToken1Contract)
     setToken2Contract(getToken2Contract)
 
-    const token1balance = await getToken1Contract.query['psp22::balanceOf'](
+    const Token1Balance = await getToken1Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
       currentAccount.address,
     )
-    if (token1balance.result.isOk) {
-      settoken1balance(token1balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
+    if (Token1Balance.result.isOk) {
+      setToken1Balance(Token1Balance.output.toString() / 10 ** Decimal) //TODO: FIX DECIMAL / 10 ** Decimal
+      console.log('Token1Balance:', Token1Balance)
     } else {
       // console.error('Error', result.asErr)
     }
-    const token2balance = await getToken2Contract.query['psp22::balanceOf'](
+    const Token2Balance = await getToken2Contract.query['psp22::balanceOf'](
       currentAccount.address,
       { gasLimit: gasLimit },
       currentAccount.address,
     )
-    if (token2balance.result.isOk) {
-      settoken2balance(token2balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
+    if (Token2Balance.result.isOk) {
+      setToken2Balance(Token2Balance.output.toString() / 10 ** Decimal) //TODO FIX DECIMAL / 10 ** Decimal
     } else {
       // console.error('Error', result.asErr)
     }
